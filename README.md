@@ -1,2 +1,2 @@
 # SportsManager
-Android App to support User in Hosting and Executing Sport Events
+Android app to support user in hosting and executing sport events, more specifically to rate attendants in different disciplines(which can be defined by the user) for determining the best participant. This can only be archived if the user is able to abstract the rating of the disciplines to either points or time. For time-rated disciplines you can create rules. For example: If the attendent fullfilled the exercise in under 4.5 sec, he gets 30pts. Furthermore you can define a step whise substraction for every lost timestep(e.g. every 0.1 sec after 4.5 sec the participant looses 2pts. 

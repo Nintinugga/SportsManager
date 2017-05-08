@@ -14,4 +14,5 @@
     <string name="title_activity_events">Events</string>
     <string name="title_activity_costumers">CostumersActivity</string>
     <string name="title_activity_disciplines">DisciplinesActivity</string>
+    <string name="title_activity_rules">RulesActivity</string>
 </resources>

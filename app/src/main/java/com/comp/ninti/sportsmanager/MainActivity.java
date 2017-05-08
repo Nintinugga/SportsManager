@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.startActivity(myIntent);
         } else if (v.getId() == R.id.rules) {
             System.out.println("rules Clicked");
+            Intent myIntent = new Intent(MainActivity.this, RulesActivity.class);
+            MainActivity.this.startActivity(myIntent);
         } else if (v.getId() == R.id.events) {
             System.out.println("events Clicked");
             Intent myIntent = new Intent(MainActivity.this, EventsActivity.class);

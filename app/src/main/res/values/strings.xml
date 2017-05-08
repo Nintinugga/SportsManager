@@ -13,4 +13,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_events">Events</string>
     <string name="title_activity_costumers">CostumersActivity</string>
+    <string name="title_activity_disciplines">DisciplinesActivity</string>
 </resources>

@@ -18,13 +18,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (v.getId() == R.id.customers) {
             System.out.println("Costumers Clicked");
+            Intent myIntent = new Intent(MainActivity.this, CustomersActivity.class);
+            MainActivity.this.startActivity(myIntent);
         } else if (v.getId() == R.id.disciplines) {
             System.out.println("disciplines Clicked");
         } else if (v.getId() == R.id.rules) {
             System.out.println("rules Clicked");
         } else if (v.getId() == R.id.events) {
             System.out.println("events Clicked");
-            Intent myIntent = new Intent(MainActivity.this, Events.class);
+            Intent myIntent = new Intent(MainActivity.this, EventsActivity.class);
             //myIntent.putExtra("key", value); //Optional parameters
             MainActivity.this.startActivity(myIntent);
         }

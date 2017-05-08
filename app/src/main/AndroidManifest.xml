@@ -17,8 +17,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Events"
+            android:name=".EventsActivity"
             android:label="@string/title_activity_events"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.comp.ninti.sportsmanager.MainActivity" />
+        </activity>
+        <activity
+            android:name=".CustomersActivity"
+            android:label="@string/title_activity_costumers"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

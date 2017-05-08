@@ -8,10 +8,9 @@
     <string name="Events">Events</string>
     <string name="Disciplines">Disciplines</string>
     <string name="Rules">Rules</string>
-    <string name="signOut">sign-out</string>
-    <string name="title_activity_main2">MainActivity2</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_events">Events</string>
+    <string name="title_activity_costumers">CostumersActivity</string>
 </resources>

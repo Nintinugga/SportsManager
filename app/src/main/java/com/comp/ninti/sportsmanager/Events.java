@@ -12,6 +12,8 @@ public class Events extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Intent intent = getIntent();
+        //String value = intent.getStringExtra("key"); //if it's a string you stored.
         setContentView(R.layout.activity_events);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

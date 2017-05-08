@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">SportsManager</string>
+    <string name="Customer">Customer</string>
+    <string name="Event">Event</string>
+    <string name="Discipline">Discipline</string>
+    <string name="Rule">Rule</string>
+    <string name="Customers">Customers</string>
+    <string name="Events">Events</string>
+    <string name="Disciplines">Disciplines</string>
+    <string name="Rules">Rules</string>
+    <string name="signOut">sign-out</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_events">Events</string>
 </resources>

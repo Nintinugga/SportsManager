@@ -1,7 +1,9 @@
 package com.comp.ninti.sportsmanager;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -9,5 +11,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    public void onClick(View v) {
+        if (v.getId() == R.id.customers) {
+            System.out.println("Costumers Clicked");
+        } else if (v.getId() == R.id.disciplines) {
+            System.out.println("disciplines Clicked");
+        } else if (v.getId() == R.id.rules) {
+            System.out.println("rules Clicked");
+        } else if (v.getId() == R.id.events) {
+            System.out.println("events Clicked");
+        }
     }
 }

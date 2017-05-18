@@ -22,4 +22,6 @@
     <string name="title_activity_disciplines">DisciplinesActivity</string>
     <string name="title_activity_rules">RulesActivity</string>
     <string name="title_activity_customer_detail1">CustomerDetail1</string>
+    <string name="CustomerDetail">Customer Detail</string>
+    <string name="AddNewCustomer">Add New Customer</string>
 </resources>

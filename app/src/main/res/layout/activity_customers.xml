@@ -21,15 +21,20 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_customers" />
+    <include layout="@layout/content_customers"
+        android:id="@+id/include" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/addNewCustomer"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@android:color/holo_green_dark"
-        app:srcCompat="@android:drawable/ic_menu_myplaces" />
+        android:layout_margin="16dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/AddNewCustomer"
+        android:scaleType="fitCenter"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="bottom|right"
+        app:srcCompat="@drawable/ic_customer" />
 
 </android.support.design.widget.CoordinatorLayout>

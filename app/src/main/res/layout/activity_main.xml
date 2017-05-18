@@ -21,41 +21,45 @@
         <Button
             android:id="@+id/rules"
             android:layout_width="130dp"
-            android:layout_height="200dp"
+            android:layout_height="130dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="66dp"
             android:onClick="onClick"
             android:text="@string/Rules" />
 
         <Button
             android:id="@+id/disciplines"
             android:layout_width="130dp"
-            android:layout_height="200dp"
+            android:layout_height="130dp"
+            android:onClick="onClick"
+            android:text="@string/Disciplines"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:onClick="onClick"
-            android:text="@string/Disciplines" />
+            android:layout_marginBottom="66dp" />
 
         <Button
             android:id="@+id/events"
             android:layout_width="130dp"
-            android:layout_height="200dp"
+            android:layout_height="130dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="66dp"
             android:onClick="onClick"
             android:text="@string/Events" />
 
         <Button
             android:id="@+id/customers"
             android:layout_width="130dp"
-            android:layout_height="200dp"
+            android:layout_height="130dp"
             android:layout_alignLeft="@+id/events"
             android:layout_alignStart="@+id/events"
             android:layout_alignTop="@+id/disciplines"
             android:layout_marginTop="0dp"
+            android:background="@drawable/ic_customer"
             android:onClick="onClick"
             android:text="@string/Customers" />
 

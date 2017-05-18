@@ -25,16 +25,7 @@ public class CustomerDetail extends AppCompatActivity {
         setContentView(R.layout.activity_customer_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ArrayList<Integer> age = new ArrayList<Integer>();
-        for (int i = 1; i <= 100; i++) {
-            age.add(i);
-        }
-        ArrayAdapter<Integer> spinnerArrayAdapter = new ArrayAdapter<Integer>(
-                this, android.R.layout.simple_spinner_item, age);
-        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
-
-        Spinner spinner = (Spinner)findViewById(R.id.spinner);
-        spinner.setAdapter(spinnerArrayAdapter);
+        createSpinnerForAge();
         Button addCustomerBtn = (Button) findViewById(R.id.addCustomer);
         addCustomerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +51,19 @@ public class CustomerDetail extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void createSpinnerForAge() {
+        ArrayList<Integer> age = new ArrayList<Integer>();
+        for (int i = 1; i <= 100; i++) {
+            age.add(i);
+        }
+        ArrayAdapter<Integer> spinnerArrayAdapter = new ArrayAdapter<Integer>(
+                this, android.R.layout.simple_spinner_item, age);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setAdapter(spinnerArrayAdapter);
     }
 
 }

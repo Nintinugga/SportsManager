@@ -52,6 +52,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.comp.ninti.sportsmanager.MainActivity" />
         </activity>
+
+        <service
+            android:name="com.comp.ninti.general.SerializableService"
+            android:exported="false" />
+
+        <activity android:name=".CustomerDetail"></activity>
     </application>
 
 </manifest>

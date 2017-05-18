@@ -57,7 +57,15 @@
             android:name="com.comp.ninti.general.SerializableService"
             android:exported="false" />
 
-        <activity android:name=".CustomerDetail"></activity>
+        <activity
+            android:name=".CustomerDetail"
+            android:label="@string/title_activity_customer_detail1"
+            android:parentActivityName=".CustomersActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.comp.ninti.sportsmanager.CustomersActivity" />
+        </activity>
     </application>
 
 </manifest>

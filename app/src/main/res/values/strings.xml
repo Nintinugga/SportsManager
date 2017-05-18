@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SportsManager</string>
     <string name="AddToCustomer">Add to Customers</string>
+    <string name="NewCustomer">New Customer</string>
     <string name="Customer">Customer</string>
     <string name="Event">Event</string>
     <string name="Discipline">Discipline</string>
@@ -20,4 +21,5 @@
     <string name="title_activity_costumers">CostumersActivity</string>
     <string name="title_activity_disciplines">DisciplinesActivity</string>
     <string name="title_activity_rules">RulesActivity</string>
+    <string name="title_activity_customer_detail1">CustomerDetail1</string>
 </resources>

@@ -11,6 +11,7 @@
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="0dp"
         android:layout_marginBottom="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="0dp"
@@ -27,10 +28,12 @@
         tools:layout_constraintTop_creator="1">
 
         <RelativeLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -42,15 +45,31 @@
             tools:layout_constraintRight_creator="1"
             tools:layout_constraintTop_creator="1">
 
+            <EditText
+                android:id="@+id/customerTelephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/customerName"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@+id/customerName"
+                android:layout_below="@+id/customerName"
+                android:layout_marginTop="55dp"
+                android:hint="@string/Telephone"
+                android:inputType="phone"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+                tools:layout_editor_absoluteX="45dp"
+                tools:layout_editor_absoluteY="0dp" />
+
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/customer_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="18dp"
-                android:layout_marginStart="18dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="51dp"
                 android:text="@string/Name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -59,12 +78,12 @@
                 android:id="@+id/customerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/textView5"
-                android:layout_alignBottom="@+id/textView5"
-                android:layout_marginLeft="33dp"
-                android:layout_marginStart="33dp"
-                android:layout_toEndOf="@+id/textView5"
-                android:layout_toRightOf="@+id/textView5"
+                android:layout_alignBaseline="@+id/customer_name"
+                android:layout_alignBottom="@+id/customer_name"
+                android:layout_marginLeft="45dp"
+                android:layout_marginStart="45dp"
+                android:layout_toEndOf="@+id/customer_name"
+                android:layout_toRightOf="@+id/customer_name"
                 android:hint="@string/Name"
                 android:inputType="textCapSentences|textAutoCorrect"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
@@ -72,36 +91,67 @@
                 tools:layout_editor_absoluteY="0dp" />
 
             <EditText
-                android:id="@+id/customerAge"
+                android:id="@+id/customerEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/Age"
-                android:inputType="textCapSentences|textAutoCorrect"
+                android:layout_alignLeft="@+id/customerTelephone"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@id/customerName"
+                android:layout_below="@+id/customerTelephone"
+                android:layout_marginTop="50dp"
+                android:hint="@string/EMail"
+                android:inputType="textEmailAddress"
+                android:imeOptions="actionNext"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
                 tools:layout_editor_absoluteX="45dp"
-                tools:layout_editor_absoluteY="0dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                tools:layout_editor_absoluteY="0dp" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/customer_age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/textView5"
-                android:layout_alignStart="@+id/textView5"
-                android:layout_below="@+id/textView5"
+                android:layout_alignEnd="@+id/customer_name"
+                android:layout_alignLeft="@+id/customer_name"
+                android:layout_alignRight="@+id/customer_name"
+                android:layout_alignStart="@+id/customer_name"
+                android:layout_below="@+id/customer_email"
                 android:layout_marginTop="64dp"
+                android:layout_toLeftOf="@+id/customerAge"
+                android:layout_toStartOf="@+id/customerAge"
                 android:text="@string/Age"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
+            <TextView
+                android:id="@+id/customer_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/customerEmail"
+                android:layout_alignLeft="@+id/customer_name"
+                android:layout_alignStart="@+id/customer_name"
+                android:text="@string/EMail"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/customerAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/customerName"
                 android:layout_alignStart="@+id/customerName"
-                android:layout_alignTop="@+id/textView" />
+                android:layout_alignTop="@+id/customer_age"
+                android:layout_below="@+id/customerTelephone"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/customer_telephone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/customer_name"
+                android:layout_alignStart="@id/customer_name"
+                android:layout_alignTop="@+id/customerTelephone"
+                android:layout_marginTop="10dp"
+                android:text="@string/Telephone"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
 
         </RelativeLayout>
@@ -116,8 +166,9 @@
             <Button
                 android:id="@+id/addCustomer"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/bottom_button_height"
                 android:text="@string/AddToCustomer" />
+
         </RelativeLayout>
 
     </RelativeLayout>

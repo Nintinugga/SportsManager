@@ -26,8 +26,8 @@
 
     <ImageButton
         android:id="@+id/addNewCustomer"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/fab_width_height"
+        android:layout_height="@dimen/fab_width_height"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:background="@android:color/transparent"

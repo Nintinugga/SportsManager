@@ -167,7 +167,7 @@
                 android:id="@+id/addCustomer"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_button_height"
-                android:text="@string/AddToCustomer" />
+                android:text="@string/AddToCustomers" />
 
         </RelativeLayout>
 

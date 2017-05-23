@@ -36,8 +36,8 @@ public class CustomerDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = ((EditText) findViewById(R.id.customerName)).getText().toString();
-                String email = ((EditText) findViewById(R.id.customerName)).getText().toString();
-                String phone = ((EditText) findViewById(R.id.customerName)).getText().toString();
+                String email = ((EditText) findViewById(R.id.customerEmail)).getText().toString();
+                String phone = ((EditText) findViewById(R.id.customerTelephone)).getText().toString();
                 int age = Integer.valueOf(((Spinner) findViewById(R.id.customerAge)).getSelectedItem().toString());
                 if (name == null || name.isEmpty() || name.equals(R.string.Name)) {
                     Toast.makeText(CustomerDetail.this, "Use an actual Name!",

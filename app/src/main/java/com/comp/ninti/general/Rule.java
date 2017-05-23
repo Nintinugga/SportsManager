@@ -3,14 +3,30 @@ package com.comp.ninti.general;
 
 import java.io.Serializable;
 
-public class Rule implements Serializable{
+public class Rule implements Serializable {
 
     private RuleType ruleType;
     private String name;
+    private int defaultAttempts;
+    private double bestTime;
+    private double worstTime;
+    private int bestTimePoints;
+    private int worstTimePoints;
 
-    public Rule(String name, RuleType ruleType){
+    public Rule(String name, RuleType ruleType, int defaultAttempts) {
         this.name = name;
         this.ruleType = ruleType;
+        this.defaultAttempts = defaultAttempts;
+    }
+
+    public Rule(String name, RuleType ruleType, int defaultAttempts, double bestTime, int bestTimePoints, double worstTime, int worstTimePoints) {
+        this.name = name;
+        this.ruleType = ruleType;
+        this.defaultAttempts = defaultAttempts;
+        this.bestTime = bestTime;
+        this.bestTimePoints = bestTimePoints;
+        this.worstTime = worstTime;
+        this.worstTimePoints = worstTimePoints;
     }
 
     public RuleType getRuleType() {
@@ -27,5 +43,45 @@ public class Rule implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getDefaultAttempts() {
+        return defaultAttempts;
+    }
+
+    public void setDefaultAttempts(int defaultAttempts) {
+        this.defaultAttempts = defaultAttempts;
+    }
+
+    public double getBestTime() {
+        return bestTime;
+    }
+
+    public void setBestTime(double bestTime) {
+        this.bestTime = bestTime;
+    }
+
+    public double getWorstTime() {
+        return worstTime;
+    }
+
+    public void setWorstTime(double worstTime) {
+        this.worstTime = worstTime;
+    }
+
+    public int getBestTimePoints() {
+        return bestTimePoints;
+    }
+
+    public void setBestTimePoints(int bestTimePoints) {
+        this.bestTimePoints = bestTimePoints;
+    }
+
+    public int getWorstTimePoints() {
+        return worstTimePoints;
+    }
+
+    public void setWorstTimePoints(int worstTimePoints) {
+        this.worstTimePoints = worstTimePoints;
     }
 }

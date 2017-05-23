@@ -22,12 +22,19 @@ public class DbHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CustomerContract.CREATE_TABLE);
+        db.execSQL(RuleContract.CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(CustomerContract.DROP_TABLE);
+        db.execSQL(RuleContract.DROP_TABLE);
         onCreate(db);
+    }
+
+    public Cursor getAllCustomers(){
+        Cursor  cursor = this.getReadableDatabase().rawQuery("select * from " + CustomerContract.CUSTOMER.TABLE_NAME,null);
+        return cursor;
     }
 
     private JSONArray getResults(SQLiteDatabase myDataBase, String searchQuery)

@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">SportsManager</string>
-    <string name="AddToCustomer">Add to Customers</string>
+    <string name="AddToCustomers">Add to Customers</string>
+    <string name="AddToRules">Add to Rules</string>
+    <string name="AddToDisciplines">Add to Disciplines</string>
+    <string name="AddToEvents">Add to Events</string>
     <string name="NewCustomer">New Customer</string>
+    <string name="NewRule">New Rule</string>
+    <string name="NewDiscipline">New Discipline</string>
+    <string name="NewEvent">New Event</string>
     <string name="Customer">Customer</string>
     <string name="Event">Event</string>
     <string name="Discipline">Discipline</string>
@@ -24,4 +30,10 @@
     <string name="title_activity_customer_detail1">CustomerDetail1</string>
     <string name="CustomerDetail">Customer Detail</string>
     <string name="AddNewCustomer">Add New Customer</string>
+    <string name="title_activity_rule_detail">RuleDetail </string>
+    <string name="BestTime">Best Time</string>
+    <string name="WorstTime">Worst Time</string>
+    <string name="Points">Points</string>
+    <string name="WorstTimePoints">Worst-Time-Points</string>
+    <string name="BestTimePoints">Best-Time-Points</string>
 </resources>

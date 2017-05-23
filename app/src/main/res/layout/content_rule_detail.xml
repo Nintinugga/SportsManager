@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.comp.ninti.sportsmanager.RuleDetail"
+    tools:showIn="@layout/activity_rule_detail">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_constraintBottom_creator="1"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1">
+
+            <EditText
+                android:id="@+id/ruleBestTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/ruleName"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@+id/ruleName"
+                android:layout_below="@+id/ruleName"
+                android:layout_marginTop="55dp"
+                android:hint="@string/BestTime"
+                android:inputType="time"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+                tools:layout_editor_absoluteX="45dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <EditText
+                android:id="@+id/ruleWorstTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/ruleName"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@+id/ruleName"
+                android:layout_below="@+id/bestTimePoints"
+                android:layout_marginTop="55dp"
+                android:hint="@string/WorstTime"
+                android:inputType="time"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+                tools:layout_editor_absoluteX="45dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <EditText
+                android:id="@+id/worstTimePoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/worstTime_points"
+                android:layout_alignLeft="@+id/ruleName"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@+id/ruleName"
+                android:layout_below="@+id/ruleWorstTime"
+                android:layout_marginTop="34dp"
+                android:hint="@string/WorstTimePoints"
+                android:inputType="number"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+                tools:layout_editor_absoluteX="45dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:id="@+id/rule_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="51dp"
+                android:text="@string/Name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <EditText
+                android:id="@+id/ruleName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/rule_name"
+                android:layout_alignBottom="@+id/rule_name"
+                android:layout_marginLeft="80dp"
+                android:layout_marginStart="80dp"
+                android:layout_toEndOf="@+id/rule_name"
+                android:layout_toRightOf="@+id/rule_name"
+                android:hint="@string/Name"
+                android:inputType="textCapSentences|textAutoCorrect"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+                tools:layout_editor_absoluteX="45dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <EditText
+                android:id="@+id/bestTimePoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/ruleBestTime"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@id/ruleName"
+                android:layout_below="@+id/ruleBestTime"
+                android:layout_marginTop="50dp"
+                android:hint="@string/BestTimePoints"
+                android:inputType="number"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+                tools:layout_editor_absoluteX="45dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:id="@+id/rule_worstTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/ruleWorstTime"
+                android:layout_alignEnd="@+id/rule_bestTime"
+                android:layout_alignLeft="@+id/rule_name"
+                android:layout_alignRight="@+id/rule_bestTime"
+                android:layout_alignStart="@+id/rule_name"
+                android:layout_below="@+id/bestTime_points"
+                android:layout_marginTop="64dp"
+                android:layout_toLeftOf="@+id/ruleName"
+                android:layout_toStartOf="@+id/ruleName"
+                android:text="@string/WorstTime"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/worstTime_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/rule_bestTime"
+                android:layout_alignLeft="@+id/rule_name"
+                android:layout_alignRight="@+id/rule_bestTime"
+                android:layout_alignStart="@+id/rule_name"
+                android:layout_below="@+id/rule_worstTime"
+                android:layout_marginTop="34dp"
+                android:layout_toLeftOf="@+id/ruleName"
+                android:layout_toStartOf="@+id/ruleName"
+                android:text="@string/Points"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/bestTime_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/bestTimePoints"
+                android:layout_alignLeft="@+id/rule_name"
+                android:layout_alignStart="@+id/rule_name"
+                android:text="@string/Points"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/rule_bestTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/rule_name"
+                android:layout_alignStart="@id/rule_name"
+                android:layout_alignTop="@+id/ruleBestTime"
+                android:layout_marginTop="10dp"
+                android:text="@string/BestTime"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <Button
+                android:id="@+id/addCustomer"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_button_height"
+                android:text="@string/AddToRules" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

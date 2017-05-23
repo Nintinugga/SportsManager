@@ -66,6 +66,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.comp.ninti.sportsmanager.CustomersActivity" />
         </activity>
+        <activity
+            android:name=".RuleDetail"
+            android:label="@string/title_activity_rule_detail"
+            android:parentActivityName=".RulesActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.comp.ninti.sportsmanager.RulesActivity" />
+        </activity>
     </application>
 
 </manifest>

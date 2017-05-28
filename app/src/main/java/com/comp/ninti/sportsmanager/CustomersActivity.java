@@ -37,7 +37,7 @@ public class CustomersActivity extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         displayItems();
-        ListView listView = (ListView) findViewById(R.id.listView);
+        ListView listView = (ListView) findViewById(R.id.customersListView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -60,7 +60,7 @@ public class CustomersActivity extends AppCompatActivity {
                 dbHandler.getAllCustomers(),
                 new String[]{CustomerContract.CUSTOMER.COLUMN_NAME, CustomerContract.CUSTOMER.COLUMN_EMAIL},
                 new int[]{android.R.id.text1, android.R.id.text2});
-        ListView listView = (ListView) findViewById(R.id.listView);
+        ListView listView = (ListView) findViewById(R.id.customersListView);
         listView.setAdapter(adapter);
     }
 

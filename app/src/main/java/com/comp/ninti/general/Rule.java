@@ -7,22 +7,19 @@ public class Rule implements Serializable {
 
     private RuleType ruleType;
     private String name;
-    private int defaultAttempts;
     private double bestTime;
     private double worstTime;
     private int bestTimePoints;
     private int worstTimePoints;
 
-    public Rule(String name, RuleType ruleType, int defaultAttempts) {
+    public Rule(String name, RuleType ruleType) {
         this.name = name;
         this.ruleType = ruleType;
-        this.defaultAttempts = defaultAttempts;
     }
 
-    public Rule(String name, RuleType ruleType, int defaultAttempts, double bestTime, int bestTimePoints, double worstTime, int worstTimePoints) {
+    public Rule(String name, RuleType ruleType, double bestTime, int bestTimePoints, double worstTime, int worstTimePoints) {
         this.name = name;
         this.ruleType = ruleType;
-        this.defaultAttempts = defaultAttempts;
         this.bestTime = bestTime;
         this.bestTimePoints = bestTimePoints;
         this.worstTime = worstTime;
@@ -43,14 +40,6 @@ public class Rule implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getDefaultAttempts() {
-        return defaultAttempts;
-    }
-
-    public void setDefaultAttempts(int defaultAttempts) {
-        this.defaultAttempts = defaultAttempts;
     }
 
     public double getBestTime() {

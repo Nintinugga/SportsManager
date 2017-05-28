@@ -204,7 +204,7 @@
             android:layout_alignParentStart="true">
 
             <Button
-                android:id="@+id/addCustomer"
+                android:id="@+id/addRule"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_button_height"
                 android:text="@string/AddToRules" />

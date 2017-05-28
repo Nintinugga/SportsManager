@@ -12,7 +12,7 @@ import org.json.JSONObject;
 public class DbHandler extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "sportsmanager.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 5;
 
 
     public DbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -21,7 +21,9 @@ public class DbHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        System.out.println("creating customers table");
         db.execSQL(CustomerContract.CREATE_TABLE);
+        System.out.println("creating rules table");
         db.execSQL(RuleContract.CREATE_TABLE);
     }
 
@@ -32,17 +34,21 @@ public class DbHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public Cursor getAllCustomers(){
-        Cursor  cursor = this.getReadableDatabase().rawQuery("select * from " + CustomerContract.CUSTOMER.TABLE_NAME,null);
+    public Cursor getAllCustomers() {
+        Cursor cursor = this.getReadableDatabase().rawQuery("select * from " + CustomerContract.CUSTOMER.TABLE_NAME, null);
         return cursor;
     }
 
-    private JSONArray getResults(SQLiteDatabase myDataBase, String searchQuery)
-    {
+    public Cursor getAllRules() {
+        Cursor cursor = this.getReadableDatabase().rawQuery("select * from " + RuleContract.RULE.TABLE_NAME, null);
+        return cursor;
+    }
 
-        Cursor cursor = myDataBase.rawQuery(searchQuery, null );
+    private JSONArray getResults(SQLiteDatabase myDataBase, String searchQuery) {
 
-        JSONArray resultSet 	= new JSONArray();
+        Cursor cursor = myDataBase.rawQuery(searchQuery, null);
+
+        JSONArray resultSet = new JSONArray();
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -50,27 +56,19 @@ public class DbHandler extends SQLiteOpenHelper {
             int totalColumn = cursor.getColumnCount();
             JSONObject rowObject = new JSONObject();
 
-            for( int i=0 ;  i< totalColumn ; i++ )
-            {
-                if( cursor.getColumnName(i) != null )
-                {
+            for (int i = 0; i < totalColumn; i++) {
+                if (cursor.getColumnName(i) != null) {
 
-                    try
-                    {
+                    try {
 
-                        if( cursor.getString(i) != null )
-                        {
-                            Log.d("TAG_NAME", cursor.getString(i) );
-                            rowObject.put(cursor.getColumnName(i) ,  cursor.getString(i) );
+                        if (cursor.getString(i) != null) {
+                            Log.d("TAG_NAME", cursor.getString(i));
+                            rowObject.put(cursor.getColumnName(i), cursor.getString(i));
+                        } else {
+                            rowObject.put(cursor.getColumnName(i), "");
                         }
-                        else
-                        {
-                            rowObject.put( cursor.getColumnName(i) ,  "" );
-                        }
-                    }
-                    catch( Exception e )
-                    {
-                        Log.d("TAG_NAME", e.getMessage()  );
+                    } catch (Exception e) {
+                        Log.d("TAG_NAME", e.getMessage());
                     }
                 }
 
@@ -81,7 +79,7 @@ public class DbHandler extends SQLiteOpenHelper {
         }
 
         cursor.close();
-        Log.d("TAG_NAME", resultSet.toString() );
+        Log.d("TAG_NAME", resultSet.toString());
         return resultSet;
 
     }

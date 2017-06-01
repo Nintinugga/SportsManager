@@ -45,7 +45,7 @@ public class CustomersActivity extends AppCompatActivity {
                 c.moveToPosition(position);
                 Customer clickedCustomer = new Customer(c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_NAME)),
                         c.getInt(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_AGE)), c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_EMAIL)),
-                        c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_PHONE)));
+                        c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_PHONE)), c.getLong(c.getColumnIndex(CustomerContract.CUSTOMER._ID)));
                 Toast.makeText(CustomersActivity.this, "Clicked Customer: " + clickedCustomer.getName() + " dbID: " + id,
                         Toast.LENGTH_LONG).show();
             }

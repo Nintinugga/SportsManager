@@ -5,11 +5,11 @@ import java.io.Serializable;
 
 public class Customer implements Serializable {
 
-    String name;
-    int age;
-    String email;
-    String phone;
-    long id;
+    private String name;
+    private int age;
+    private String email;
+    private String phone;
+    private long id;
 
     public Customer(String name) {
         this.name = name;
@@ -63,5 +63,13 @@ public class Customer implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

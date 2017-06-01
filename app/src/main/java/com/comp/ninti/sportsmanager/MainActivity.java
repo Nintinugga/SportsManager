@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Costumers Clicked");
             Intent myIntent = new Intent(MainActivity.this, CustomersActivity.class);
             MainActivity.this.startActivity(myIntent);
-        } else if (v.getId() == R.id.disciplines) {
+        } else if (v.getId() == R.id.discipline) {
             System.out.println("disciplines Clicked");
             Intent myIntent = new Intent(MainActivity.this, DisciplinesActivity.class);
             MainActivity.this.startActivity(myIntent);

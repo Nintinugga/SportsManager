@@ -3,19 +3,19 @@ package com.comp.ninti.general;
 import java.io.Serializable;
 
 
-public class Disciplines implements Serializable {
+public class Discipline implements Serializable {
     String name;
     Rule rule;
     int attempts;
     long id;
 
-    public Disciplines(String name, Rule rule, int attempts) {
+    public Discipline(String name, Rule rule, int attempts) {
         this.name = name;
         this.rule = rule;
         this.attempts = attempts;
     }
 
-    public Disciplines(String name, Rule rule, int attempts, long id) {
+    public Discipline(String name, Rule rule, int attempts, long id) {
         this.name = name;
         this.rule = rule;
         this.attempts = attempts;

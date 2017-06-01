@@ -6,6 +6,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.comp.ninti.general.Rule;
+import com.comp.ninti.general.RuleType;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -43,6 +46,37 @@ public class DbHandler extends SQLiteOpenHelper {
         Cursor cursor = this.getReadableDatabase().rawQuery("select * from " + RuleContract.RULE.TABLE_NAME, null);
         return cursor;
     }
+
+    /**
+     * Returns the Rule with the given ruleName
+     *
+     * @param ruleName the name of the rule you want to get
+     * @return the Rule with the given ruleName or null if none was found
+     */
+    public Rule getSpecificRule(String ruleName) {
+        Rule ruleToReturn = null;
+        Cursor cursor = this.getReadableDatabase().rawQuery("select * from " + RuleContract.RULE.TABLE_NAME + " where " + RuleContract.RULE.COLUMN_NAME + " = \"" + ruleName + "\"", null);
+        try {
+            int ruleTypeIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_TYPE);
+            int idIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE._ID);
+            int nameIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_NAME);
+            RuleType ruleType = Enum.valueOf(RuleType.class, cursor.getString(ruleTypeIndex));
+            if (ruleType.equals(RuleType.Default)) {
+                ruleToReturn = new Rule(cursor.getString(nameIndex), ruleType, cursor.getLong(idIndex));
+            } else {
+                int worstTimeIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_WORSTTIME);
+                int bestTimeIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_BESTTIME);
+                int bestTimePointsIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_BESTTIMEPOINTS);
+                int worstTimePointIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_WORSTTIMEPOINTS);
+                ruleToReturn = new Rule(cursor.getString(nameIndex), ruleType, cursor.getDouble(bestTimeIndex),
+                        cursor.getInt(bestTimePointsIndex), cursor.getDouble(worstTimeIndex), cursor.getInt(worstTimePointIndex), cursor.getLong(idIndex));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ruleToReturn;
+    }
+
 
     private JSONArray getResults(SQLiteDatabase myDataBase, String searchQuery) {
 

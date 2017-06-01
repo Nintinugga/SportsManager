@@ -87,7 +87,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <Spinner
-                android:id="@+id/ruleSpinner"
+                android:id="@+id/disciplineRuleSp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/disciplineName"
@@ -95,12 +95,12 @@
                 android:layout_below="@+id/disciplineName" />
 
             <Spinner
-                android:id="@+id/attemptsSpinner"
+                android:id="@+id/disciplineAttemptsSp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/disciplineName"
                 android:layout_alignTop="@+id/attemptsText"
-                android:layout_below="@+id/ruleSpinner" />
+                android:layout_below="@+id/disciplineRuleSp" />
 
             <TextView
                 android:id="@+id/attemptsText"

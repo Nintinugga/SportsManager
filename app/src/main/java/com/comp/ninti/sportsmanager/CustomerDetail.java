@@ -35,6 +35,7 @@ public class CustomerDetail extends AppCompatActivity {
         addCustomerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO check if customer is already in db
                 String name = ((EditText) findViewById(R.id.customerName)).getText().toString();
                 String email = ((EditText) findViewById(R.id.customerEmail)).getText().toString();
                 String phone = ((EditText) findViewById(R.id.customerTelephone)).getText().toString();

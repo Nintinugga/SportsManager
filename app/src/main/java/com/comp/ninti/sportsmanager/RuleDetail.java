@@ -49,6 +49,7 @@ public class RuleDetail extends AppCompatActivity {
     private void addRule() {
         String name = ruleName.getText().toString();
         Rule rule = null;
+        //TODO check if rule is already in db
         if (name == null || name.isEmpty()) {
             Toast.makeText(RuleDetail.this, "You need to name a Rule",
                     Toast.LENGTH_LONG).show();

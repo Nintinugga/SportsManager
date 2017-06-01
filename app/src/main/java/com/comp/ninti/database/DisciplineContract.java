@@ -21,7 +21,7 @@ public class DisciplineContract {
             + DISCIPLINE._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + DISCIPLINE.COLUMN_NAME + " TEXT, " + DISCIPLINE.COLUMN_ATTEMPTS + " INTEGER, "
             + DISCIPLINE.COLUMN_RULE + " INTEGER, "
-            + "FOREIGN KEY(" + DISCIPLINE.COLUMN_RULE + ") REFERENCES rule(" + RuleContract.RULE._ID + ");";
+            + "FOREIGN KEY(" + DISCIPLINE.COLUMN_RULE + ") REFERENCES "+ RuleContract.RULE.TABLE_NAME+"(" + RuleContract.RULE._ID + "));";
 
     public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + DISCIPLINE.TABLE_NAME;
 

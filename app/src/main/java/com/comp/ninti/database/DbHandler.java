@@ -15,7 +15,7 @@ import org.json.JSONObject;
 public class DbHandler extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "sportsmanager.db";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
 
     public DbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -60,7 +60,9 @@ public class DbHandler extends SQLiteOpenHelper {
      */
     public Rule getSpecificRule(String ruleName) {
         Rule ruleToReturn = null;
-        Cursor cursor = this.getReadableDatabase().rawQuery("select * from " + RuleContract.RULE.TABLE_NAME + " where " + RuleContract.RULE.COLUMN_NAME + " = \"" + ruleName + "\"", null);
+        String select = "select * from " + RuleContract.RULE.TABLE_NAME + " where " + RuleContract.RULE.COLUMN_NAME + " = \"" + ruleName + "\"";
+        Cursor cursor = this.getReadableDatabase().rawQuery(select, null);
+        cursor.moveToFirst();
         try {
             int ruleTypeIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_TYPE);
             int idIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE._ID);

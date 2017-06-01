@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 
 public class Discipline implements Serializable {
-    String name;
-    Rule rule;
-    int attempts;
-    long id;
+    private String name;
+    private Rule rule;
+    private int attempts;
+    private long id;
 
     public Discipline(String name, Rule rule, int attempts) {
         this.name = name;

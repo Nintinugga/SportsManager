@@ -36,4 +36,6 @@
     <string name="Points">Points</string>
     <string name="WorstTimePoints">Worst-Time-Points</string>
     <string name="BestTimePoints">Best-Time-Points</string>
+    <string name="Attempts">Attempts</string>
+    <string name="title_activity_discipline_detail">DisciplineDetail</string>
 </resources>

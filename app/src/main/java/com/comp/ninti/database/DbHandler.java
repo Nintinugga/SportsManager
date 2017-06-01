@@ -24,13 +24,13 @@ public class DbHandler extends SQLiteOpenHelper {
         System.out.println("creating customers table");
         db.execSQL(CustomerContract.CREATE_TABLE);
         System.out.println("creating rules table");
-        db.execSQL(RuleContract.CREATE_TABLE);
+        db.execSQL(RuleContract.CREATE_TABLE_RULE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(CustomerContract.DROP_TABLE);
-        db.execSQL(RuleContract.DROP_TABLE);
+        db.execSQL(RuleContract.DROP_TABLE_RULE);
         onCreate(db);
     }
 

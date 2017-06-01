@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
-import com.comp.ninti.database.CustomerContract;
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.RuleContract;
 import com.comp.ninti.general.Rule;
@@ -26,9 +25,7 @@ public class RulesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("creating rules");
         setContentView(R.layout.activity_rules);
-        System.out.println("set content rules");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

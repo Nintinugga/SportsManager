@@ -11,11 +11,19 @@ public class Rule implements Serializable {
     private double worstTime;
     private int bestTimePoints;
     private int worstTimePoints;
+    long id;
 
     public Rule(String name, RuleType ruleType) {
         this.name = name;
         this.ruleType = ruleType;
     }
+
+    public Rule(String name, RuleType ruleType, long id) {
+        this.name = name;
+        this.ruleType = ruleType;
+        this.id = id;
+    }
+
 
     public Rule(String name, RuleType ruleType, double bestTime, int bestTimePoints, double worstTime, int worstTimePoints) {
         this.name = name;
@@ -25,6 +33,17 @@ public class Rule implements Serializable {
         this.worstTime = worstTime;
         this.worstTimePoints = worstTimePoints;
     }
+
+    public Rule(String name, RuleType ruleType, double bestTime, int bestTimePoints, double worstTime, int worstTimePoints, long id) {
+        this.name = name;
+        this.ruleType = ruleType;
+        this.bestTime = bestTime;
+        this.bestTimePoints = bestTimePoints;
+        this.worstTime = worstTime;
+        this.worstTimePoints = worstTimePoints;
+        this.id = id;
+    }
+
 
     public RuleType getRuleType() {
         return ruleType;

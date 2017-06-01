@@ -2,19 +2,24 @@ package com.comp.ninti.general;
 
 import java.io.Serializable;
 
-/**
- * Created by ninti on 5/14/2017.
- */
 
 public class Disciplines implements Serializable {
     String name;
     Rule rule;
     int attempts;
+    long id;
 
     public Disciplines(String name, Rule rule, int attempts) {
         this.name = name;
         this.rule = rule;
         this.attempts = attempts;
+    }
+
+    public Disciplines(String name, Rule rule, int attempts, long id) {
+        this.name = name;
+        this.rule = rule;
+        this.attempts = attempts;
+        this.id = id;
     }
 
     public String getName() {

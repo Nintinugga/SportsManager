@@ -11,7 +11,7 @@ public class Rule implements Serializable {
     private double worstTime;
     private int bestTimePoints;
     private int worstTimePoints;
-    long id;
+    private long id;
 
     public Rule(String name, RuleType ruleType) {
         this.name = name;
@@ -91,5 +91,13 @@ public class Rule implements Serializable {
 
     public void setWorstTimePoints(int worstTimePoints) {
         this.worstTimePoints = worstTimePoints;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

@@ -28,23 +28,28 @@ public class DbHandler extends SQLiteOpenHelper {
         db.execSQL(CustomerContract.CREATE_TABLE);
         System.out.println("creating rules table");
         db.execSQL(RuleContract.CREATE_TABLE_RULE);
+        System.out.println("creating disciplines table");
+        db.execSQL(DisciplineContract.CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(CustomerContract.DROP_TABLE);
+        db.execSQL(DisciplineContract.DROP_TABLE);
         db.execSQL(RuleContract.DROP_TABLE_RULE);
         onCreate(db);
     }
 
     public Cursor getAllCustomers() {
-        Cursor cursor = this.getReadableDatabase().rawQuery("select * from " + CustomerContract.CUSTOMER.TABLE_NAME, null);
-        return cursor;
+        return this.getReadableDatabase().rawQuery("select * from " + CustomerContract.CUSTOMER.TABLE_NAME, null);
     }
 
     public Cursor getAllRules() {
-        Cursor cursor = this.getReadableDatabase().rawQuery("select * from " + RuleContract.RULE.TABLE_NAME, null);
-        return cursor;
+        return this.getReadableDatabase().rawQuery("select * from " + RuleContract.RULE.TABLE_NAME, null);
+    }
+
+    public Cursor getAllDisciplines(){
+        return this.getReadableDatabase().rawQuery("select * from " + DisciplineContract.DISCIPLINE.TABLE_NAME, null);
     }
 
     /**
@@ -74,6 +79,7 @@ public class DbHandler extends SQLiteOpenHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        cursor.close();
         return ruleToReturn;
     }
 

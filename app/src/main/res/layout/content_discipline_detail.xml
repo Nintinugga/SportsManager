@@ -90,6 +90,7 @@
                 android:id="@+id/disciplineRuleSp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/ruleText"
                 android:layout_alignStart="@+id/disciplineName"
                 android:layout_alignTop="@+id/ruleText"
                 android:layout_below="@+id/disciplineName" />
@@ -98,6 +99,7 @@
                 android:id="@+id/disciplineAttemptsSp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/attemptsText"
                 android:layout_alignStart="@+id/disciplineName"
                 android:layout_alignTop="@+id/attemptsText"
                 android:layout_below="@+id/disciplineRuleSp" />

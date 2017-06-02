@@ -62,17 +62,17 @@ public class RuleDetail extends AppCompatActivity {
 
         if (bestTimeSt.isEmpty() && worstTimeSt.isEmpty() && bestTimePointsSt.isEmpty() && worstTimePointsSt.isEmpty()) {
             rule = new Rule(name, RuleType.Default);
-        } else if (!bestTimeSt.isEmpty() || !worstTimeSt.isEmpty() || !bestTimePointsSt.isEmpty() || !worstTimePointsSt.isEmpty()) {
-            Toast.makeText(RuleDetail.this, "Don't give points or time for a Default Rule. \n" +
-                            "If you want to create a Time Rule, fill all Fields!",
-                    Toast.LENGTH_LONG).show();
-            return;
         } else if (!bestTimeSt.isEmpty() && !worstTimeSt.isEmpty() && !bestTimePointsSt.isEmpty() && !worstTimePointsSt.isEmpty()) {
             double bestTime = Double.valueOf(bestTimeSt);
             double worstTime = Double.valueOf(worstTimeSt);
             int bestTimePoints = Integer.valueOf(bestTimePointsSt);
             int worstTimePoints = Integer.valueOf(worstTimePointsSt);
             rule = new Rule(name, RuleType.Time, bestTime, bestTimePoints, worstTime, worstTimePoints);
+        } else if (!bestTimeSt.isEmpty() || !worstTimeSt.isEmpty() || !bestTimePointsSt.isEmpty() || !worstTimePointsSt.isEmpty()) {
+            Toast.makeText(RuleDetail.this, "Don't give points or time for a Default Rule. \n" +
+                            "If you want to create a Time Rule, fill all Fields!",
+                    Toast.LENGTH_LONG).show();
+            return;
         }
         if (rule == null) {
             Toast.makeText(RuleDetail.this, "Something went wrong with the Creation of the Rule. " +

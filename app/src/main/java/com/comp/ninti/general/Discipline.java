@@ -8,6 +8,7 @@ public class Discipline implements Serializable {
     private Rule rule;
     private int attempts;
     private long id;
+    private long ruleId;
 
     public Discipline(String name, Rule rule, int attempts) {
         this.name = name;
@@ -20,6 +21,13 @@ public class Discipline implements Serializable {
         this.rule = rule;
         this.attempts = attempts;
         this.id = id;
+    }
+
+    public Discipline(String name, long ruleId, int attempts, long id) {
+        this.name = name;
+        this.attempts = attempts;
+        this.id = id;
+        this.ruleId = ruleId;
     }
 
     public String getName() {
@@ -44,5 +52,21 @@ public class Discipline implements Serializable {
 
     public void setAttempts(int attempts) {
         this.attempts = attempts;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getRuleId() {
+        return ruleId;
+    }
+
+    public void setRuleId(long ruleId) {
+        this.ruleId = ruleId;
     }
 }

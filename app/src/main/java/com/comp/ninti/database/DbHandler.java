@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.comp.ninti.general.Rule;
-import com.comp.ninti.general.RuleType;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -48,7 +47,7 @@ public class DbHandler extends SQLiteOpenHelper {
         return this.getReadableDatabase().rawQuery("select * from " + RuleContract.RULE.TABLE_NAME, null);
     }
 
-    public Cursor getAllDisciplines(){
+    public Cursor getAllDisciplines() {
         return this.getReadableDatabase().rawQuery("select * from " + DisciplineContract.DISCIPLINE.TABLE_NAME, null);
     }
 
@@ -59,32 +58,24 @@ public class DbHandler extends SQLiteOpenHelper {
      * @return the Rule with the given ruleName or null if none was found
      */
     public Rule getSpecificRule(String ruleName) {
-        Rule ruleToReturn = null;
         String select = "select * from " + RuleContract.RULE.TABLE_NAME + " where " + RuleContract.RULE.COLUMN_NAME + " = \"" + ruleName + "\"";
         Cursor cursor = this.getReadableDatabase().rawQuery(select, null);
         cursor.moveToFirst();
-        try {
-            int ruleTypeIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_TYPE);
-            int idIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE._ID);
-            int nameIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_NAME);
-            RuleType ruleType = Enum.valueOf(RuleType.class, cursor.getString(ruleTypeIndex));
-            if (ruleType.equals(RuleType.Default)) {
-                ruleToReturn = new Rule(cursor.getString(nameIndex), ruleType, cursor.getLong(idIndex));
-            } else {
-                int worstTimeIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_WORSTTIME);
-                int bestTimeIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_BESTTIME);
-                int bestTimePointsIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_BESTTIMEPOINTS);
-                int worstTimePointIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_WORSTTIMEPOINTS);
-                ruleToReturn = new Rule(cursor.getString(nameIndex), ruleType, cursor.getDouble(bestTimeIndex),
-                        cursor.getInt(bestTimePointsIndex), cursor.getDouble(worstTimeIndex), cursor.getInt(worstTimePointIndex), cursor.getLong(idIndex));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        cursor.close();
-        return ruleToReturn;
+        return RuleContract.createRule(cursor);
     }
 
+    /**
+     * Returns the Rule with the given id
+     *
+     * @param ruleId the id of the rule you want to get
+     * @return the Rule with the given ruleId or null if none was found
+     */
+    public Rule getSpecificRuleById(long ruleId) {
+        String select = "select * from " + RuleContract.RULE.TABLE_NAME + " where " + RuleContract.RULE._ID + " = " + ruleId + "";
+        Cursor cursor = this.getReadableDatabase().rawQuery(select, null);
+        cursor.moveToFirst();
+        return RuleContract.createRule(cursor);
+    }
 
     private JSONArray getResults(SQLiteDatabase myDataBase, String searchQuery) {
 

@@ -12,7 +12,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.comp.ninti.database.CustomerContract;
+
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DisciplineContract;
 import com.comp.ninti.database.RuleContract;
@@ -51,7 +51,7 @@ public class DisciplineDetail extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
             return;
         }
-        Cursor spinnerOb = (Cursor)((Spinner) findViewById(R.id.disciplineRuleSp)).getSelectedItem();
+        Cursor spinnerOb = (Cursor) ((Spinner) findViewById(R.id.disciplineRuleSp)).getSelectedItem();
         int attempts = Integer.valueOf(((Spinner) findViewById(R.id.disciplineAttemptsSp)).getSelectedItem().toString());
         DbHandler dbHandler = new DbHandler(DisciplineDetail.this, "", null, 1);
         Rule rule = dbHandler.getSpecificRule(spinnerOb.getString(spinnerOb.getColumnIndex(RuleContract.RULE.COLUMN_NAME)));
@@ -61,7 +61,6 @@ public class DisciplineDetail extends AppCompatActivity {
             return;
         }
         Discipline discipline = new Discipline(name, rule, attempts);
-        //TODO add discipline to db
         long returnVal;
         if ((returnVal = dbHandler.getWritableDatabase().insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline))) == -1) {
             Toast.makeText(DisciplineDetail.this, "Error while inserting!",

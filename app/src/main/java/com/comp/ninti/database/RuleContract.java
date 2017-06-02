@@ -2,9 +2,11 @@ package com.comp.ninti.database;
 
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.provider.BaseColumns;
 
 import com.comp.ninti.general.Rule;
+import com.comp.ninti.general.RuleType;
 
 public final class RuleContract {
     private RuleContract() {
@@ -60,5 +62,29 @@ public final class RuleContract {
         values.put(RULE.COLUMN_WORSTTIME, rule.getWorstTime());
         values.put(RULE.COLUMN_WORSTTIMEPOINTS, rule.getWorstTimePoints());
         return values;
+    }
+
+    public static Rule createRule(Cursor cursor) {
+        Rule ruleToReturn = null;
+        try {
+            int ruleTypeIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_TYPE);
+            int idIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE._ID);
+            int nameIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_NAME);
+            RuleType ruleType = Enum.valueOf(RuleType.class, cursor.getString(ruleTypeIndex));
+            if (ruleType.equals(RuleType.Default)) {
+                ruleToReturn = new Rule(cursor.getString(nameIndex), ruleType, cursor.getLong(idIndex));
+            } else {
+                int worstTimeIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_WORSTTIME);
+                int bestTimeIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_BESTTIME);
+                int bestTimePointsIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_BESTTIMEPOINTS);
+                int worstTimePointIndex = cursor.getColumnIndexOrThrow(RuleContract.RULE.COLUMN_WORSTTIMEPOINTS);
+                ruleToReturn = new Rule(cursor.getString(nameIndex), ruleType, cursor.getDouble(bestTimeIndex),
+                        cursor.getInt(bestTimePointsIndex), cursor.getDouble(worstTimeIndex), cursor.getInt(worstTimePointIndex), cursor.getLong(idIndex));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        cursor.close();
+        return ruleToReturn;
     }
 }

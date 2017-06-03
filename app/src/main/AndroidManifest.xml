@@ -84,6 +84,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.comp.ninti.sportsmanager.DisciplinesActivity" />
         </activity>
+        <activity
+            android:name=".EventDetail"
+            android:label="@string/title_activity_event_detail"
+            android:parentActivityName=".EventsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.comp.ninti.sportsmanager.EventsActivity" />
+        </activity>
     </application>
 
 </manifest>

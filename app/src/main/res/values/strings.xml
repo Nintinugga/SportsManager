@@ -38,4 +38,8 @@
     <string name="BestTimePoints">Best-Time-Points</string>
     <string name="Attempts">Attempts</string>
     <string name="title_activity_discipline_detail">DisciplineDetail</string>
+    <string name="title_activity_event_detail">EventDetail</string>
+    <string name="Date">Date</string>
+    <string name="Time">Time</string>
+    <string name="Select">SELECT</string>
 </resources>

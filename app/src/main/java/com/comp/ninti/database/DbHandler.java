@@ -14,7 +14,7 @@ import org.json.JSONObject;
 public class DbHandler extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "sportsmanager.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
 
 
     public DbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -28,6 +28,8 @@ public class DbHandler extends SQLiteOpenHelper {
         System.out.println("creating rules table");
         db.execSQL(RuleContract.CREATE_TABLE_RULE);
         System.out.println("creating disciplines table");
+        db.execSQL(EventContract.CREATE_TABLE);
+        System.out.println("creating events table");
         db.execSQL(DisciplineContract.CREATE_TABLE);
     }
 
@@ -36,6 +38,7 @@ public class DbHandler extends SQLiteOpenHelper {
         db.execSQL(CustomerContract.DROP_TABLE);
         db.execSQL(DisciplineContract.DROP_TABLE);
         db.execSQL(RuleContract.DROP_TABLE_RULE);
+        db.execSQL(EventContract.DROP_TABLE);
         onCreate(db);
     }
 
@@ -49,6 +52,10 @@ public class DbHandler extends SQLiteOpenHelper {
 
     public Cursor getAllDisciplines() {
         return this.getReadableDatabase().rawQuery("select * from " + DisciplineContract.DISCIPLINE.TABLE_NAME, null);
+    }
+
+    public Cursor getAllEvents(){
+        return this.getReadableDatabase().rawQuery("select * from " + EventContract.EVENT.TABLE_NAME, null);
     }
 
     /**

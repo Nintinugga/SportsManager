@@ -7,6 +7,7 @@
     <string name="NewCustomer">New Customer</string>
     <string name="NewRule">New Rule</string>
     <string name="NewDiscipline">New Discipline</string>
+    <string name="SelectDisciplines">Select Disciplines:</string>
     <string name="NewEvent">New Event</string>
     <string name="Customer">Customer</string>
     <string name="Event">Event</string>

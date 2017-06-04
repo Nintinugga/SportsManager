@@ -14,10 +14,15 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.comp.ninti.database.CustomerContract;
 import com.comp.ninti.database.DbHandler;
+import com.comp.ninti.database.DbListUtil;
 import com.comp.ninti.database.DisciplineContract;
+import com.comp.ninti.database.EventContract;
 import com.comp.ninti.general.Discipline;
+import com.comp.ninti.general.Event;
 import com.comp.ninti.general.TimeUtil;
 
 import java.util.Calendar;
@@ -25,21 +30,25 @@ import java.util.LinkedList;
 
 public class EventDetail extends AppCompatActivity {
 
-    Button btnDatePicker, btnTimePicker;
-    EditText txtDate, txtTime;
+    Button btnDatePicker, btnTimePicker, addEventBtn;
+    EditText txtDate, txtTime, eventName;
     private LinkedList<Discipline> disciplines;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    private Calendar calendar;
     private DbHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
+        calendar = Calendar.getInstance();
         disciplines = new LinkedList<>();
         btnDatePicker = (Button) findViewById(R.id.btn_date);
         btnTimePicker = (Button) findViewById(R.id.btn_time);
+        addEventBtn = (Button) findViewById(R.id.addEventBtn);
         txtDate = (EditText) findViewById(R.id.in_date);
         txtTime = (EditText) findViewById(R.id.in_time);
+        eventName = (EditText) findViewById(R.id.eventName);
 
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +61,14 @@ public class EventDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBtnClick(btnTimePicker);
+            }
+        });
+
+        addEventBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addEvent();
+                finish();
             }
         });
 
@@ -76,6 +93,34 @@ public class EventDetail extends AppCompatActivity {
         displayItems();
     }
 
+    private void addEvent() {
+        String name = eventName.getText().toString();
+
+        String date = txtDate.getText().toString();
+
+        String time = txtTime.getText().toString();
+        if (checkParameter(name, date, time) == false)
+            return;
+        if (disciplines == null || disciplines.isEmpty()) {
+            makeToast("Your Event needs one Discipline at least");
+            return;
+        }
+        String dateTime = date + " " + time;
+        Event event = new Event(name, DbListUtil.convertDisciplinesToList(disciplines), dateTime);
+
+        DbHandler dbHandler = new DbHandler(EventDetail.this, "", null, 1);
+        long returnVal;
+        if ((returnVal = dbHandler.getWritableDatabase().insert(EventContract.EVENT.TABLE_NAME, null, EventContract.getInsert(event))) == -1) {
+            Toast.makeText(EventDetail.this, "Error while inserting!",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(EventDetail.this, "Added Event: " + event.getName() + " on position " + returnVal,
+                    Toast.LENGTH_LONG).show();
+        }
+        dbHandler.close();
+    }
+
+
     private void displayItems() {
         dbHandler = new DbHandler(EventDetail.this, "", null, 1);
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
@@ -93,10 +138,9 @@ public class EventDetail extends AppCompatActivity {
         if (btn == btnDatePicker) {
 
             // Get Current Date
-            final Calendar c = Calendar.getInstance();
-            mYear = c.get(Calendar.YEAR);
-            mMonth = c.get(Calendar.MONTH);
-            mDay = c.get(Calendar.DAY_OF_MONTH);
+            mYear = calendar.get(Calendar.YEAR);
+            mMonth = calendar.get(Calendar.MONTH);
+            mDay = calendar.get(Calendar.DAY_OF_MONTH);
             // Launch Date Picker Dialog
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                     new DatePickerDialog.OnDateSetListener() {
@@ -104,10 +148,10 @@ public class EventDetail extends AppCompatActivity {
                         @Override
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
-                            c.set(Calendar.YEAR, year);
-                            c.set(Calendar.MONTH, monthOfYear);
-                            c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                            txtDate.setText(TimeUtil.dateFormat.format(c.getTime()));
+                            calendar.set(Calendar.YEAR, year);
+                            calendar.set(Calendar.MONTH, monthOfYear);
+                            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                            txtDate.setText(TimeUtil.dateFormat.format(calendar.getTime()));
                             onBtnClick(btnTimePicker);
                         }
                     }, mYear, mMonth, mDay);
@@ -116,9 +160,8 @@ public class EventDetail extends AppCompatActivity {
         if (btn == btnTimePicker) {
 
             // Get Current Time
-            final Calendar c = Calendar.getInstance();
-            mHour = c.get(Calendar.HOUR_OF_DAY);
-            mMinute = c.get(Calendar.MINUTE);
+            mHour = calendar.get(Calendar.HOUR_OF_DAY);
+            mMinute = calendar.get(Calendar.MINUTE);
 
             // Launch Time Picker Dialog
             TimePickerDialog timePickerDialog = new TimePickerDialog(this,
@@ -127,9 +170,9 @@ public class EventDetail extends AppCompatActivity {
                         @Override
                         public void onTimeSet(TimePicker view, int hourOfDay,
                                               int minute) {
-                            c.set(Calendar.MINUTE, minute);
-                            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                            txtTime.setText(TimeUtil.timeFormat.format(c.getTime()));
+                            calendar.set(Calendar.MINUTE, minute);
+                            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                            txtTime.setText(TimeUtil.timeFormat.format(calendar.getTime()));
                         }
                     }, mHour, mMinute, false);
             timePickerDialog.show();
@@ -141,5 +184,31 @@ public class EventDetail extends AppCompatActivity {
         super.onDestroy();
         if (dbHandler != null)
             dbHandler.close();
+    }
+
+    private boolean checkParameter(String name, String date, String time) {
+        if (name == null || name.isEmpty()) {
+            makeToast("Your Event needs a Name!");
+            return false;
+        }
+        if (date == null || date.isEmpty()) {
+            makeToast("Your Event needs a Date!");
+            return false;
+        }
+        if (time == null || time.isEmpty()) {
+            makeToast("Your Event needs a Time!");
+            return false;
+        }
+        if (disciplines == null || disciplines.isEmpty()) {
+            makeToast("Your Event needs one Discipline at least");
+            return false;
+        }
+        return true;
+    }
+
+    private void makeToast(String toShow) {
+        Toast.makeText(EventDetail.this, toShow,
+                Toast.LENGTH_LONG).show();
+        return;
     }
 }

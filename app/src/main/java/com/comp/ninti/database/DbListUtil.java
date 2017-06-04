@@ -7,10 +7,10 @@ import java.util.List;
 public class DbListUtil {
     private static String LIST_SEPARATOR = ",";
 
-    public static String convertListToString(List<String> stringList) {
+    public static String convertListToString(List<Long> stringList) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (String str : stringList) {
-            stringBuilder.append(str).append(LIST_SEPARATOR);
+        for (Long lon : stringList) {
+            stringBuilder.append(lon).append(LIST_SEPARATOR);
         }
 
         // Remove last separator

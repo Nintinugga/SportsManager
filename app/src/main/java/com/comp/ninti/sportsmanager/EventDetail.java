@@ -14,7 +14,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DisciplineContract;
@@ -22,11 +21,13 @@ import com.comp.ninti.general.Discipline;
 import com.comp.ninti.general.TimeUtil;
 
 import java.util.Calendar;
+import java.util.LinkedList;
 
 public class EventDetail extends AppCompatActivity {
 
     Button btnDatePicker, btnTimePicker;
     EditText txtDate, txtTime;
+    private LinkedList<Discipline> disciplines;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private DbHandler dbHandler;
 
@@ -34,7 +35,7 @@ public class EventDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
-
+        disciplines = new LinkedList<>();
         btnDatePicker = (Button) findViewById(R.id.btn_date);
         btnTimePicker = (Button) findViewById(R.id.btn_time);
         txtDate = (EditText) findViewById(R.id.in_date);
@@ -53,6 +54,7 @@ public class EventDetail extends AppCompatActivity {
                 onBtnClick(btnTimePicker);
             }
         });
+
         ListView listView = (ListView) findViewById(R.id.eventDisciplinesLV);
         listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -63,8 +65,11 @@ public class EventDetail extends AppCompatActivity {
                 Discipline clickedDiscipline = new Discipline(c.getString(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_NAME)),
                         c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_RULE)), c.getInt(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_ATTEMPTS)),
                         c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE._ID)));
-                Toast.makeText(EventDetail.this, "Clicked Discipline: " + clickedDiscipline.getName() + " dbID: " + id,
-                        Toast.LENGTH_LONG).show();
+                if (disciplines.contains(clickedDiscipline)) {
+                    disciplines.remove(clickedDiscipline);
+                } else {
+                    disciplines.add(clickedDiscipline);
+                }
             }
         });
 
@@ -92,8 +97,7 @@ public class EventDetail extends AppCompatActivity {
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
             mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
+            // Launch Date Picker Dialog
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                     new DatePickerDialog.OnDateSetListener() {
 
@@ -104,7 +108,7 @@ public class EventDetail extends AppCompatActivity {
                             c.set(Calendar.MONTH, monthOfYear);
                             c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                             txtDate.setText(TimeUtil.dateFormat.format(c.getTime()));
-
+                            onBtnClick(btnTimePicker);
                         }
                     }, mYear, mMonth, mDay);
             datePickerDialog.show();
@@ -130,5 +134,12 @@ public class EventDetail extends AppCompatActivity {
                     }, mHour, mMinute, false);
             timePickerDialog.show();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (dbHandler != null)
+            dbHandler.close();
     }
 }

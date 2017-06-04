@@ -69,4 +69,13 @@ public class Discipline implements Serializable {
     public void setRuleId(long ruleId) {
         this.ruleId = ruleId;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Discipline){
+            Discipline toCompare = (Discipline)obj;
+            return this.id == toCompare.getId();
+        }
+            return super.equals(obj);
+    }
 }

@@ -46,14 +46,25 @@
             tools:layout_constraintTop_creator="1">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvSelectDisciplines"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/event_name"
                 android:layout_alignStart="@+id/event_name"
-                android:layout_below="@+id/btn_time"
+                android:layout_below="@+id/tvTime"
                 android:layout_marginTop="10dp"
                 android:text="@string/SelectDisciplines"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/in_date"
+                android:layout_alignLeft="@+id/event_name"
+                android:layout_alignStart="@+id/event_name"
+                android:layout_below="@+id/event_name"
+                android:text="@string/Date"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
@@ -67,6 +78,17 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="51dp"
                 android:text="@string/Name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/in_time"
+                android:layout_alignLeft="@+id/event_name"
+                android:layout_alignStart="@+id/event_name"
+                android:layout_below="@+id/event_name"
+                android:text="@string/Time"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <EditText
@@ -91,8 +113,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/eventName"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentLeft="false"
+                android:layout_alignParentRight="true"
                 android:layout_alignParentStart="false"
                 android:layout_alignParentTop="false"
                 android:layout_alignStart="@+id/eventName"
@@ -100,18 +122,6 @@
                 android:layout_marginTop="34dp"
                 android:hint="@string/Date"
                 android:inputType="date" />
-
-            <Button
-                android:id="@+id/btn_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/in_date"
-                android:layout_alignLeft="@+id/event_name"
-                android:layout_alignStart="@+id/event_name"
-                android:layout_alignTop="@+id/in_date"
-                android:layout_toEndOf="@+id/in_date"
-                android:layout_toRightOf="@+id/in_date"
-                android:text="@string/Select" />
 
             <EditText
                 android:id="@+id/in_time"
@@ -128,21 +138,10 @@
                 android:hint="@string/Time"
                 android:inputType="" />
 
-            <Button
-                android:id="@+id/btn_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/in_time"
-                android:layout_alignLeft="@+id/btn_date"
-                android:layout_alignStart="@+id/btn_date"
-                android:layout_alignTop="@+id/in_time"
-                android:layout_below="@+id/btn_date"
-                android:text="@string/Select" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignBaseline="@+id/textView"
+                android:layout_alignBaseline="@+id/tvSelectDisciplines"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
@@ -153,8 +152,31 @@
                     android:id="@+id/eventDisciplinesLV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="5dp" />
+                    android:layout_marginTop="5dp"
+                    android:contentDescription="@string/Time" />
             </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/btn_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/in_date"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/Date"
+                app:srcCompat="@android:drawable/ic_menu_edit" />
+
+            <ImageButton
+                android:id="@+id/btn_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/in_time"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/Time"
+                app:srcCompat="@android:drawable/ic_menu_edit" />
 
 
         </RelativeLayout>

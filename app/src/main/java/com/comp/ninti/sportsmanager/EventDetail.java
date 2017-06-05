@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -29,7 +30,8 @@ import java.util.LinkedList;
 
 public class EventDetail extends AppCompatActivity {
 
-    Button btnDatePicker, btnTimePicker, addEventBtn;
+    Button addEventBtn;
+    ImageButton btnDatePicker, btnTimePicker;
     EditText txtDate, txtTime, eventName;
     private LinkedList<Discipline> disciplines;
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -42,8 +44,8 @@ public class EventDetail extends AppCompatActivity {
         setContentView(R.layout.activity_event_detail);
         calendar = Calendar.getInstance();
         disciplines = new LinkedList<>();
-        btnDatePicker = (Button) findViewById(R.id.btn_date);
-        btnTimePicker = (Button) findViewById(R.id.btn_time);
+        btnDatePicker = (ImageButton) findViewById(R.id.btn_date);
+        btnTimePicker = (ImageButton) findViewById(R.id.btn_time);
         addEventBtn = (Button) findViewById(R.id.addEventBtn);
         txtDate = (EditText) findViewById(R.id.in_date);
         txtTime = (EditText) findViewById(R.id.in_time);
@@ -132,7 +134,7 @@ public class EventDetail extends AppCompatActivity {
     }
 
 
-    public void onBtnClick(Button btn) {
+    public void onBtnClick(ImageButton btn) {
 
         if (btn == btnDatePicker) {
 
@@ -151,6 +153,7 @@ public class EventDetail extends AppCompatActivity {
                             calendar.set(Calendar.MONTH, monthOfYear);
                             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                             txtDate.setText(TimeUtil.dateFormat.format(calendar.getTime()));
+                            if(txtTime.getText().toString().isEmpty())
                             onBtnClick(btnTimePicker);
                         }
                     }, mYear, mMonth, mDay);

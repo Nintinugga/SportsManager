@@ -6,15 +6,21 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.comp.ninti.general.Customer;
+import com.comp.ninti.general.Discipline;
+import com.comp.ninti.general.Event;
 import com.comp.ninti.general.Rule;
+import com.comp.ninti.general.RuleType;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.LinkedList;
+
 public class DbHandler extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "sportsmanager.db";
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 9;
 
 
     public DbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -31,6 +37,8 @@ public class DbHandler extends SQLiteOpenHelper {
         db.execSQL(EventContract.CREATE_TABLE);
         System.out.println("creating events table");
         db.execSQL(DisciplineContract.CREATE_TABLE);
+        createDefaultValues(db);
+        System.out.println("creating default values");
     }
 
     @Override
@@ -122,6 +130,19 @@ public class DbHandler extends SQLiteOpenHelper {
         Log.d("TAG_NAME", resultSet.toString());
         return resultSet;
 
+    }
+
+    private void createDefaultValues(SQLiteDatabase db){
+        Customer customer = new Customer("Jonas Huber", 23, "Jonas.Huber@rocketmail.com", "01718650307");
+        db.insert(CustomerContract.CUSTOMER.TABLE_NAME, null, CustomerContract.getInsert(customer));
+        Rule rule = new Rule("Default1", RuleType.Default, 1l);
+        db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule));
+        Discipline discipline = new Discipline("Weitschussexperte", rule, 2);
+        db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline));
+        LinkedList<Long> disciplines = new LinkedList<>();
+        disciplines.add(1l);
+        Event event = new Event("Fussballcamp", disciplines, "2017-08-21 18:30");
+        db.insert(EventContract.EVENT.TABLE_NAME, null, EventContract.getInsert(event));
     }
 
 }

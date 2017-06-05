@@ -16,7 +16,6 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.comp.ninti.database.CustomerContract;
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DbListUtil;
 import com.comp.ninti.database.DisciplineContract;
@@ -90,7 +89,7 @@ public class EventDetail extends AppCompatActivity {
             }
         });
 
-        displayItems();
+        displayDisciplinesItems();
     }
 
     private void addEvent() {
@@ -121,7 +120,7 @@ public class EventDetail extends AppCompatActivity {
     }
 
 
-    private void displayItems() {
+    private void displayDisciplinesItems() {
         dbHandler = new DbHandler(EventDetail.this, "", null, 1);
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_activated_2,
@@ -210,5 +209,11 @@ public class EventDetail extends AppCompatActivity {
         Toast.makeText(EventDetail.this, toShow,
                 Toast.LENGTH_LONG).show();
         return;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        displayDisciplinesItems();
     }
 }

@@ -43,4 +43,7 @@
     <string name="Date">Date</string>
     <string name="Time">Time</string>
     <string name="Select">SELECT</string>
+    <string name="OK">OK</string>
+    <string name="Back">Back</string>
+    <string name="ADD">ADD</string>
 </resources>

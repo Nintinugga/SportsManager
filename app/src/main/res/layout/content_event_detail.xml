@@ -46,17 +46,6 @@
             tools:layout_constraintTop_creator="1">
 
             <TextView
-                android:id="@+id/tvSelectDisciplines"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/event_name"
-                android:layout_alignStart="@+id/event_name"
-                android:layout_below="@+id/tvTime"
-                android:layout_marginTop="10dp"
-                android:text="@string/SelectDisciplines"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-            <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -138,23 +127,6 @@
                 android:hint="@string/Time"
                 android:inputType="" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignBaseline="@+id/tvSelectDisciplines"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="@dimen/bottom_button_height">
-
-                <ListView
-                    android:id="@+id/eventDisciplinesLV"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp" />
-            </RelativeLayout>
-
             <ImageButton
                 android:id="@+id/btn_date"
                 android:layout_width="wrap_content"
@@ -176,6 +148,17 @@
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/Time"
                 app:srcCompat="@android:drawable/ic_menu_edit" />
+
+            <Button
+                android:id="@+id/btnSelectDisc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/in_time"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="false"
+                android:layout_centerVertical="false"
+                android:layout_marginTop="34dp"
+                android:text="@string/SelectDisciplines" />
 
 
         </RelativeLayout>

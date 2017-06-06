@@ -1,9 +1,9 @@
 package com.comp.ninti.sportsmanager;
 
 import android.app.DatePickerDialog;
+import android.app.FragmentManager;
 import android.app.TimePickerDialog;
 import android.database.Cursor;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +21,7 @@ import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DbListUtil;
 import com.comp.ninti.database.DisciplineContract;
 import com.comp.ninti.database.EventContract;
+import com.comp.ninti.dialogs.SelectDisciplines;
 import com.comp.ninti.general.Discipline;
 import com.comp.ninti.general.Event;
 import com.comp.ninti.general.TimeUtil;
@@ -28,15 +29,14 @@ import com.comp.ninti.general.TimeUtil;
 import java.util.Calendar;
 import java.util.LinkedList;
 
-public class EventDetail extends AppCompatActivity {
+public class EventDetail extends AppCompatActivity implements SelectDisciplines.OnCompleteListener {
 
-    Button addEventBtn;
+    Button addEventBtn, btnSelectDisc;
     ImageButton btnDatePicker, btnTimePicker;
     EditText txtDate, txtTime, eventName;
     private LinkedList<Discipline> disciplines;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private Calendar calendar;
-    private DbHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +47,18 @@ public class EventDetail extends AppCompatActivity {
         btnDatePicker = (ImageButton) findViewById(R.id.btn_date);
         btnTimePicker = (ImageButton) findViewById(R.id.btn_time);
         addEventBtn = (Button) findViewById(R.id.addEventBtn);
+        btnSelectDisc = (Button) findViewById(R.id.btnSelectDisc);
+        eventName = (EditText) findViewById(R.id.eventName);
         txtDate = (EditText) findViewById(R.id.in_date);
         txtTime = (EditText) findViewById(R.id.in_time);
-        eventName = (EditText) findViewById(R.id.eventName);
+
+        btnSelectDisc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SelectDisciplines selectDisciplines = new SelectDisciplines();
+                selectDisciplines.show(getFragmentManager(), "selectDisciplines");
+            }
+        });
 
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +73,6 @@ public class EventDetail extends AppCompatActivity {
                 onBtnClick(btnTimePicker);
             }
         });
-
         addEventBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,25 +81,6 @@ public class EventDetail extends AppCompatActivity {
             }
         });
 
-        ListView listView = (ListView) findViewById(R.id.eventDisciplinesLV);
-        listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Cursor c = (Cursor) parent.getAdapter().getItem(position);
-                c.moveToPosition(position);
-                Discipline clickedDiscipline = new Discipline(c.getString(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_NAME)),
-                        c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_RULE)), c.getInt(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_ATTEMPTS)),
-                        c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE._ID)));
-                if (disciplines.contains(clickedDiscipline)) {
-                    disciplines.remove(clickedDiscipline);
-                } else {
-                    disciplines.add(clickedDiscipline);
-                }
-            }
-        });
-
-        displayDisciplinesItems();
     }
 
     private void addEvent() {
@@ -100,6 +89,7 @@ public class EventDetail extends AppCompatActivity {
         String date = txtDate.getText().toString();
 
         String time = txtTime.getText().toString();
+        //Todo does not stop on false and closes the view
         if (checkParameter(name, date, time) == false)
             return;
         if (disciplines == null || disciplines.isEmpty()) {
@@ -121,19 +111,6 @@ public class EventDetail extends AppCompatActivity {
         dbHandler.close();
     }
 
-
-    private void displayDisciplinesItems() {
-        dbHandler = new DbHandler(EventDetail.this, "", null, 1);
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_activated_2,
-                dbHandler.getAllDisciplines(),
-                new String[]{DisciplineContract.DISCIPLINE.COLUMN_NAME, DisciplineContract.DISCIPLINE.COLUMN_RULE},
-                new int[]{android.R.id.text1, android.R.id.text2});
-        ListView listView = (ListView) findViewById(R.id.eventDisciplinesLV);
-        listView.setAdapter(adapter);
-    }
-
-
     public void onBtnClick(ImageButton btn) {
 
         if (btn == btnDatePicker) {
@@ -153,8 +130,8 @@ public class EventDetail extends AppCompatActivity {
                             calendar.set(Calendar.MONTH, monthOfYear);
                             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                             txtDate.setText(TimeUtil.dateFormat.format(calendar.getTime()));
-                            if(txtTime.getText().toString().isEmpty())
-                            onBtnClick(btnTimePicker);
+                            if (txtTime.getText().toString().isEmpty())
+                                onBtnClick(btnTimePicker);
                         }
                     }, mYear, mMonth, mDay);
             datePickerDialog.show();
@@ -179,13 +156,6 @@ public class EventDetail extends AppCompatActivity {
                     }, mHour, mMinute, false);
             timePickerDialog.show();
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (dbHandler != null)
-            dbHandler.close();
     }
 
     private boolean checkParameter(String name, String date, String time) {
@@ -215,8 +185,8 @@ public class EventDetail extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        displayDisciplinesItems();
+    public void onComplete(LinkedList<Discipline> selectedDisciplines) {
+        this.disciplines.clear();
+        this.disciplines.addAll(selectedDisciplines);
     }
 }

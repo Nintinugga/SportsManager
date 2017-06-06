@@ -152,8 +152,7 @@
                     android:id="@+id/eventDisciplinesLV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:contentDescription="@string/Time" />
+                    android:layout_marginTop="5dp" />
             </RelativeLayout>
 
             <ImageButton

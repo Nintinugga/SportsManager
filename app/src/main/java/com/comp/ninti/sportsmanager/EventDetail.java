@@ -1,25 +1,19 @@
 package com.comp.ninti.sportsmanager;
 
 import android.app.DatePickerDialog;
-import android.app.FragmentManager;
 import android.app.TimePickerDialog;
-import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DbListUtil;
-import com.comp.ninti.database.DisciplineContract;
 import com.comp.ninti.database.EventContract;
 import com.comp.ninti.dialogs.SelectDisciplines;
 import com.comp.ninti.general.Discipline;

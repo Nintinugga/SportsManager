@@ -1,21 +1,17 @@
 package com.comp.ninti.sportsmanager;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.comp.ninti.database.DbHandler;
-import com.comp.ninti.database.DisciplineContract;
 import com.comp.ninti.database.EventContract;
-import com.comp.ninti.general.Discipline;
 
 public class EventsActivity extends AppCompatActivity {
     private DbHandler dbHandler;

@@ -76,25 +76,23 @@ public class EventDetail extends AppCompatActivity implements SelectDisciplines.
         addEventBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addEvent();
-                finish();
+                if (addEvent())
+                    finish();
             }
         });
 
     }
 
-    private void addEvent() {
+    private boolean addEvent() {
         String name = eventName.getText().toString();
-
         String date = txtDate.getText().toString();
-
         String time = txtTime.getText().toString();
-        //Todo does not stop on false and closes the view
+
         if (checkParameter(name, date, time) == false)
-            return;
+            return false;
         if (disciplines == null || disciplines.isEmpty()) {
             makeToast("Your Event needs one Discipline at least");
-            return;
+            return false;
         }
         String dateTime = date + " " + time;
         Event event = new Event(name, DbListUtil.convertDisciplinesToList(disciplines), dateTime);
@@ -109,6 +107,7 @@ public class EventDetail extends AppCompatActivity implements SelectDisciplines.
                     Toast.LENGTH_LONG).show();
         }
         dbHandler.close();
+        return true;
     }
 
     public void onBtnClick(ImageButton btn) {

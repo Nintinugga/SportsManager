@@ -189,4 +189,12 @@ public class EventDetail extends AppCompatActivity implements SelectDisciplines.
         this.disciplines.clear();
         this.disciplines.addAll(selectedDisciplines);
     }
+
+    public LinkedList<Discipline> getDisciplines() {
+        return disciplines;
+    }
+
+    public void setDisciplines(LinkedList<Discipline> disciplines) {
+        this.disciplines = disciplines;
+    }
 }

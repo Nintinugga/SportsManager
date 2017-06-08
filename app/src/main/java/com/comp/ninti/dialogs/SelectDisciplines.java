@@ -19,6 +19,7 @@ import android.widget.ListView;
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DisciplineContract;
 import com.comp.ninti.general.Discipline;
+import com.comp.ninti.sportsmanager.EventDetail;
 import com.comp.ninti.sportsmanager.R;
 
 import java.util.LinkedList;
@@ -43,7 +44,7 @@ public class SelectDisciplines extends DialogFragment implements View.OnClickLis
         }
     }
 
-    public static interface OnCompleteListener {
+    public interface OnCompleteListener {
         void onComplete(LinkedList<Discipline> selectedDisciplines);
     }
 
@@ -67,6 +68,7 @@ public class SelectDisciplines extends DialogFragment implements View.OnClickLis
         View view = inflater.inflate(R.layout.fragment_disciplines, null);
         System.out.println("INFLATING");
         disciplines = new LinkedList<>();
+        disciplines.addAll(((EventDetail)getActivity()).getDisciplines());
         ListView listView = (ListView) view.findViewById(R.id.disciplinesListView);
         btnAdd = (Button) view.findViewById(R.id.btnAdd);
         btnBack = (Button) view.findViewById(R.id.btnBack);
@@ -91,6 +93,10 @@ public class SelectDisciplines extends DialogFragment implements View.OnClickLis
             }
         });
         displayDisciplinesItems(view);
+        for(Discipline discipline: disciplines){
+            System.out.println("found discipline: " + discipline);
+            listView.setItemChecked((int)discipline.getId()-1, true);
+        }
         return view;
     }
 

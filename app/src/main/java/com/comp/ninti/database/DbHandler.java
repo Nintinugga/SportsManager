@@ -6,10 +6,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.comp.ninti.general.Customer;
-import com.comp.ninti.general.Discipline;
-import com.comp.ninti.general.Event;
-import com.comp.ninti.general.Rule;
+import com.comp.ninti.general.core.Customer;
+import com.comp.ninti.general.core.Discipline;
+import com.comp.ninti.general.core.Event;
+import com.comp.ninti.general.core.Rule;
 import com.comp.ninti.general.RuleType;
 
 import org.json.JSONArray;
@@ -37,6 +37,8 @@ public class DbHandler extends SQLiteOpenHelper {
         db.execSQL(EventContract.CREATE_TABLE);
         System.out.println("creating events table");
         db.execSQL(DisciplineContract.CREATE_TABLE);
+        System.out.println("creating eventcustomer table");
+        db.execSQL(EventCustomerContract.CREATE_TABLE);
         createDefaultValues(db);
         System.out.println("creating default values");
     }
@@ -47,6 +49,7 @@ public class DbHandler extends SQLiteOpenHelper {
         db.execSQL(DisciplineContract.DROP_TABLE);
         db.execSQL(RuleContract.DROP_TABLE_RULE);
         db.execSQL(EventContract.DROP_TABLE);
+        db.execSQL(EventCustomerContract.DROP_TABLE);
         onCreate(db);
     }
 

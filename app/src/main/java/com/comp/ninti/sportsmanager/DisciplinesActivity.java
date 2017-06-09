@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DisciplineContract;
-import com.comp.ninti.general.Discipline;
+import com.comp.ninti.general.core.Discipline;
 
 public class DisciplinesActivity extends AppCompatActivity {
     private DbHandler dbHandler;

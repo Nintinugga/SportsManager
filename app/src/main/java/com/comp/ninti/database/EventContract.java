@@ -3,7 +3,7 @@ package com.comp.ninti.database;
 import android.content.ContentValues;
 import android.provider.BaseColumns;
 
-import com.comp.ninti.general.Event;
+import com.comp.ninti.general.core.Event;
 
 public class EventContract {
     private EventContract() {

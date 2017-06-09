@@ -16,8 +16,8 @@ import android.widget.Toast;
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DisciplineContract;
 import com.comp.ninti.database.RuleContract;
-import com.comp.ninti.general.Discipline;
-import com.comp.ninti.general.Rule;
+import com.comp.ninti.general.core.Discipline;
+import com.comp.ninti.general.core.Rule;
 
 import java.util.ArrayList;
 

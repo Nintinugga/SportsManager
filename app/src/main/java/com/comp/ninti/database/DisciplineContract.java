@@ -4,7 +4,7 @@ package com.comp.ninti.database;
 import android.content.ContentValues;
 import android.provider.BaseColumns;
 
-import com.comp.ninti.general.Discipline;
+import com.comp.ninti.general.core.Discipline;
 
 public class DisciplineContract {
     private DisciplineContract() {

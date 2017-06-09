@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.comp.ninti.database.CustomerContract;
 import com.comp.ninti.database.DbHandler;
-import com.comp.ninti.general.Customer;
+import com.comp.ninti.general.core.Customer;
 
 import java.util.ArrayList;
 

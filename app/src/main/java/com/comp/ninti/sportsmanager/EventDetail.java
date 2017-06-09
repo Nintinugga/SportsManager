@@ -16,8 +16,8 @@ import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DbListUtil;
 import com.comp.ninti.database.EventContract;
 import com.comp.ninti.dialogs.SelectDisciplines;
-import com.comp.ninti.general.Discipline;
-import com.comp.ninti.general.Event;
+import com.comp.ninti.general.core.Discipline;
+import com.comp.ninti.general.core.Event;
 import com.comp.ninti.general.TimeUtil;
 
 import java.util.Calendar;

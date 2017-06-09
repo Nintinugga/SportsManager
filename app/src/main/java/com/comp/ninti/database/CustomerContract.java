@@ -3,7 +3,7 @@ package com.comp.ninti.database;
 import android.content.ContentValues;
 import android.provider.BaseColumns;
 
-import com.comp.ninti.general.Customer;
+import com.comp.ninti.general.core.Customer;
 
 
 public final class CustomerContract {

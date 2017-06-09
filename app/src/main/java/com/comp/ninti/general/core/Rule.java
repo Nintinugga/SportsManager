@@ -1,9 +1,13 @@
-package com.comp.ninti.general;
+package com.comp.ninti.general.core;
 
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Rule implements Serializable {
+import com.comp.ninti.general.RuleType;
+
+
+public class Rule implements Parcelable {
 
     private RuleType ruleType;
     private String name;
@@ -44,6 +48,27 @@ public class Rule implements Serializable {
         this.id = id;
     }
 
+
+    protected Rule(Parcel in) {
+        name = in.readString();
+        bestTime = in.readDouble();
+        worstTime = in.readDouble();
+        bestTimePoints = in.readInt();
+        worstTimePoints = in.readInt();
+        id = in.readLong();
+    }
+
+    public static final Creator<Rule> CREATOR = new Creator<Rule>() {
+        @Override
+        public Rule createFromParcel(Parcel in) {
+            return new Rule(in);
+        }
+
+        @Override
+        public Rule[] newArray(int size) {
+            return new Rule[size];
+        }
+    };
 
     public RuleType getRuleType() {
         return ruleType;
@@ -99,5 +124,20 @@ public class Rule implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeDouble(bestTime);
+        dest.writeDouble(worstTime);
+        dest.writeInt(bestTimePoints);
+        dest.writeInt(worstTimePoints);
+        dest.writeLong(id);
     }
 }

@@ -1,9 +1,12 @@
-package com.comp.ninti.general;
+package com.comp.ninti.general.core;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class Event {
+public class Event implements Parcelable{
     private long id;
     private String name;
     private LinkedList<Long> disciplines = new LinkedList<>();
@@ -14,6 +17,26 @@ public class Event {
         this.disciplines.addAll(disciplines);
         this.date = date;
     }
+
+    protected Event(Parcel in) {
+        id = in.readLong();
+        name = in.readString();
+        date = in.readString();
+        disciplines = new LinkedList<>();
+        in.readList(disciplines, null);
+    }
+
+    public static final Creator<Event> CREATOR = new Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel in) {
+            return new Event(in);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
 
     public long getId() {
         return id;
@@ -59,5 +82,18 @@ public class Event {
                 ", disciplines=" + disc +
                 ", date='" + date + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(name);
+        dest.writeString(date);
+        dest.writeList(disciplines);
     }
 }

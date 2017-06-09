@@ -1,7 +1,7 @@
 package com.comp.ninti.database;
 
 
-import com.comp.ninti.general.Discipline;
+import com.comp.ninti.general.core.Discipline;
 
 import java.util.Arrays;
 import java.util.LinkedList;

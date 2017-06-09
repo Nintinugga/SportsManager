@@ -5,7 +5,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
-import com.comp.ninti.general.Rule;
+import com.comp.ninti.general.core.Rule;
 import com.comp.ninti.general.RuleType;
 
 public final class RuleContract {

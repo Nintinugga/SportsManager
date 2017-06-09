@@ -16,7 +16,7 @@ import android.widget.ListView;
 
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DisciplineContract;
-import com.comp.ninti.general.Discipline;
+import com.comp.ninti.general.core.Discipline;
 import com.comp.ninti.sportsmanager.EventDetail;
 import com.comp.ninti.sportsmanager.R;
 

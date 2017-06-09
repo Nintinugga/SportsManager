@@ -1,9 +1,11 @@
-package com.comp.ninti.general;
+package com.comp.ninti.general.core;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 
-public class Discipline implements Serializable {
+
+public class Discipline implements Parcelable {
     private String name;
     private Rule rule;
     private int attempts;
@@ -29,6 +31,25 @@ public class Discipline implements Serializable {
         this.id = id;
         this.ruleId = ruleId;
     }
+
+    protected Discipline(Parcel in) {
+        name = in.readString();
+        attempts = in.readInt();
+        id = in.readLong();
+        ruleId = in.readLong();
+    }
+
+    public static final Creator<Discipline> CREATOR = new Creator<Discipline>() {
+        @Override
+        public Discipline createFromParcel(Parcel in) {
+            return new Discipline(in);
+        }
+
+        @Override
+        public Discipline[] newArray(int size) {
+            return new Discipline[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -77,5 +98,18 @@ public class Discipline implements Serializable {
             return this.id == toCompare.getId();
         }
             return super.equals(obj);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeInt(attempts);
+        dest.writeLong(id);
+        dest.writeLong(ruleId);
     }
 }

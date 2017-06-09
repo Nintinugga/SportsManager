@@ -1,9 +1,11 @@
-package com.comp.ninti.general;
+package com.comp.ninti.general.core;
 
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Customer implements Serializable {
+
+public class Customer implements Parcelable {
 
     private String name;
     private int age;
@@ -32,6 +34,26 @@ public class Customer implements Serializable {
         this.phone = phone;
         this.id = id;
     }
+
+    protected Customer(Parcel in) {
+        name = in.readString();
+        age = in.readInt();
+        email = in.readString();
+        phone = in.readString();
+        id = in.readLong();
+    }
+
+    public static final Creator<Customer> CREATOR = new Creator<Customer>() {
+        @Override
+        public Customer createFromParcel(Parcel in) {
+            return new Customer(in);
+        }
+
+        @Override
+        public Customer[] newArray(int size) {
+            return new Customer[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -72,4 +94,19 @@ public class Customer implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
+
+    @Override
+    public int describeContents() {
+        return hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeInt(age);
+        dest.writeString(email);
+        dest.writeString(phone);
+        dest.writeLong(id);
+    }
+
 }

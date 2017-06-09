@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.RuleContract;
-import com.comp.ninti.general.Rule;
+import com.comp.ninti.general.core.Rule;
 import com.comp.ninti.general.RuleType;
 
 public class RuleDetail extends AppCompatActivity {

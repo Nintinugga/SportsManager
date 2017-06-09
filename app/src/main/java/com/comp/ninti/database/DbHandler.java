@@ -21,7 +21,7 @@ import java.util.List;
 public class DbHandler extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "sportsmanager.db";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 11;
 
 
     public DbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -152,11 +152,23 @@ public class DbHandler extends SQLiteOpenHelper {
 
     private void createDefaultValues(SQLiteDatabase db){
         Customer customer = new Customer("Jonas Huber", 23, "Jonas.Huber@rocketmail.com", "01718650307");
+        Customer customer1 = new Customer("Sepp Huber", 23, "Jonas.Huber@rocketmail.com", "01718650307");
+        Customer customer2 = new Customer("Woife Huber", 23, "Jonas.Huber@rocketmail.com", "01718650307");
         db.insert(CustomerContract.CUSTOMER.TABLE_NAME, null, CustomerContract.getInsert(customer));
-        Rule rule = new Rule("Default1", RuleType.Default, 1l);
+        db.insert(CustomerContract.CUSTOMER.TABLE_NAME, null, CustomerContract.getInsert(customer1));
+        db.insert(CustomerContract.CUSTOMER.TABLE_NAME, null, CustomerContract.getInsert(customer2));
+        Rule rule = new Rule("Default1", RuleType.Default);
+        Rule rule1 = new Rule("Default2", RuleType.Default);
+        Rule rule2 = new Rule("Default3", RuleType.Default);
         db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule));
+        db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule1));
+        db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule2));
         Discipline discipline = new Discipline("Weitschussexperte", rule, 2);
+        Discipline discipline1 = new Discipline("Sprintmeister", rule, 2);
+        Discipline discipline2 = new Discipline("WasErAuchSonstMacht", rule, 2);
         db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline));
+        db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline1));
+        db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline2));
         LinkedList<Long> disciplines = new LinkedList<>();
         disciplines.add(1l);
         LinkedList<Long> customers = new LinkedList<>();

@@ -160,6 +160,19 @@
                 android:layout_marginTop="34dp"
                 android:text="@string/SelectDisciplines" />
 
+            <Button
+                android:id="@+id/btnSelectCus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/btnSelectDisc"
+                android:layout_alignLeft="@+id/btnSelectDisc"
+                android:layout_alignRight="@+id/btnSelectDisc"
+                android:layout_alignStart="@+id/btnSelectDisc"
+                android:layout_below="@+id/btnSelectDisc"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="34dp"
+                android:text="@string/SelectCustomers" />
+
 
         </RelativeLayout>
 

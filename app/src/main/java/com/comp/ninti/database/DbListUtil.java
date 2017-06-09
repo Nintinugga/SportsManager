@@ -34,4 +34,12 @@ public class DbListUtil {
     public static List<String> convertStringToList(String str) {
         return Arrays.asList(str.split(LIST_SEPARATOR));
     }
+
+    public static List<Long> convertStringToLongList(String str){
+        LinkedList<Long> toReturn = new LinkedList<>();
+        for(String string: convertStringToList(str)){
+            toReturn.add(Long.valueOf(string));
+        }
+        return toReturn;
+    }
 }

@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class DbHandler extends SQLiteOpenHelper {
 
@@ -67,6 +68,20 @@ public class DbHandler extends SQLiteOpenHelper {
 
     public Cursor getAllEvents(){
         return this.getReadableDatabase().rawQuery("select * from " + EventContract.EVENT.TABLE_NAME, null);
+    }
+
+    public Cursor getDisciplinesById(List<Long> ids){
+        final StringBuilder query = new StringBuilder("select * from " + DisciplineContract.DISCIPLINE.TABLE_NAME);
+        final String discEq = DisciplineContract.DISCIPLINE._ID + " = ";
+        final String separator = " or ";
+                query.append(" where ");
+        for(Long id: ids){
+            query.append(discEq);
+            query.append(id);
+            query.append(separator);
+        }
+        query.delete(query.length()-separator.length(), query.length());
+        return this.getReadableDatabase().rawQuery(query.toString(), null);
     }
 
     /**

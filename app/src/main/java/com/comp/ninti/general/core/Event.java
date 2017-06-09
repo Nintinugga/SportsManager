@@ -18,6 +18,13 @@ public class Event implements Parcelable{
         this.date = date;
     }
 
+    public Event(long id, String name, List<Long> disciplines, String date) {
+        this.id = id;
+        this.name = name;
+        this.disciplines.addAll(disciplines);
+        this.date = date;
+    }
+
     protected Event(Parcel in) {
         id = in.readLong();
         name = in.readString();

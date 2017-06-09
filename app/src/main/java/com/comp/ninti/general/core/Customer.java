@@ -109,4 +109,13 @@ public class Customer implements Parcelable {
         dest.writeLong(id);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+       if(obj instanceof Customer){
+           Customer customer = (Customer)obj;
+           return customer.getId() == id;
+       }else{
+           return super.equals(obj);
+       }
+    }
 }

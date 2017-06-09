@@ -8,6 +8,7 @@
     <string name="NewRule">New Rule</string>
     <string name="NewDiscipline">New Discipline</string>
     <string name="SelectDisciplines">Select Disciplines</string>
+    <string name="SelectCustomers">Select Customer</string>
     <string name="NewEvent">New Event</string>
     <string name="Customer">Customer</string>
     <string name="Event">Event</string>
@@ -46,5 +47,8 @@
     <string name="OK">OK</string>
     <string name="Back">Back</string>
     <string name="ADD">ADD</string>
+    <string name="title_activity_event_start">EventStart</string>
     <string name="SAVE">SAVE</string>
+    <string name="StartEvent">START EVENT</string>
+    <string name="DisciplinesColon">Disciplines:</string>
 </resources>

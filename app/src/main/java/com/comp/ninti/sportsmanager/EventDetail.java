@@ -15,7 +15,9 @@ import android.widget.Toast;
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DbListUtil;
 import com.comp.ninti.database.EventContract;
+import com.comp.ninti.dialogs.SelectCustomer;
 import com.comp.ninti.dialogs.SelectDisciplines;
+import com.comp.ninti.general.core.Customer;
 import com.comp.ninti.general.core.Discipline;
 import com.comp.ninti.general.core.Event;
 import com.comp.ninti.general.TimeUtil;
@@ -23,12 +25,13 @@ import com.comp.ninti.general.TimeUtil;
 import java.util.Calendar;
 import java.util.LinkedList;
 
-public class EventDetail extends AppCompatActivity implements SelectDisciplines.OnCompleteListener {
+public class EventDetail extends AppCompatActivity implements SelectDisciplines.OnCompleteListener, SelectCustomer.OnCompleteListener {
 
-    Button addEventBtn, btnSelectDisc;
+    Button addEventBtn, btnSelectDisc, btnSelectCust;
     ImageButton btnDatePicker, btnTimePicker;
     EditText txtDate, txtTime, eventName;
     private LinkedList<Discipline> disciplines;
+    private LinkedList<Customer> customers;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private Calendar calendar;
 
@@ -38,10 +41,12 @@ public class EventDetail extends AppCompatActivity implements SelectDisciplines.
         setContentView(R.layout.activity_event_detail);
         calendar = Calendar.getInstance();
         disciplines = new LinkedList<>();
+        customers = new LinkedList<>();
         btnDatePicker = (ImageButton) findViewById(R.id.btn_date);
         btnTimePicker = (ImageButton) findViewById(R.id.btn_time);
         addEventBtn = (Button) findViewById(R.id.addEventBtn);
         btnSelectDisc = (Button) findViewById(R.id.btnSelectDisc);
+        btnSelectCust = (Button) findViewById(R.id.btnSelectCus);
         eventName = (EditText) findViewById(R.id.eventName);
         txtDate = (EditText) findViewById(R.id.in_date);
         txtTime = (EditText) findViewById(R.id.in_time);
@@ -51,6 +56,14 @@ public class EventDetail extends AppCompatActivity implements SelectDisciplines.
             public void onClick(View v) {
                 SelectDisciplines selectDisciplines = new SelectDisciplines();
                 selectDisciplines.show(getFragmentManager(), "selectDisciplines");
+            }
+        });
+
+        btnSelectCust.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SelectCustomer selectCustomer = new SelectCustomer();
+                selectCustomer.show(getFragmentManager(), "selectCustomer");
             }
         });
 
@@ -178,9 +191,15 @@ public class EventDetail extends AppCompatActivity implements SelectDisciplines.
     }
 
     @Override
-    public void onComplete(LinkedList<Discipline> selectedDisciplines) {
+    public void onCompleteSelectDisc(LinkedList<Discipline> selectedDisciplines) {
         this.disciplines.clear();
         this.disciplines.addAll(selectedDisciplines);
+    }
+
+    @Override
+    public void onCompleteSelectCust(LinkedList<Customer> selectedCustomers) {
+        this.customers.clear();
+        this.customers.addAll(selectedCustomers);
     }
 
     public LinkedList<Discipline> getDisciplines() {
@@ -189,5 +208,13 @@ public class EventDetail extends AppCompatActivity implements SelectDisciplines.
 
     public void setDisciplines(LinkedList<Discipline> disciplines) {
         this.disciplines = disciplines;
+    }
+
+    public LinkedList<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(LinkedList<Customer> customers) {
+        this.customers = customers;
     }
 }

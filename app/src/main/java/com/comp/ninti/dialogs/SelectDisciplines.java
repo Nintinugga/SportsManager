@@ -30,23 +30,23 @@ public class SelectDisciplines extends DialogFragment implements View.OnClickLis
     private Button btnAdd, btnBack;
     private ListView listView;
 
+    private OnCompleteListener mListener;
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnAdd) {
             System.out.println("add was clicked");
-            this.mListener.onComplete(disciplines);
+            this.mListener.onCompleteSelectDisc(disciplines);
             dismiss();
         } else if (v.getId() == R.id.btnBack) {
             System.out.println("back was clicked");
             dismiss();
         }
     }
-
     public interface OnCompleteListener {
-        void onComplete(LinkedList<Discipline> selectedDisciplines);
-    }
+        void onCompleteSelectDisc(LinkedList<Discipline> selectedDisciplines);
 
-    private OnCompleteListener mListener;
+    }
 
     // make sure the Activity implemented it
     @Override

@@ -10,14 +10,17 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.comp.ninti.database.CustomerContract;
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DisciplineContract;
+import com.comp.ninti.general.core.Customer;
 import com.comp.ninti.general.core.Discipline;
 import com.comp.ninti.general.core.Event;
 
 public class EventStart extends AppCompatActivity {
     private Event event;
     private DbHandler dbHandler;
+    private ListView disciplinesListView, customersListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +32,9 @@ public class EventStart extends AppCompatActivity {
         getSupportActionBar().setTitle(event.getName());
         getSupportActionBar().setSubtitle(event.getDate());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ListView listView = (ListView) findViewById(R.id.selectedDisciplinesLv);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        disciplinesListView = (ListView) findViewById(R.id.selectedDisciplinesLv);
+        customersListView = (ListView) findViewById(R.id.selectedCustomersLv);
+        disciplinesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cursor c = (Cursor) parent.getAdapter().getItem(position);
@@ -42,16 +46,38 @@ public class EventStart extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
         });
-        displayItems();
+        customersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Cursor c = (Cursor) parent.getAdapter().getItem(position);
+                c.moveToPosition(position);
+                Customer clickedCustomer = new Customer(c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_NAME)),
+                        c.getInt(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_AGE)), c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_EMAIL)),
+                        c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_PHONE)), c.getLong(c.getColumnIndex(CustomerContract.CUSTOMER._ID)));
+                Toast.makeText(EventStart.this, "Clicked Discipline: " + clickedCustomer.getName() + " dbID: " + id,
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+        displayDisciplinesItems();
+        displayCustomersItems();
     }
-    private void displayItems() {
+    private void displayCustomersItems() {
+        dbHandler = new DbHandler(EventStart.this, "", null, 1);
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+                android.R.layout.simple_list_item_2,
+                dbHandler.getCustomersById(event.getCustomers()),
+                new String[]{CustomerContract.CUSTOMER.COLUMN_NAME, CustomerContract.CUSTOMER.COLUMN_EMAIL},
+                new int[]{android.R.id.text1, android.R.id.text2});
+        customersListView.setAdapter(adapter);
+    }
+
+    private void displayDisciplinesItems() {
         dbHandler = new DbHandler(EventStart.this, "", null, 1);
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_2,
                 dbHandler.getDisciplinesById(event.getDisciplines()),
                 new String[]{DisciplineContract.DISCIPLINE.COLUMN_NAME, DisciplineContract.DISCIPLINE.COLUMN_RULE},
                 new int[]{android.R.id.text1, android.R.id.text2});
-        ListView listView = (ListView) findViewById(R.id.selectedDisciplinesLv);
-        listView.setAdapter(adapter);
+        disciplinesListView.setAdapter(adapter);
     }
 }

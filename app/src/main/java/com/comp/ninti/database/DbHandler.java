@@ -84,6 +84,20 @@ public class DbHandler extends SQLiteOpenHelper {
         return this.getReadableDatabase().rawQuery(query.toString(), null);
     }
 
+    public Cursor getCustomersById(List<Long> ids){
+        final StringBuilder query = new StringBuilder("select * from " + CustomerContract.CUSTOMER.TABLE_NAME);
+        final String discEq = CustomerContract.CUSTOMER._ID + " = ";
+        final String separator = " or ";
+        query.append(" where ");
+        for(Long id: ids){
+            query.append(discEq);
+            query.append(id);
+            query.append(separator);
+        }
+        query.delete(query.length()-separator.length(), query.length());
+        return this.getReadableDatabase().rawQuery(query.toString(), null);
+    }
+
     /**
      * Returns the Rule with the given ruleName
      *

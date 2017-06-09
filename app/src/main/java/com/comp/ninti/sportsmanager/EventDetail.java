@@ -101,8 +101,12 @@ public class EventDetail extends AppCompatActivity implements SelectDisciplines.
             makeToast("Your Event needs one Discipline at least");
             return false;
         }
+        if(customers == null || customers.isEmpty()){
+            makeToast("Your Event needs one Customer at least");
+            return false;
+        }
         String dateTime = date + " " + time;
-        Event event = new Event(name, DbListUtil.convertDisciplinesToList(disciplines), dateTime);
+        Event event = new Event(name, DbListUtil.convertDisciplinesToList(disciplines), DbListUtil.convertCustomerToList(customers), dateTime);
 
         DbHandler dbHandler = new DbHandler(EventDetail.this, "", null, 1);
         long returnVal;

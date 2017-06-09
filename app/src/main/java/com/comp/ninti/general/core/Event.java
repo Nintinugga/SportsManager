@@ -10,18 +10,21 @@ public class Event implements Parcelable{
     private long id;
     private String name;
     private LinkedList<Long> disciplines = new LinkedList<>();
+    private LinkedList<Long> customers = new LinkedList<>();
     private String date;
 
-    public Event(String name, List<Long> disciplines, String date) {
+    public Event(String name, List<Long> disciplines, List<Long> customers, String date) {
         this.name = name;
         this.disciplines.addAll(disciplines);
+        this.customers.addAll(customers);
         this.date = date;
     }
 
-    public Event(long id, String name, List<Long> disciplines, String date) {
+    public Event(long id, String name, List<Long> disciplines, List<Long> customers, String date) {
         this.id = id;
         this.name = name;
         this.disciplines.addAll(disciplines);
+        this.customers.addAll(customers);
         this.date = date;
     }
 
@@ -30,7 +33,9 @@ public class Event implements Parcelable{
         name = in.readString();
         date = in.readString();
         disciplines = new LinkedList<>();
+        customers = new LinkedList<>();
         in.readList(disciplines, null);
+        in.readList(customers, null);
     }
 
     public static final Creator<Event> CREATOR = new Creator<Event>() {
@@ -65,6 +70,10 @@ public class Event implements Parcelable{
         return disciplines;
     }
 
+    public List<Long> getCustomers(){
+        return customers;
+    }
+
     public void setDisciplines(LinkedList<Long> disciplines) {
         this.disciplines = disciplines;
     }
@@ -80,13 +89,18 @@ public class Event implements Parcelable{
     @Override
     public String toString() {
         String disc = "";
+        String cust = "";
         for(Long disciLong: disciplines){
             disc = disc + ", " +disciLong;
+        }
+        for(Long custLon: customers){
+            disc = disc + ", " +custLon;
         }
         return "Event{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", disciplines=" + disc +
+                ", customers=" + cust +
                 ", date='" + date + '\'' +
                 '}';
     }
@@ -102,5 +116,6 @@ public class Event implements Parcelable{
         dest.writeString(name);
         dest.writeString(date);
         dest.writeList(disciplines);
+        dest.writeList(customers);
     }
 }

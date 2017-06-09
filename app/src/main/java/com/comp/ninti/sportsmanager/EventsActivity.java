@@ -45,6 +45,7 @@ public class EventsActivity extends AppCompatActivity {
                 Event clickedEvent = new Event(c.getLong(c.getColumnIndex(EventContract.EVENT._ID)),
                         c.getString(c.getColumnIndex(EventContract.EVENT.COLUMN_NAME)),
                         DbListUtil.convertStringToLongList(c.getString(c.getColumnIndex(EventContract.EVENT.COLUMN_DISCIPLINES))),
+                        DbListUtil.convertStringToLongList(c.getString(c.getColumnIndex(EventContract.EVENT.COLUMN_CUSTOMERS))),
                         c.getString(c.getColumnIndex(EventContract.EVENT.COLUMN_DATE)));
                 Intent myIntent = new Intent(EventsActivity.this, EventStart.class);
                 myIntent.putExtra("com.comp.ninti.general.core.Event", clickedEvent);

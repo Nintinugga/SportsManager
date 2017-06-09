@@ -21,7 +21,7 @@ import java.util.List;
 public class DbHandler extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "sportsmanager.db";
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 10;
 
 
     public DbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -159,7 +159,9 @@ public class DbHandler extends SQLiteOpenHelper {
         db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline));
         LinkedList<Long> disciplines = new LinkedList<>();
         disciplines.add(1l);
-        Event event = new Event("Fussballcamp", disciplines, "2017-08-21 18:30");
+        LinkedList<Long> customers = new LinkedList<>();
+        customers.add(1l);
+        Event event = new Event("Fussballcamp", disciplines, customers,"2017-08-21 18:30");
         db.insert(EventContract.EVENT.TABLE_NAME, null, EventContract.getInsert(event));
     }
 

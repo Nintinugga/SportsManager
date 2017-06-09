@@ -1,6 +1,7 @@
 package com.comp.ninti.database;
 
 
+import com.comp.ninti.general.core.Customer;
 import com.comp.ninti.general.core.Discipline;
 
 import java.util.Arrays;
@@ -29,6 +30,14 @@ public class DbListUtil {
             longDisc.add(discipline.getId());
         }
         return longDisc;
+    }
+
+    public static LinkedList<Long> convertCustomerToList(List<Customer> customers){
+        LinkedList<Long> longCust = new LinkedList<>();
+        for(Customer customer: customers){
+            longCust.add(customer.getId());
+        }
+        return longCust;
     }
 
     public static List<String> convertStringToList(String str) {

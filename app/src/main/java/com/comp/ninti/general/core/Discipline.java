@@ -106,6 +106,17 @@ public class Discipline implements Parcelable {
     }
 
     @Override
+    public String toString() {
+        return "Discipline{" +
+                "name='" + name + '\'' +
+                ", rule=" + rule +
+                ", attempts=" + attempts +
+                ", id=" + id +
+                ", ruleId=" + ruleId +
+                '}';
+    }
+
+    @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeInt(attempts);

@@ -110,6 +110,17 @@ public class Customer implements Parcelable {
     }
 
     @Override
+    public String toString() {
+        return "Customer{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object obj) {
        if(obj instanceof Customer){
            Customer customer = (Customer)obj;

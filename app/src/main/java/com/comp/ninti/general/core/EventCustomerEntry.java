@@ -17,6 +17,13 @@ public class EventCustomerEntry {
         this.points = points;
     }
 
+    public EventCustomerEntry(long evId, long custId, long discId, int attempt) {
+        this.evId = evId;
+        this.custId = custId;
+        this.discId = discId;
+        this.attempt = attempt;
+    }
+
     public long getEvId() {
         return evId;
     }
@@ -55,5 +62,16 @@ public class EventCustomerEntry {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    @Override
+    public String toString() {
+        return "EventCustomerEntry{" +
+                "evId=" + evId +
+                ", custId=" + custId +
+                ", discId=" + discId +
+                ", attempt=" + attempt +
+                ", points=" + points +
+                '}';
     }
 }

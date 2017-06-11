@@ -66,35 +66,35 @@ public class DbHandler extends SQLiteOpenHelper {
         return this.getReadableDatabase().rawQuery("select * from " + DisciplineContract.DISCIPLINE.TABLE_NAME, null);
     }
 
-    public Cursor getAllEvents(){
+    public Cursor getAllEvents() {
         return this.getReadableDatabase().rawQuery("select * from " + EventContract.EVENT.TABLE_NAME, null);
     }
 
-    public Cursor getDisciplinesById(List<Long> ids){
+    public Cursor getDisciplinesById(List<Long> ids) {
         final StringBuilder query = new StringBuilder("select * from " + DisciplineContract.DISCIPLINE.TABLE_NAME);
         final String discEq = DisciplineContract.DISCIPLINE._ID + " = ";
         final String separator = " or ";
-                query.append(" where ");
-        for(Long id: ids){
+        query.append(" where ");
+        for (Long id : ids) {
             query.append(discEq);
             query.append(id);
             query.append(separator);
         }
-        query.delete(query.length()-separator.length(), query.length());
+        query.delete(query.length() - separator.length(), query.length());
         return this.getReadableDatabase().rawQuery(query.toString(), null);
     }
 
-    public Cursor getCustomersById(List<Long> ids){
+    public Cursor getCustomersById(List<Long> ids) {
         final StringBuilder query = new StringBuilder("select * from " + CustomerContract.CUSTOMER.TABLE_NAME);
         final String discEq = CustomerContract.CUSTOMER._ID + " = ";
         final String separator = " or ";
         query.append(" where ");
-        for(Long id: ids){
+        for (Long id : ids) {
             query.append(discEq);
             query.append(id);
             query.append(separator);
         }
-        query.delete(query.length()-separator.length(), query.length());
+        query.delete(query.length() - separator.length(), query.length());
         return this.getReadableDatabase().rawQuery(query.toString(), null);
     }
 
@@ -122,6 +122,16 @@ public class DbHandler extends SQLiteOpenHelper {
         Cursor cursor = this.getReadableDatabase().rawQuery(select, null);
         cursor.moveToFirst();
         return RuleContract.createRule(cursor);
+    }
+
+    public boolean isEventIn(long eventId) {
+        String query = "SELECT EXISTS(SELECT 1 FROM " + EventCustomerContract.EVENTCUSTOMER.TABLE_NAME + " WHERE "
+                + EventCustomerContract.EVENTCUSTOMER.COLUMN_EV_ID + " = " + eventId + " LIMIT 1);";
+        Cursor cursor = this.getReadableDatabase().rawQuery(query, null);
+        cursor.moveToFirst();
+        if (cursor.getInt(0) == 1)
+            return true;
+        return false;
     }
 
     private JSONArray getResults(SQLiteDatabase myDataBase, String searchQuery) {
@@ -164,19 +174,19 @@ public class DbHandler extends SQLiteOpenHelper {
 
     }
 
-    public static Customer populateCustomer(Cursor c){
+    public static Customer populateCustomer(Cursor c) {
         return new Customer(c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_NAME)),
                 c.getInt(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_AGE)), c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_EMAIL)),
                 c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_PHONE)), c.getLong(c.getColumnIndex(CustomerContract.CUSTOMER._ID)));
     }
 
-    public static Discipline populateDiscipline(Cursor c){
+    public static Discipline populateDiscipline(Cursor c) {
         return new Discipline(c.getString(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_NAME)),
                 c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_RULE)), c.getInt(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_ATTEMPTS)),
                 c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE._ID)));
     }
 
-    private void createDefaultValues(SQLiteDatabase db){
+    private void createDefaultValues(SQLiteDatabase db) {
         Customer customer = new Customer("Jonas Huber", 23, "Jonas.Huber@rocketmail.com", "01718650307");
         Customer customer1 = new Customer("Sepp Huber", 23, "Jonas.Huber@rocketmail.com", "01718650307");
         Customer customer2 = new Customer("Woife Huber", 23, "Jonas.Huber@rocketmail.com", "01718650307");
@@ -199,7 +209,7 @@ public class DbHandler extends SQLiteOpenHelper {
         disciplines.add(1l);
         LinkedList<Long> customers = new LinkedList<>();
         customers.add(1l);
-        Event event = new Event("Fussballcamp", disciplines, customers,"2017-08-21 18:30");
+        Event event = new Event("Fussballcamp", disciplines, customers, "2017-08-21 18:30");
         db.insert(EventContract.EVENT.TABLE_NAME, null, EventContract.getInsert(event));
     }
 

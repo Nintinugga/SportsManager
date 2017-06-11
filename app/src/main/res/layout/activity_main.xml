@@ -49,6 +49,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="66dp"
+            android:background="@drawable/ic_event"
             android:onClick="onClick"
             android:text="@string/Events" />
 

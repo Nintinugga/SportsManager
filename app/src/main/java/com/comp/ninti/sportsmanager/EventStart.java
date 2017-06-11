@@ -89,7 +89,7 @@ public class EventStart extends AppCompatActivity {
                         return;
                         //success
                     } else {
-                        Log.i(TAG, "Added Discipline: " + eventCustomerEntry.toString() + " on position " + returnVal);
+                        Log.i(TAG, "Added eventcustomerentry: " + eventCustomerEntry.toString() + " on position " + returnVal);
                     }
                 }
             }

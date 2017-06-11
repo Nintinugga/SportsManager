@@ -164,6 +164,18 @@ public class DbHandler extends SQLiteOpenHelper {
 
     }
 
+    public static Customer populateCustomer(Cursor c){
+        return new Customer(c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_NAME)),
+                c.getInt(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_AGE)), c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_EMAIL)),
+                c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_PHONE)), c.getLong(c.getColumnIndex(CustomerContract.CUSTOMER._ID)));
+    }
+
+    public static Discipline populateDiscipline(Cursor c){
+        return new Discipline(c.getString(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_NAME)),
+                c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_RULE)), c.getInt(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_ATTEMPTS)),
+                c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE._ID)));
+    }
+
     private void createDefaultValues(SQLiteDatabase db){
         Customer customer = new Customer("Jonas Huber", 23, "Jonas.Huber@rocketmail.com", "01718650307");
         Customer customer1 = new Customer("Sepp Huber", 23, "Jonas.Huber@rocketmail.com", "01718650307");

@@ -19,6 +19,15 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="@string/Rules" />
 
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            app:itemIconTint="@android:color/background_light"
+            app:itemTextColor="@android:color/white"
+            app:menu="@menu/navigation" />
+
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_rules"

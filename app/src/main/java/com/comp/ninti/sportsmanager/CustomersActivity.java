@@ -3,29 +3,45 @@ package com.comp.ninti.sportsmanager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comp.ninti.database.CustomerContract;
 import com.comp.ninti.database.DbHandler;
+import com.comp.ninti.general.NavigationUtil;
 import com.comp.ninti.general.core.Customer;
 
 public class CustomersActivity extends AppCompatActivity {
     private DbHandler dbHandler;
+    private BottomNavigationView navigation;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+           return NavigationUtil.switchNavigation(item, CustomersActivity.this);
+        }
+
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customers);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.getMenu().getItem(1).setChecked(true);
         ImageButton addNewCustomer = (ImageButton) findViewById(R.id.addNewCustomer);
         addNewCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +90,7 @@ public class CustomersActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        navigation.getMenu().getItem(1).setChecked(true);
         displayItems();
     }
 }

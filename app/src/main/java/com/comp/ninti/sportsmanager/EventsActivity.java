@@ -3,10 +3,13 @@ package com.comp.ninti.sportsmanager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -15,10 +18,22 @@ import android.widget.ListView;
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DbListUtil;
 import com.comp.ninti.database.EventContract;
+import com.comp.ninti.general.NavigationUtil;
 import com.comp.ninti.general.core.Event;
 
 public class EventsActivity extends AppCompatActivity {
     private DbHandler dbHandler;
+    private BottomNavigationView navigation;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            return NavigationUtil.switchNavigation(item, EventsActivity.this);
+        }
+
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +41,9 @@ public class EventsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_events);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.getMenu().getItem(0).setChecked(true);
         ImageButton fab = (ImageButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +95,7 @@ public class EventsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        navigation.getMenu().getItem(0).setChecked(true);
         displayItems();
     }
 

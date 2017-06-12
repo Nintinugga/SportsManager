@@ -3,9 +3,12 @@ package com.comp.ninti.sportsmanager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -14,10 +17,22 @@ import android.widget.Toast;
 
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DisciplineContract;
+import com.comp.ninti.general.NavigationUtil;
 import com.comp.ninti.general.core.Discipline;
 
 public class DisciplinesActivity extends AppCompatActivity {
     private DbHandler dbHandler;
+    private BottomNavigationView navigation;
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            return NavigationUtil.switchNavigation(item, DisciplinesActivity.this);
+        }
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +40,10 @@ public class DisciplinesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_disciplines);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.getMenu().getItem(3).setChecked(true);
 
         ImageButton fab = (ImageButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +94,7 @@ public class DisciplinesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        navigation.getMenu().getItem(3).setChecked(true);
         displayItems();
     }
 

@@ -11,7 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".EventsActivity"
+            android:label="@string/title_activity_events"
+            android:parentActivityName=".EventsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.comp.ninti.sportsmanager.EventsActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,40 +26,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EventsActivity"
-            android:label="@string/title_activity_events"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.comp.ninti.sportsmanager.MainActivity" />
-        </activity>
-        <activity
             android:name=".CustomersActivity"
             android:label="@string/title_activity_costumers"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".EventsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.comp.ninti.sportsmanager.MainActivity" />
+                android:value="com.comp.ninti.sportsmanager.EventsActivity" />
         </activity>
         <activity
             android:name=".DisciplinesActivity"
             android:label="@string/title_activity_disciplines"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".EventsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.comp.ninti.sportsmanager.MainActivity" />
+                android:value="com.comp.ninti.sportsmanager.EventsActivity" />
         </activity>
         <activity
             android:name=".RulesActivity"
             android:label="@string/title_activity_rules"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".EventsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.comp.ninti.sportsmanager.MainActivity" />
+                android:value="com.comp.ninti.sportsmanager.EventsActivity" />
         </activity>
 
         <service

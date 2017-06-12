@@ -3,11 +3,14 @@ package com.comp.ninti.sportsmanager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -17,11 +20,22 @@ import android.widget.Toast;
 
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.RuleContract;
+import com.comp.ninti.general.NavigationUtil;
 import com.comp.ninti.general.core.Rule;
 import com.comp.ninti.general.RuleType;
 
 public class RulesActivity extends AppCompatActivity {
     private DbHandler dbHandler;
+    private BottomNavigationView navigation;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            return NavigationUtil.switchNavigation(item, RulesActivity.this);
+        }
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +43,10 @@ public class RulesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rules);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.getMenu().getItem(2).setChecked(true);
 
         ImageButton fab = (ImageButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +98,7 @@ public class RulesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        navigation.getMenu().getItem(2).setChecked(true);
         displayItems();
     }
 }

@@ -129,8 +129,11 @@ public class DbHandler extends SQLiteOpenHelper {
                 + EventCustomerContract.EVENTCUSTOMER.COLUMN_EV_ID + " = " + eventId + " LIMIT 1);";
         Cursor cursor = this.getReadableDatabase().rawQuery(query, null);
         cursor.moveToFirst();
-        if (cursor.getInt(0) == 1)
+        if (cursor.getInt(0) == 1) {
+            cursor.close();
             return true;
+        }
+        cursor.close();
         return false;
     }
 
@@ -193,9 +196,9 @@ public class DbHandler extends SQLiteOpenHelper {
         db.insert(CustomerContract.CUSTOMER.TABLE_NAME, null, CustomerContract.getInsert(customer));
         db.insert(CustomerContract.CUSTOMER.TABLE_NAME, null, CustomerContract.getInsert(customer1));
         db.insert(CustomerContract.CUSTOMER.TABLE_NAME, null, CustomerContract.getInsert(customer2));
-        Rule rule = new Rule("Default1", RuleType.Default, 1l);
-        Rule rule1 = new Rule("Default2", RuleType.Default, 2l);
-        Rule rule2 = new Rule("Default3", RuleType.Default, 3l);
+        Rule rule = new Rule("Default1", RuleType.Default, 1L);
+        Rule rule1 = new Rule("Default2", RuleType.Default, 2L);
+        Rule rule2 = new Rule("Default3", RuleType.Default, 3L);
         db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule));
         db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule1));
         db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule2));
@@ -206,9 +209,9 @@ public class DbHandler extends SQLiteOpenHelper {
         db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline1));
         db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline2));
         LinkedList<Long> disciplines = new LinkedList<>();
-        disciplines.add(1l);
+        disciplines.add(1L);
         LinkedList<Long> customers = new LinkedList<>();
-        customers.add(1l);
+        customers.add(1L);
         Event event = new Event("Fussballcamp", disciplines, customers, "2017-08-21 18:30");
         db.insert(EventContract.EVENT.TABLE_NAME, null, EventContract.getInsert(event));
     }

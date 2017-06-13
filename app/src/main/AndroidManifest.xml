@@ -13,7 +13,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".EventsActivity"
-            android:label="@string/title_activity_events"
             android:parentActivityName=".EventsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -27,7 +26,6 @@
         </activity>
         <activity
             android:name=".CustomersActivity"
-            android:label="@string/title_activity_costumers"
             android:parentActivityName=".EventsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -36,7 +34,6 @@
         </activity>
         <activity
             android:name=".DisciplinesActivity"
-            android:label="@string/title_activity_disciplines"
             android:parentActivityName=".EventsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -45,7 +42,6 @@
         </activity>
         <activity
             android:name=".RulesActivity"
-            android:label="@string/title_activity_rules"
             android:parentActivityName=".EventsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

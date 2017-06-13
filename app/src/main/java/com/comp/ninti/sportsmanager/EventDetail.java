@@ -95,7 +95,7 @@ public class EventDetail extends AppCompatActivity implements SelectDisciplines.
         String date = txtDate.getText().toString();
         String time = txtTime.getText().toString();
 
-        if (checkParameter(name, date, time) == false)
+        if (!checkParameter(name, date, time))
             return false;
         if (disciplines == null || disciplines.isEmpty()) {
             makeToast("Your Event needs one Discipline at least");

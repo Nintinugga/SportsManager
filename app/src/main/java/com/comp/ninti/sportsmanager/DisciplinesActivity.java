@@ -8,6 +8,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,6 +34,17 @@ public class DisciplinesActivity extends AppCompatActivity {
         }
 
     };
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return NavigationUtil.switchNavigation(item, DisciplinesActivity.this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.navigation, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +94,7 @@ public class DisciplinesActivity extends AppCompatActivity {
                 new int[]{android.R.id.text1, android.R.id.text2});
         ListView listView = (ListView) findViewById(R.id.disciplinesListView);
         listView.setAdapter(adapter);
+        dbHandler.close();
     }
 
     @Override

@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -52,7 +51,6 @@ public class EventsActivity extends AppCompatActivity {
                 EventsActivity.this.startActivity(myIntent);
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ListView listView = (ListView) findViewById(R.id.eventsLV);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,6 +81,7 @@ public class EventsActivity extends AppCompatActivity {
                 new int[]{android.R.id.text1, android.R.id.text2});
         ListView listView = (ListView) findViewById(R.id.eventsLV);
         listView.setAdapter(adapter);
+        dbHandler.close();
     }
 
     @Override

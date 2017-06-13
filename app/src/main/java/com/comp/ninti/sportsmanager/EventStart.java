@@ -63,6 +63,7 @@ public class EventStart extends AppCompatActivity {
                     Toast.makeText(EventStart.this, "Event table was already created for this id: " + event.getId(),
                             Toast.LENGTH_LONG).show();
                 }
+                dbHandler.close();
             }
         });
     }
@@ -135,6 +136,7 @@ public class EventStart extends AppCompatActivity {
                 new String[]{CustomerContract.CUSTOMER.COLUMN_NAME, CustomerContract.CUSTOMER.COLUMN_EMAIL},
                 new int[]{android.R.id.text1, android.R.id.text2});
         customersListView.setAdapter(custAdapter);
+        dbHandler.close();
     }
 
     private void displayDisciplinesItems() {
@@ -145,6 +147,7 @@ public class EventStart extends AppCompatActivity {
                 new String[]{DisciplineContract.DISCIPLINE.COLUMN_NAME, DisciplineContract.DISCIPLINE.COLUMN_RULE},
                 new int[]{android.R.id.text1, android.R.id.text2});
         disciplinesListView.setAdapter(discAdapter);
+        dbHandler.close();
     }
 
     @Override

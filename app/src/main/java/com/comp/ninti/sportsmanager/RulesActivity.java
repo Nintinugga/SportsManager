@@ -5,11 +5,11 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,6 +36,18 @@ public class RulesActivity extends AppCompatActivity {
         }
 
     };
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return NavigationUtil.switchNavigation(item, RulesActivity.this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        /** Create an option menu from res/menu/items.xml */
+        getMenuInflater().inflate(R.menu.navigation, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +98,7 @@ public class RulesActivity extends AppCompatActivity {
                 new int[]{android.R.id.text1});
         ListView listView = (ListView) findViewById(R.id.rulesListView);
         listView.setAdapter(adapter);
+        dbHandler.close();
     }
 
     @Override

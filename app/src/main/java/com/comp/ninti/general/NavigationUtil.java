@@ -1,11 +1,8 @@
 package com.comp.ninti.general;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
-import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
 import com.comp.ninti.sportsmanager.CustomersActivity;
@@ -21,14 +18,10 @@ public class NavigationUtil {
         switch (item.getItemId()) {
             case R.id.navigation_event:
                 System.out.println("events Clicked");
-                try {
-                    myIntent = NavUtils.getParentActivityIntent(context, EventsActivity.class);
-                    NavUtils.navigateUpTo((Activity) context, myIntent);
-                    return true;
-                } catch (PackageManager.NameNotFoundException e) {
-                    e.printStackTrace();
-                    return false;
-                }
+                myIntent = new Intent(context, EventsActivity.class);
+                //myIntent.putExtra("key", value); //Optional parameters
+                context.startActivity(myIntent);
+                return true;
             case R.id.navigation_customers:
                 System.out.println("Costumers Clicked");
                 myIntent = new Intent(context, CustomersActivity.class);

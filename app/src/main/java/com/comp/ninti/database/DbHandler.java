@@ -21,7 +21,7 @@ import java.util.List;
 public class DbHandler extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "sportsmanager.db";
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 12;
 
 
     public DbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -193,9 +193,9 @@ public class DbHandler extends SQLiteOpenHelper {
         db.insert(CustomerContract.CUSTOMER.TABLE_NAME, null, CustomerContract.getInsert(customer));
         db.insert(CustomerContract.CUSTOMER.TABLE_NAME, null, CustomerContract.getInsert(customer1));
         db.insert(CustomerContract.CUSTOMER.TABLE_NAME, null, CustomerContract.getInsert(customer2));
-        Rule rule = new Rule("Default1", RuleType.Default);
-        Rule rule1 = new Rule("Default2", RuleType.Default);
-        Rule rule2 = new Rule("Default3", RuleType.Default);
+        Rule rule = new Rule("Default1", RuleType.Default, 1l);
+        Rule rule1 = new Rule("Default2", RuleType.Default, 2l);
+        Rule rule2 = new Rule("Default3", RuleType.Default, 3l);
         db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule));
         db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule1));
         db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule2));

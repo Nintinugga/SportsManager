@@ -78,6 +78,7 @@ public class SelectCustomer extends DialogFragment implements View.OnClickListen
                 new String[]{CustomerContract.CUSTOMER.COLUMN_NAME, CustomerContract.CUSTOMER.COLUMN_EMAIL},
                 new int[]{android.R.id.text1, android.R.id.text2});
         listView.setAdapter(adapter);
+        dbHandler.close();
     }
 
     @Override

@@ -108,6 +108,7 @@ public class SelectDisciplines extends DialogFragment implements View.OnClickLis
                 new int[]{android.R.id.text1, android.R.id.text2});
         ListView listView = (ListView) view.findViewById(R.id.disciplinesListView);
         listView.setAdapter(adapter);
+        dbHandler.close();
     }
 
     @Override

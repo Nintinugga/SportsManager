@@ -33,10 +33,34 @@
             app:layout_constraintVertical_bias="0.0">
 
 
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:paddingEnd="5dp"
+                android:paddingRight="5dp"
+                android:theme="?attr/actionBarTheme"
+                app:title="@string/SelectDisciplines"
+                tools:ignore="RtlSymmetry" />
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="false"
+                android:minHeight="?attr/actionBarSize"
+                tools:ignore="RtlHardcoded" />
+
             <ListView
                 android:id="@+id/disciplinesListView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_below="@+id/toolbar" />
         </RelativeLayout>
 
         <LinearLayout

@@ -13,10 +13,13 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 
 import com.comp.ninti.database.CustomerContract;
 import com.comp.ninti.database.DbHandler;
+import com.comp.ninti.general.SelectionUtil;
 import com.comp.ninti.general.core.Customer;
 import com.comp.ninti.sportsmanager.EventDetail;
 import com.comp.ninti.sportsmanager.R;
@@ -38,6 +41,7 @@ public class SelectCustomer extends DialogFragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_customers, null);
+        final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
         customers = new LinkedList<>();
         customers.addAll(((EventDetail)getActivity()).getCustomers());
         listView = (ListView) view.findViewById(R.id.customerListView);
@@ -63,11 +67,32 @@ public class SelectCustomer extends DialogFragment implements View.OnClickListen
                 }
             }
         });
+        onCheckBoxClick(checkBox);
         displayItems(view);
         for(Customer customer: customers){
             listView.setItemChecked((int)customer.getId()-1, true);
         }
         return view;
+    }
+
+    private void onCheckBoxClick(CheckBox checkBox) {
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    for (int i = 0; i < listView.getAdapter().getCount(); i++) {
+                        Object obj = listView.getAdapter().getItem(i);
+                        Customer customer = DbHandler.populateCustomer((Cursor) obj);
+                        if (!customers.contains(customer))
+                            customers.add(customer);
+                    }
+                    SelectionUtil.selectAll(listView);
+                } else {
+                    customers.clear();
+                    SelectionUtil.deselectAll(listView);
+                }
+            }
+        });
     }
 
     private void displayItems(View view) {

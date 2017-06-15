@@ -21,5 +21,9 @@
         android:id="@+id/navigation_disciplines"
         android:icon="@drawable/ic_discipline_blank"
         android:title="@string/Disciplines" />
+    <item
+        android:id="@+id/timer"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:title="@string/Timer" />
 
 </menu>

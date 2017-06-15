@@ -10,6 +10,7 @@ import com.comp.ninti.sportsmanager.DisciplinesActivity;
 import com.comp.ninti.sportsmanager.EventsActivity;
 import com.comp.ninti.sportsmanager.R;
 import com.comp.ninti.sportsmanager.RulesActivity;
+import com.comp.ninti.sportsmanager.Timer;
 
 
 public class NavigationUtil {
@@ -35,6 +36,11 @@ public class NavigationUtil {
             case R.id.navigation_disciplines:
                 System.out.println("disciplines Clicked");
                 myIntent = new Intent(context, DisciplinesActivity.class);
+                context.startActivity(myIntent);
+                return true;
+            case R.id.timer:
+                System.out.println("timer Clicked");
+                myIntent = new Intent(context, Timer.class);
                 context.startActivity(myIntent);
                 return true;
         }

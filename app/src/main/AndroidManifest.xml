@@ -18,6 +18,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.comp.ninti.sportsmanager.EventsActivity" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -98,6 +99,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.comp.ninti.sportsmanager.EventsActivity" />
         </activity>
+        <activity
+            android:name=".EventStarted"
+            android:label="@string/title_activity_event_started"
+            android:parentActivityName=".EventStart"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.comp.ninti.sportsmanager.EventStart" />
+        </activity>
+        <activity
+            android:name=".Timer"
+            android:label="@string/title_activity_timer"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

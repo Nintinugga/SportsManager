@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">SportsManager</string>
     <string name="AddToCustomers">Add to Customers</string>
     <string name="AddToRules">Add to Rules</string>
@@ -53,4 +53,14 @@
     <string name="DisciplinesColon">Disciplines:</string>
     <string name="CustomersColon">Customers:</string>
     <string name="selectAll">Select All</string>
+    <string name="title_activity_event_started">EventStarted</string>
+    <string name="title_activity_timer">Timer</string>
+    <string name="chronometer_start">Start</string>
+    <string name="chronometer_stop">Stop</string>
+    <string name="chronometer_reset">Reset</string>
+    <string name="chronometer_set_format">Set format string</string>
+    <string name="chronometer_clear_format">Clear format string</string>
+    <string name="chronometer_initial_format">Initial format: <xliff:g id="initial-format">"HH:MM:SS"</xliff:g></string>
+    <string name="Timer">Timer</string>
+    <string name="AddPenalty">AddPenalty</string>
 </resources>

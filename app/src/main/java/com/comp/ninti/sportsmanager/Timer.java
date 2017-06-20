@@ -1,79 +1,139 @@
 package com.comp.ninti.sportsmanager;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+
 
 public class Timer extends AppCompatActivity implements View.OnClickListener {
 
-    Chronometer mChronometer;
-    Button btnStart, btnStop, btnReset;
+    private Chronometer mChronometer;
+    private Button timerBtn;
+    private ImageButton addPenaltyTime;
+    private int addedPenaltyTime = 0;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.reset) {
+            refresh();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.reset, menu);
+        System.out.println("options menu in timer created");
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.content_timer);
-
-
+        setContentView(R.layout.activity_timer);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarblbub);
+        setSupportActionBar(toolbar);
         mChronometer = (Chronometer) findViewById(R.id.chronometer);
-        btnStart = (Button) findViewById(R.id.start);
-        btnStop = (Button) findViewById(R.id.stop);
-        setBtnDisabled(btnStop);
-        btnReset = (Button) findViewById(R.id.reset);
-        setBtnDisabled(btnReset);
+        addPenaltyTime = (ImageButton) findViewById(R.id.addPenaltyTime);
+        addPenaltyTime.setTag(0);
+        timerBtn = (Button) findViewById(R.id.timerBtn);
+        timerBtn.setTag(0);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.start) {
-            mChronometer.setBase(SystemClock.elapsedRealtime());
-            mChronometer.start();
-            switchButton(btnStart);
-            switchButton(btnStop);
-        } else if (v.getId() == R.id.stop) {
-            mChronometer.stop();
-            switchButton(btnStop);
-            switchButton(btnReset);
-            long elapsedMillis = SystemClock.elapsedRealtime() - mChronometer.getBase();
-        } else if (v.getId() == R.id.reset) {
-            mChronometer.setBase(SystemClock.elapsedRealtime());
-            switchButton(btnReset);
-            switchButton(btnStart);
-
+        if (v.getId() == R.id.timerBtn) {
+            final int status = (Integer) v.getTag();
+            if (status == 0) {
+                //start chronometer
+                mChronometer.setBase(SystemClock.elapsedRealtime());
+                mChronometer.start();
+                timerBtn.setText(R.string.chronometer_stop);
+                timerBtn.setTag(1);
+            } else if (status == 1) {
+                //stop chronometer
+                mChronometer.stop();
+                timerBtn.setText(R.string.chronometer_reset);
+                timerBtn.setTag(2);
+                addPenaltyTime.setTag(1);
+                long elapsedMillis = SystemClock.elapsedRealtime() - mChronometer.getBase();
+            } else if (status == 2) {
+                //reset chronometer
+                mChronometer.setBase(SystemClock.elapsedRealtime());
+                timerBtn.setText(R.string.chronometer_start);
+                timerBtn.setTag(0);
+                addPenaltyTime.setTag(0);
+            } else if (status == 3) {
+                //save
+            } else {
+                Toast.makeText(Timer.this, "Unknown Button operation", Toast.LENGTH_SHORT).show();
+            }
             //mChronometer.setFormat("Formatted time (%s)");
             //mChronometer.setFormat(null);
+        } else if (v.getId() == R.id.addPenaltyTime) {
+            final int status = (Integer) addPenaltyTime.getTag();
+            if (status == 0) {
+                Toast.makeText(Timer.this, "Take a Time first", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                final EditText edittext = new EditText(Timer.this);
+                //should be number
+                edittext.setInputType(2);
+                edittext.setText("0");
+                edittext.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        edittext.setText("");
+                    }
+                });
+                alert.setMessage("Specify Amount in Seconds");
+                alert.setTitle("Add Penalty Time");
+
+                alert.setView(edittext);
+
+                alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //What ever you want to do with the value
+                        //OR
+                        String dialogText = edittext.getText().toString();
+                        addedPenaltyTime = Integer.valueOf(dialogText);
+                        timerBtn.setText(R.string.SAVE);
+                        timerBtn.setTag(3);
+                    }
+                });
+
+                alert.setNegativeButton("Back", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+                //tries are done one after another
+                alert.show();
+            }
         }
     }
 
-    private void switchButton(Button button) {
-        if (button.getVisibility() == View.VISIBLE) {
-            setBtnDisabled(button);
-        } else {
-            setBtnEnabled(button);
-        }
-    }
 
-    private void setBtnDisabled(Button button){
-        button.setVisibility(View.INVISIBLE);
-        button.setEnabled(false);
-        button.setClickable(false);
-    }
-
-    private void setBtnEnabled(Button button){
-        button.setVisibility(View.VISIBLE);
-        button.setEnabled(true);
-        button.setClickable(true);
+    private void refresh() {
+        addPenaltyTime.setTag(0);
+        timerBtn.setTag(0);
+        timerBtn.setText(R.string.chronometer_start);
+        mChronometer.stop();
+        mChronometer.setBase(SystemClock.elapsedRealtime());
     }
 }
 

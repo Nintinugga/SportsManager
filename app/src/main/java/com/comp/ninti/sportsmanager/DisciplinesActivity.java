@@ -37,7 +37,9 @@ public class DisciplinesActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return NavigationUtil.switchNavigation(item, DisciplinesActivity.this);
+        if(NavigationUtil.switchNavigation(item, DisciplinesActivity.this))
+            return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

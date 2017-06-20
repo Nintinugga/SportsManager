@@ -111,7 +111,12 @@
         <activity
             android:name=".Timer"
             android:label="@string/title_activity_timer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".EventStart"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.comp.ninti.sportsmanager.EventStart" />
+        </activity>
     </application>
 
 </manifest>

@@ -29,14 +29,16 @@ public class CustomersActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-           return NavigationUtil.switchNavigation(item, CustomersActivity.this);
+            return NavigationUtil.switchNavigation(item, CustomersActivity.this);
         }
 
     };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return NavigationUtil.switchNavigation(item, CustomersActivity.this);
+        if (NavigationUtil.switchNavigation(item, CustomersActivity.this))
+            return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

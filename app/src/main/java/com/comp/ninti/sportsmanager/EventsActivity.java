@@ -36,7 +36,9 @@ public class EventsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return NavigationUtil.switchNavigation(item, EventsActivity.this);
+        if(NavigationUtil.switchNavigation(item, EventsActivity.this))
+            return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

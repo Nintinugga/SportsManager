@@ -39,12 +39,13 @@ public class RulesActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return NavigationUtil.switchNavigation(item, RulesActivity.this);
+        if(NavigationUtil.switchNavigation(item, RulesActivity.this))
+            return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        /** Create an option menu from res/menu/items.xml */
         getMenuInflater().inflate(R.menu.navigation, menu);
         return super.onCreateOptionsMenu(menu);
     }

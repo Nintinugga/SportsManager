@@ -107,13 +107,7 @@ public class Discipline implements Parcelable {
 
     @Override
     public String toString() {
-        return "Discipline{" +
-                "name='" + name + '\'' +
-                ", rule=" + rule +
-                ", attempts=" + attempts +
-                ", id=" + id +
-                ", ruleId=" + ruleId +
-                '}';
+        return name;
     }
 
     @Override

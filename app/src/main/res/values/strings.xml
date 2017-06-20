@@ -58,9 +58,7 @@
     <string name="chronometer_start">Start</string>
     <string name="chronometer_stop">Stop</string>
     <string name="chronometer_reset">Reset</string>
-    <string name="chronometer_set_format">Set format string</string>
-    <string name="chronometer_clear_format">Clear format string</string>
-    <string name="chronometer_initial_format">Initial format: <xliff:g id="initial-format">"HH:MM:SS"</xliff:g></string>
     <string name="Timer">Timer</string>
     <string name="AddPenalty">AddPenalty</string>
+    <string name="Reset">Reset</string>
 </resources>

@@ -25,14 +25,39 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Chronometer
-            android:id="@+id/chronometer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="false"
-            android:layout_centerVertical="true"
-            android:textSize="@android:dimen/notification_large_icon_height" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="@dimen/bottom_button_height">
+
+            <Chronometer
+                android:id="@+id/chronometer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="false"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="false"
+                android:textSize="@android:dimen/notification_large_icon_height" />
+
+            <ImageButton
+                android:id="@+id/addPenaltyTime"
+                android:layout_width="@dimen/fab_width_height"
+                android:layout_height="@dimen/fab_width_height"
+                android:layout_below="@+id/chronometer"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/bottom_button_height"
+                android:adjustViewBounds="false"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/AddPenalty"
+                android:onClick="onClick"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_penalty_time" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -44,33 +69,7 @@
             android:layout_centerInParent="false">
 
             <Button
-                android:id="@+id/stop"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/bottom_button_height"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:onClick="onClick"
-                android:text="@string/chronometer_stop"></Button>
-
-            <Button
-                android:id="@+id/reset"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/bottom_button_height"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:onClick="onClick"
-                android:text="@string/chronometer_reset"></Button>
-
-            <Button
-                android:id="@+id/start"
+                android:id="@+id/timerBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/bottom_button_height"
                 android:layout_alignParentBottom="true"
@@ -86,19 +85,6 @@
             </Button>
 
         </RelativeLayout>
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="@dimen/fab_width_height"
-            android:layout_height="@dimen/fab_width_height"
-            android:layout_below="@+id/chronometer"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="56dp"
-            android:adjustViewBounds="false"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/AddPenalty"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_penalty_time" />
 
     </RelativeLayout>
 

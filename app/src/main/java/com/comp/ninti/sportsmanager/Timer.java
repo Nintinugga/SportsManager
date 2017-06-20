@@ -36,7 +36,6 @@ public class Timer extends AppCompatActivity implements View.OnClickListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.reset, menu);
-        System.out.println("options menu in timer created");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -44,7 +43,7 @@ public class Timer extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarblbub);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mChronometer = (Chronometer) findViewById(R.id.chronometer);
         addPenaltyTime = (ImageButton) findViewById(R.id.addPenaltyTime);

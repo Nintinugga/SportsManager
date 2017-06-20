@@ -24,4 +24,12 @@ public class TimeUtil {
         return dateFormat.format(date);
     }
 
+    private static int getPointsFromTime(int maxP, int minP, int maxT, int minT, int t){
+        if(t<minT)
+            return maxP;
+        if(t>maxT)
+            return minP;
+        return (maxP-minP)*(t-minT)/(maxT-minT)+ minP;
+    }
+
 }

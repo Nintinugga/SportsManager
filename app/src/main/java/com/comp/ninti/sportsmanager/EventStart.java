@@ -1,5 +1,6 @@
 package com.comp.ninti.sportsmanager;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -64,6 +65,9 @@ public class EventStart extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                 }
                 dbHandler.close();
+                Intent myIntent = new Intent(EventStart.this, EventStarted.class);
+                myIntent.putExtra("com.comp.ninti.general.core.Event", event);
+                EventStart.this.startActivityForResult(myIntent, 1);
             }
         });
     }
@@ -148,6 +152,15 @@ public class EventStart extends AppCompatActivity {
                 new int[]{android.R.id.text1, android.R.id.text2});
         disciplinesListView.setAdapter(discAdapter);
         dbHandler.close();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                event = data.getExtras().getParcelable("com.comp.ninti.general.core.Event");
+            }
+        }
     }
 
     @Override

@@ -22,4 +22,16 @@
 
     <include layout="@layout/content_event_started" />
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@color/colorPrimary">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_button_height" />
+    </RelativeLayout>
+
 </android.support.design.widget.CoordinatorLayout>

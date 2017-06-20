@@ -127,6 +127,11 @@ public class SelectCustomer extends DialogFragment implements View.OnClickListen
         }
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 
     @Override
     public void onAttach(Activity activity) {

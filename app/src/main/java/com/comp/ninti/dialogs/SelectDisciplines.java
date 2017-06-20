@@ -147,4 +147,10 @@ public class SelectDisciplines extends DialogFragment implements View.OnClickLis
             dismiss();
         }
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 }

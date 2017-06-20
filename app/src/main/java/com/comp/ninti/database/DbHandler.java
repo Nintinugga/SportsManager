@@ -21,7 +21,7 @@ import java.util.List;
 public class DbHandler extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "sportsmanager.db";
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 13;
 
 
     public DbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -109,6 +109,13 @@ public class DbHandler extends SQLiteOpenHelper {
         Cursor cursor = this.getReadableDatabase().rawQuery(select, null);
         cursor.moveToFirst();
         return RuleContract.createRule(cursor);
+    }
+
+    public Cursor getEventCustomerEntries(long discId, long evId) {
+        String select = "select * from " + EventCustomerContract.EVENTCUSTOMER.TABLE_NAME
+                + " where " + EventCustomerContract.EVENTCUSTOMER.COLUMN_DI_ID + " = " + discId
+                + " AND " + EventCustomerContract.EVENTCUSTOMER.COLUMN_EV_ID + " = " + evId;
+        return this.getReadableDatabase().rawQuery(select, null);
     }
 
     /**

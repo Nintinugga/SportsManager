@@ -154,15 +154,6 @@ public class EventStart extends AppCompatActivity {
         dbHandler.close();
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if(resultCode == RESULT_OK) {
-                event = data.getExtras().getParcelable("com.comp.ninti.general.core.Event");
-            }
-        }
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();

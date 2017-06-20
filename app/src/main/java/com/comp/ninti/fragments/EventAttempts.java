@@ -1,0 +1,125 @@
+package com.comp.ninti.fragments;
+
+import android.content.Context;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.SimpleCursorAdapter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.comp.ninti.database.DbHandler;
+import com.comp.ninti.database.EventCustomerContract;
+import com.comp.ninti.sportsmanager.R;
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link EventAttempts.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link EventAttempts#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class EventAttempts extends Fragment {
+    // the fragment initialization parameters
+    private static final String ARG_PARAM1 = "discId";
+    private static final String ARG_PARAM2 = "evId";
+    private DbHandler dbHandler;
+    private long discId, evId;
+    private ListView listView;
+
+    private OnFragmentInteractionListener mListener;
+
+    public EventAttempts() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     *
+     * @return A new instance of fragment EventAttempts.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static EventAttempts newInstance(long discId, long evId) {
+        EventAttempts fragment = new EventAttempts();
+        Bundle args = new Bundle();
+        args.putLong(ARG_PARAM1, discId);
+        args.putLong(ARG_PARAM2, evId);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            discId = getArguments().getLong(ARG_PARAM1);
+            evId = getArguments().getLong(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view =  inflater.inflate(R.layout.fragment_event_attempts, container, false);
+        listView = (ListView) view.findViewById(R.id.listView);
+        displayItems(view);
+        return view;
+    }
+
+    private void displayItems(View view) {
+        dbHandler = new DbHandler(view.getContext(), "", null, 1);
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(view.getContext(),
+                android.R.layout.simple_list_item_2,
+                dbHandler.getEventCustomerEntries(discId, evId),
+                new String[]{EventCustomerContract.EVENTCUSTOMER.COLUMN_CU_ID, EventCustomerContract.EVENTCUSTOMER.COLUMN_ATTEMPT},
+                new int[]{android.R.id.text1, android.R.id.text2});
+        listView.setAdapter(adapter);
+        dbHandler.close();
+    }
+
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+}

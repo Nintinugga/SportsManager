@@ -197,7 +197,7 @@ public class DbHandler extends SQLiteOpenHelper {
 
     public static Discipline populateDiscipline(Cursor c) {
         return new Discipline(c.getString(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_NAME)),
-                c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_RULE)), c.getInt(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_ATTEMPTS)),
+                c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_RULE_ID)), c.getInt(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_ATTEMPTS)),
                 c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE._ID)));
     }
 

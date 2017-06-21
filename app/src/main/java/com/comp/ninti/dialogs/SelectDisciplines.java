@@ -6,15 +6,10 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.support.v7.app.AppCompatActivity;
-import android.view.ActionMode;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -77,7 +72,7 @@ public class SelectDisciplines extends DialogFragment implements View.OnClickLis
                 Cursor c = (Cursor) parent.getAdapter().getItem(position);
                 c.moveToPosition(position);
                 Discipline clickedDiscipline = new Discipline(c.getString(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_NAME)),
-                        c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_RULE)), c.getInt(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_ATTEMPTS)),
+                        c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_RULE_ID)), c.getInt(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_ATTEMPTS)),
                         c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE._ID)));
                 if (disciplines.contains(clickedDiscipline)) {
                     disciplines.remove(clickedDiscipline);
@@ -121,7 +116,7 @@ public class SelectDisciplines extends DialogFragment implements View.OnClickLis
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(view.getContext(),
                 android.R.layout.simple_list_item_activated_2,
                 dbHandler.getAllDisciplines(),
-                new String[]{DisciplineContract.DISCIPLINE.COLUMN_NAME, DisciplineContract.DISCIPLINE.COLUMN_RULE},
+                new String[]{DisciplineContract.DISCIPLINE.COLUMN_NAME, DisciplineContract.DISCIPLINE.COLUMN_RULE_ID},
                 new int[]{android.R.id.text1, android.R.id.text2});
         listView = (ListView) view.findViewById(R.id.disciplinesListView);
         listView.setAdapter(adapter);

@@ -2,19 +2,22 @@ package com.comp.ninti.fragments;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.comp.ninti.database.CustomerContract;
 import com.comp.ninti.database.DbHandler;
+import com.comp.ninti.database.DisciplineContract;
 import com.comp.ninti.database.EventCustomerContract;
+import com.comp.ninti.general.RuleType;
+import com.comp.ninti.general.core.Rule;
 import com.comp.ninti.sportsmanager.R;
 
 /**
@@ -70,6 +73,21 @@ public class EventAttempts extends Fragment {
         View view = inflater.inflate(R.layout.fragment_event_attempts, container, false);
         listView = (ListView) view.findViewById(R.id.listView);
         displayItems(view);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Cursor c = (Cursor) parent.getAdapter().getItem(position);
+                c.moveToPosition(position);
+                Cursor cuDi = dbHandler.getReadableDatabase().rawQuery("select " + DisciplineContract.DISCIPLINE.COLUMN_RULE_ID
+                        + " from " + DisciplineContract.DISCIPLINE.TABLE_NAME
+                        + " where " + DisciplineContract.DISCIPLINE._ID
+                        + " = " + c.getLong(c.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_DI_ID)), null);
+                cuDi.moveToFirst();
+                Rule rule = dbHandler.getSpecificRuleById(cuDi.getLong(cuDi.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_RULE_ID)));
+                cuDi.close();
+                onFragmentInterAction(c.getLong(c.getColumnIndex(EventCustomerContract.EVENTCUSTOMER._ID)), rule.getRuleType());
+            }
+        });
         return view;
     }
 
@@ -105,9 +123,9 @@ public class EventAttempts extends Fragment {
         dbHandler.close();
     }
 
-    public void onButtonPressed(Uri uri) {
+    public void onFragmentInterAction(long eventCustomerEntryId, RuleType ruleType) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onFragmentInteraction(eventCustomerEntryId, ruleType);
         }
     }
 
@@ -140,6 +158,6 @@ public class EventAttempts extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(long eventCustomerEntryId, RuleType ruleType);
     }
 }

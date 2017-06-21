@@ -1,7 +1,6 @@
 package com.comp.ninti.sportsmanager;
 
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +13,7 @@ import android.widget.Spinner;
 
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.fragments.EventAttempts;
+import com.comp.ninti.general.RuleType;
 import com.comp.ninti.general.core.Discipline;
 import com.comp.ninti.general.core.Event;
 
@@ -78,7 +78,11 @@ public class EventStarted extends AppCompatActivity implements EventAttempts.OnF
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public void onFragmentInteraction(long eventCustomerEntryId, RuleType ruleType) {
+        if(ruleType == RuleType.Default){
+            System.out.println(RuleType.Default);
+        }else if(ruleType == RuleType.Time){
+            System.out.println(RuleType.Time);
+        }
     }
 }

@@ -77,7 +77,7 @@ public class DisciplinesActivity extends AppCompatActivity {
                 Cursor c = (Cursor) parent.getAdapter().getItem(position);
                 c.moveToPosition(position);
                 Discipline clickedDiscipline = new Discipline(c.getString(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_NAME)),
-                        c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_RULE)), c.getInt(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_ATTEMPTS)),
+                        c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_RULE_ID)), c.getInt(c.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_ATTEMPTS)),
                         c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE._ID)));
                 Toast.makeText(DisciplinesActivity.this, "Clicked Discipline: " + clickedDiscipline.getName() + " dbID: " + id,
                         Toast.LENGTH_LONG).show();
@@ -92,7 +92,7 @@ public class DisciplinesActivity extends AppCompatActivity {
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_2,
                 dbHandler.getAllDisciplines(),
-                new String[]{DisciplineContract.DISCIPLINE.COLUMN_NAME, DisciplineContract.DISCIPLINE.COLUMN_RULE},
+                new String[]{DisciplineContract.DISCIPLINE.COLUMN_NAME, DisciplineContract.DISCIPLINE.COLUMN_RULE_ID},
                 new int[]{android.R.id.text1, android.R.id.text2});
         ListView listView = (ListView) findViewById(R.id.disciplinesListView);
         listView.setAdapter(adapter);

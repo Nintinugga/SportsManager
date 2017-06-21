@@ -119,7 +119,6 @@
         </activity>
         <activity
             android:name="com.comp.ninti.pointsDetermination.DefaultPoints"
-            android:label="@string/title_activity_default_points"
             android:parentActivityName=".EventStarted"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

@@ -22,19 +22,6 @@ public final class RuleContract {
         public static final String COLUMN_WORSTTIMEPOINTS = "worsttimepoints";
     }
 
-    public static final class TIMERULE {
-        public static final String TABLE_NAME = "timerule";
-        public static final String COLUMN_RULEID = "ruleid";
-        public static final String COLUMN_TIME = "time";
-        public static final String COLUMN_POINTS = "points";
-    }
-
-    public static final String CREATE_TABLE_TIME = "CREATE TABLE " + TIMERULE.TABLE_NAME + "("
-            + TIMERULE.COLUMN_RULEID + " INTEGER, " + TIMERULE.COLUMN_TIME + " DOUBLE, "
-            + TIMERULE.COLUMN_POINTS + " INTEGER, FOREIGN KEY("
-            + TIMERULE.COLUMN_RULEID + ") REFERENCES "
-            + RULE.TABLE_NAME + "(" + RULE._ID + "));";
-
     public static final String CREATE_TABLE_RULE = "CREATE TABLE " + RULE.TABLE_NAME + "("
             + RULE._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + RULE.COLUMN_NAME + " TEXT, "
@@ -45,7 +32,6 @@ public final class RuleContract {
             + RULE.COLUMN_WORSTTIMEPOINTS + " DOUBLE);";
 
     public static final String DROP_TABLE_RULE = "DROP TABLE IF EXISTS " + RULE.TABLE_NAME;
-    public static final String DROP_TABLE_TIME = "DROP TABLE IF EXISTS " + TIMERULE.TABLE_NAME;
 
     public static String getDelete(Rule rule) {
         return "DELETE FROM " + RULE.TABLE_NAME + " WHERE "

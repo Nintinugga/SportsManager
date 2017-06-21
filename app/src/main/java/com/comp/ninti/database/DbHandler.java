@@ -84,6 +84,11 @@ public class DbHandler extends SQLiteOpenHelper {
         return this.getReadableDatabase().rawQuery(query.toString(), null);
     }
 
+    public Cursor getCustomerById(long id) {
+        final String query = "select * from " + CustomerContract.CUSTOMER.TABLE_NAME + " where " + CustomerContract.CUSTOMER._ID + " = " + id;
+        return this.getReadableDatabase().rawQuery(query, null);
+    }
+
     public Cursor getCustomersById(List<Long> ids) {
         final StringBuilder query = new StringBuilder("select * from " + CustomerContract.CUSTOMER.TABLE_NAME);
         final String discEq = CustomerContract.CUSTOMER._ID + " = ";

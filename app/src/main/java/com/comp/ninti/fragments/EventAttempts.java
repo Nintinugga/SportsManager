@@ -1,6 +1,7 @@
 package com.comp.ninti.fragments;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.comp.ninti.database.CustomerContract;
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.EventCustomerContract;
 import com.comp.ninti.sportsmanager.R;
@@ -79,6 +82,27 @@ public class EventAttempts extends Fragment {
                 dbHandler.getEventCustomerEntries(discId, evId),
                 new String[]{EventCustomerContract.EVENTCUSTOMER.COLUMN_CU_ID, EventCustomerContract.EVENTCUSTOMER.COLUMN_ATTEMPT},
                 new int[]{android.R.id.text1, android.R.id.text2});
+        adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder(){
+            @Override
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+
+                //CUSTOMER
+                if(columnIndex == cursor.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_CU_ID)) {
+                    Cursor custCurs = dbHandler.getCustomerById(cursor.getLong(cursor.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_CU_ID)));
+                    custCurs.moveToFirst();
+                    TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                    tv.setText(custCurs.getString(custCurs.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_NAME)));
+                    custCurs.close();
+                    return true;
+                }
+                if(columnIndex == cursor.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_ATTEMPT)) {
+                    TextView tv = (TextView) view.findViewById(android.R.id.text2);
+                    tv.setText(getString(R.string.AttemptColon, cursor.getInt(cursor.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_ATTEMPT))));
+                    return true;
+                }
+                return false;
+            }
+        });
         listView.setAdapter(adapter);
         dbHandler.close();
     }

@@ -61,7 +61,5 @@
     <string name="Timer">Timer</string>
     <string name="AddPenalty">AddPenalty</string>
     <string name="Reset">Reset</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="AttemptColon">Attempt: %d</string>
 </resources>

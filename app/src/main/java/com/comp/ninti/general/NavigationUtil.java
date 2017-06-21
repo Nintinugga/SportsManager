@@ -38,11 +38,6 @@ public class NavigationUtil {
                 myIntent = new Intent(context, DisciplinesActivity.class);
                 context.startActivity(myIntent);
                 return true;
-            case R.id.timer:
-                System.out.println("timer Clicked");
-                myIntent = new Intent(context, Timer.class);
-                context.startActivity(myIntent);
-                return true;
         }
         return false;
     }

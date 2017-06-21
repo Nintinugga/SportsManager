@@ -111,11 +111,11 @@
         <activity
             android:name="com.comp.ninti.pointsDetermination.Timer"
             android:label="@string/title_activity_timer"
-            android:parentActivityName=".EventStart"
+            android:parentActivityName=".EventStarted"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.comp.ninti.sportsmanager.EventStart" />
+                android:value="com.comp.ninti.sportsmanager.EventStarted" />
         </activity>
         <activity
             android:name="com.comp.ninti.pointsDetermination.DefaultPoints"

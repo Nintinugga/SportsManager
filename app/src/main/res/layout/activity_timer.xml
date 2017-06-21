@@ -5,7 +5,7 @@
     android:id="@+id/cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.comp.ninti.sportsmanager.Timer">
+    tools:context="com.comp.ninti.pointsDetermination.Timer">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/apl"

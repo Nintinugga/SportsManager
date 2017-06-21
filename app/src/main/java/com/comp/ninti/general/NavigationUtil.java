@@ -10,7 +10,7 @@ import com.comp.ninti.sportsmanager.DisciplinesActivity;
 import com.comp.ninti.sportsmanager.EventsActivity;
 import com.comp.ninti.sportsmanager.R;
 import com.comp.ninti.sportsmanager.RulesActivity;
-import com.comp.ninti.sportsmanager.Timer;
+import com.comp.ninti.pointsDetermination.Timer;
 
 
 public class NavigationUtil {

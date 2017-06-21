@@ -1,4 +1,4 @@
-package com.comp.ninti.sportsmanager;
+package com.comp.ninti.pointsDetermination;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.comp.ninti.sportsmanager.R;
 
 
 public class Timer extends AppCompatActivity implements View.OnClickListener {
@@ -22,7 +23,8 @@ public class Timer extends AppCompatActivity implements View.OnClickListener {
     private Chronometer mChronometer;
     private Button timerBtn;
     private ImageButton addPenaltyTime;
-    private int addedPenaltyTime = 0;
+    private long addedPenaltyTime = 0;
+    long elapsedMillis = 0;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -69,7 +71,8 @@ public class Timer extends AppCompatActivity implements View.OnClickListener {
                 timerBtn.setText(R.string.chronometer_reset);
                 timerBtn.setTag(2);
                 addPenaltyTime.setTag(1);
-                long elapsedMillis = SystemClock.elapsedRealtime() - mChronometer.getBase();
+                elapsedMillis = SystemClock.elapsedRealtime() - mChronometer.getBase();
+                System.out.println("elapsed millis: " + elapsedMillis);
             } else if (status == 2) {
                 //reset chronometer
                 mChronometer.setBase(SystemClock.elapsedRealtime());
@@ -110,7 +113,10 @@ public class Timer extends AppCompatActivity implements View.OnClickListener {
                         //What ever you want to do with the value
                         //OR
                         String dialogText = edittext.getText().toString();
-                        addedPenaltyTime = Integer.valueOf(dialogText);
+                        addedPenaltyTime = Long.valueOf(dialogText)*1000;
+                        mChronometer.setBase(SystemClock.elapsedRealtime()- (elapsedMillis + addedPenaltyTime));
+                        System.out.println("added penalty time: " + addedPenaltyTime);
+                        System.out.println("new time: " + mChronometer.getBase());
                         timerBtn.setText(R.string.SAVE);
                         timerBtn.setTag(3);
                     }

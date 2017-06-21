@@ -109,7 +109,7 @@
                 android:value="com.comp.ninti.sportsmanager.EventsActivity" />
         </activity>
         <activity
-            android:name=".Timer"
+            android:name="com.comp.ninti.pointsDetermination.Timer"
             android:label="@string/title_activity_timer"
             android:parentActivityName=".EventStart"
             android:theme="@style/AppTheme.NoActionBar">

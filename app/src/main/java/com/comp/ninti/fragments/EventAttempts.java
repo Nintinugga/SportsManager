@@ -16,7 +16,6 @@ import com.comp.ninti.database.CustomerContract;
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DisciplineContract;
 import com.comp.ninti.database.EventCustomerContract;
-import com.comp.ninti.general.RuleType;
 import com.comp.ninti.general.core.Rule;
 import com.comp.ninti.sportsmanager.R;
 
@@ -85,7 +84,7 @@ public class EventAttempts extends Fragment {
                 cuDi.moveToFirst();
                 Rule rule = dbHandler.getSpecificRuleById(cuDi.getLong(cuDi.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_RULE_ID)));
                 cuDi.close();
-                onFragmentInterAction(c.getLong(c.getColumnIndex(EventCustomerContract.EVENTCUSTOMER._ID)), rule.getRuleType());
+                onFragmentInterAction(c.getLong(c.getColumnIndex(EventCustomerContract.EVENTCUSTOMER._ID)), rule);
             }
         });
         return view;
@@ -123,9 +122,9 @@ public class EventAttempts extends Fragment {
         dbHandler.close();
     }
 
-    public void onFragmentInterAction(long eventCustomerEntryId, RuleType ruleType) {
+    public void onFragmentInterAction(long eventCustomerEntryId, Rule rule) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(eventCustomerEntryId, ruleType);
+            mListener.onFragmentInteraction(eventCustomerEntryId, rule);
         }
     }
 
@@ -157,7 +156,6 @@ public class EventAttempts extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(long eventCustomerEntryId, RuleType ruleType);
+        void onFragmentInteraction(long eventCustomerEntryId, Rule rule);
     }
 }

@@ -1,6 +1,7 @@
 package com.comp.ninti.pointsDetermination;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
@@ -15,7 +16,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.comp.ninti.general.TimeUtil;
+import com.comp.ninti.general.core.Event;
+import com.comp.ninti.general.core.Rule;
 import com.comp.ninti.sportsmanager.R;
+
+import java.util.Calendar;
 
 
 public class Timer extends AppCompatActivity implements View.OnClickListener {
@@ -25,11 +31,17 @@ public class Timer extends AppCompatActivity implements View.OnClickListener {
     private ImageButton addPenaltyTime;
     private long addedPenaltyTime = 0;
     long elapsedMillis = 0;
+    long pointOfStop = 0;
+    private Event event;
+    private Rule rule;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.reset) {
             refresh();
+            return true;
+        } else if (item.getItemId() == android.R.id.home) {
+            super.onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -44,6 +56,11 @@ public class Timer extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        event = getIntent().getExtras().getParcelable("com.comp.ninti.general.core.Event");
+        rule = getIntent().getExtras().getParcelable("com.comp.ninti.general.core.Rule");
+        Intent intent = new Intent();
+        intent.putExtra("com.comp.ninti.general.core.Event", event);
+        setResult(RESULT_CANCELED, intent);
         setContentView(R.layout.activity_timer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -80,7 +97,14 @@ public class Timer extends AppCompatActivity implements View.OnClickListener {
                 timerBtn.setTag(0);
                 addPenaltyTime.setTag(0);
             } else if (status == 3) {
-                //save
+                Intent intent = new Intent();
+                intent.putExtra("com.comp.ninti.general.core.Event", event);
+                Calendar calender = Calendar.getInstance();
+                calender.setTimeInMillis(pointOfStop - mChronometer.getBase());
+                System.out.println("time: " + (pointOfStop - mChronometer.getBase()));
+                intent.putExtra("SCORE", TimeUtil.getPointsFromTime(rule.getBestTimePoints(), rule.getWorstTimePoints(), rule.getWorstTime(), rule.getBestTime(), calender.get(Calendar.SECOND)));
+                setResult(RESULT_OK, intent);
+                finish();
             } else {
                 Toast.makeText(Timer.this, "Unknown Button operation", Toast.LENGTH_SHORT).show();
             }
@@ -113,10 +137,9 @@ public class Timer extends AppCompatActivity implements View.OnClickListener {
                         //What ever you want to do with the value
                         //OR
                         String dialogText = edittext.getText().toString();
-                        addedPenaltyTime = Long.valueOf(dialogText)*1000;
-                        mChronometer.setBase(SystemClock.elapsedRealtime()- (elapsedMillis + addedPenaltyTime));
-                        System.out.println("added penalty time: " + addedPenaltyTime);
-                        System.out.println("new time: " + mChronometer.getBase());
+                        addedPenaltyTime = Long.valueOf(dialogText) * 1000;
+                        pointOfStop = SystemClock.elapsedRealtime();
+                        mChronometer.setBase(pointOfStop - (elapsedMillis + addedPenaltyTime));
                         timerBtn.setText(R.string.SAVE);
                         timerBtn.setTag(3);
                     }

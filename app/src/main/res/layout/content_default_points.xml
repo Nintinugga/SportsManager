@@ -32,11 +32,15 @@
         android:layout_marginBottom="@dimen/bottom_button_height">
 
             <EditText
+                android:id="@+id/etScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:gravity="center"
                 android:hint="@string/EnterScore"
-                android:inputType="number">
+                android:inputType="number"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium">
 
             </EditText>
 

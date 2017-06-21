@@ -67,7 +67,7 @@ public class EventStart extends AppCompatActivity {
                 dbHandler.close();
                 Intent myIntent = new Intent(EventStart.this, EventStarted.class);
                 myIntent.putExtra("com.comp.ninti.general.core.Event", event);
-                EventStart.this.startActivityForResult(myIntent, 1);
+                EventStart.this.startActivity(myIntent);
             }
         });
     }

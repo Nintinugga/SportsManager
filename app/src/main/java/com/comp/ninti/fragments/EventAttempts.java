@@ -43,10 +43,8 @@ public class EventAttempts extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     *
      * @return A new instance of fragment EventAttempts.
      */
-    // TODO: Rename and change types and number of parameters
     public static EventAttempts newInstance(long discId, long evId) {
         EventAttempts fragment = new EventAttempts();
         Bundle args = new Bundle();
@@ -69,7 +67,7 @@ public class EventAttempts extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_event_attempts, container, false);
+        View view = inflater.inflate(R.layout.fragment_event_attempts, container, false);
         listView = (ListView) view.findViewById(R.id.listView);
         displayItems(view);
         return view;
@@ -82,12 +80,12 @@ public class EventAttempts extends Fragment {
                 dbHandler.getEventCustomerEntries(discId, evId),
                 new String[]{EventCustomerContract.EVENTCUSTOMER.COLUMN_CU_ID, EventCustomerContract.EVENTCUSTOMER.COLUMN_ATTEMPT},
                 new int[]{android.R.id.text1, android.R.id.text2});
-        adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder(){
+        adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
             @Override
             public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
 
                 //CUSTOMER
-                if(columnIndex == cursor.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_CU_ID)) {
+                if (columnIndex == cursor.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_CU_ID)) {
                     Cursor custCurs = dbHandler.getCustomerById(cursor.getLong(cursor.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_CU_ID)));
                     custCurs.moveToFirst();
                     TextView tv = (TextView) view.findViewById(android.R.id.text1);
@@ -95,7 +93,7 @@ public class EventAttempts extends Fragment {
                     custCurs.close();
                     return true;
                 }
-                if(columnIndex == cursor.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_ATTEMPT)) {
+                if (columnIndex == cursor.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_ATTEMPT)) {
                     TextView tv = (TextView) view.findViewById(android.R.id.text2);
                     tv.setText(getString(R.string.AttemptColon, cursor.getInt(cursor.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_ATTEMPT))));
                     return true;
@@ -107,8 +105,6 @@ public class EventAttempts extends Fragment {
         dbHandler.close();
     }
 
-
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);

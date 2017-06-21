@@ -6,11 +6,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.comp.ninti.general.RuleType;
 import com.comp.ninti.general.core.Customer;
 import com.comp.ninti.general.core.Discipline;
 import com.comp.ninti.general.core.Event;
 import com.comp.ninti.general.core.Rule;
-import com.comp.ninti.general.RuleType;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,7 +21,7 @@ import java.util.List;
 public class DbHandler extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "sportsmanager.db";
-    private static final int DATABASE_VERSION = 13;
+    private static final int DATABASE_VERSION = 15;
 
 
     public DbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -211,19 +211,28 @@ public class DbHandler extends SQLiteOpenHelper {
         Rule rule = new Rule("Default1", RuleType.Default, 1L);
         Rule rule1 = new Rule("Default2", RuleType.Default, 2L);
         Rule rule2 = new Rule("Default3", RuleType.Default, 3L);
+        Rule rule3 = new Rule("Time1", RuleType.Time, 20D, 40, 40D, 20, 4L);
         db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule));
         db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule1));
         db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule2));
+        db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule3));
         Discipline discipline = new Discipline("Weitschussexperte", rule, 2);
         Discipline discipline1 = new Discipline("Sprintmeister", rule, 2);
         Discipline discipline2 = new Discipline("WasErAuchSonstMacht", rule, 2);
+        Discipline discipline3 = new Discipline("TIMEBased", rule3, 2);
         db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline));
         db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline1));
         db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline2));
+        db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline3));
         LinkedList<Long> disciplines = new LinkedList<>();
         disciplines.add(1L);
+        disciplines.add(2L);
+        disciplines.add(3L);
+        disciplines.add(4L);
         LinkedList<Long> customers = new LinkedList<>();
         customers.add(1L);
+        customers.add(2L);
+        customers.add(3L);
         Event event = new Event("Fussballcamp", disciplines, customers, "2017-08-21 18:30");
         db.insert(EventContract.EVENT.TABLE_NAME, null, EventContract.getInsert(event));
     }

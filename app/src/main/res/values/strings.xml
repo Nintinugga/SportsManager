@@ -36,6 +36,7 @@
     <string name="BestTime">Best Time</string>
     <string name="WorstTime">Worst Time</string>
     <string name="Points">Points</string>
+    <string name="EnterScore">Enter Score</string>
     <string name="WorstTimePoints">Worst-Time-Points</string>
     <string name="BestTimePoints">Best-Time-Points</string>
     <string name="Attempts">Attempts</string>

@@ -117,6 +117,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.comp.ninti.sportsmanager.EventStart" />
         </activity>
+        <activity
+            android:name="com.comp.ninti.pointsDetermination.DefaultPoints"
+            android:label="@string/title_activity_default_points"
+            android:parentActivityName=".EventStarted"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.comp.ninti.sportsmanager.EventStarted" />
+        </activity>
     </application>
 
 </manifest>

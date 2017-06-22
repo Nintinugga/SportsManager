@@ -5,12 +5,7 @@
     android:id="@+id/customSpinnerItemTextView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:gravity="center_vertical|fill_vertical|fill_horizontal|start"
-    android:padding="5dp"
-    android:paddingBottom="5dp"
-    android:paddingEnd="5dp"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:paddingStart="5dp"
-    android:paddingTop="5dp"
-    android:textSize="20sp" />
+    android:padding="8dp"
+    android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse" />

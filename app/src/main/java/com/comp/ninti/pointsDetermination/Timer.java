@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comp.ninti.general.TimeUtil;
@@ -34,6 +35,9 @@ public class Timer extends AppCompatActivity implements View.OnClickListener {
     long pointOfStop = 0;
     private Event event;
     private Rule rule;
+    private String customerName,attempt;
+    private TextView tvDiscTitle;
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -58,14 +62,21 @@ public class Timer extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         event = getIntent().getExtras().getParcelable("com.comp.ninti.general.core.Event");
         rule = getIntent().getExtras().getParcelable("com.comp.ninti.general.core.Rule");
+        customerName = getIntent().getStringExtra("CUSTOMER");
+        attempt = getIntent().getStringExtra("ATTEMPT");
         Intent intent = new Intent();
         intent.putExtra("com.comp.ninti.general.core.Event", event);
         setResult(RESULT_CANCELED, intent);
         setContentView(R.layout.activity_timer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(customerName);
+        getSupportActionBar().setSubtitle(attempt);
         mChronometer = (Chronometer) findViewById(R.id.chronometer);
         addPenaltyTime = (ImageButton) findViewById(R.id.addPenaltyTime);
+
+        tvDiscTitle = (TextView) findViewById(R.id.discTitle);
+        tvDiscTitle.setText(getIntent().getStringExtra("DISCIPLINE"));
         addPenaltyTime.setTag(0);
         timerBtn = (Button) findViewById(R.id.timerBtn);
         timerBtn.setTag(0);

@@ -30,6 +30,7 @@ public class EventStarted extends AppCompatActivity implements EventAttempts.OnF
     private FragmentManager mFragmentManager;
     private int score = 0;
     private long currentEventCustomerId;
+    private Discipline disc;
     Event event;
     DbHandler dbHandler;
     ArrayList<Discipline> disciplines;
@@ -50,13 +51,17 @@ public class EventStarted extends AppCompatActivity implements EventAttempts.OnF
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getAllDisciplines();
         spinner = (Spinner) findViewById(R.id.spinner);
+        createSpinner();
+    }
+
+    private void createSpinner() {
         ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
                 R.layout.spinner_item, disciplines.toArray(new Discipline[disciplines.size()]));
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Discipline disc = (Discipline) spinner.getSelectedItem();
+                disc = (Discipline) spinner.getSelectedItem();
                 mFragmentManager = getSupportFragmentManager();
                 mFragmentTransaction = mFragmentManager.beginTransaction();
                 mFragmentTransaction.replace(R.id.content_frame, EventAttempts.newInstance(disc.getId(), event.getId()));
@@ -103,7 +108,7 @@ public class EventStarted extends AppCompatActivity implements EventAttempts.OnF
     }
 
     @Override
-    public void onFragmentInteraction(long eventCustomerEntryId, Rule rule) {
+    public void onFragmentInteraction(long eventCustomerEntryId, Rule rule, String customerName, String attempt) {
         Intent intent;
         currentEventCustomerId = eventCustomerEntryId;
         if (rule.getRuleType() == RuleType.Default) {
@@ -116,6 +121,9 @@ public class EventStarted extends AppCompatActivity implements EventAttempts.OnF
         }
         intent.putExtra("com.comp.ninti.general.core.Event", event);
         intent.putExtra("com.comp.ninti.general.core.Rule", rule);
+        intent.putExtra("ATTEMPT", attempt);
+        intent.putExtra("CUSTOMER", customerName);
+        intent.putExtra("DISCIPLINE", disc.getName());
         EventStarted.this.startActivityForResult(intent, 1);
     }
 }

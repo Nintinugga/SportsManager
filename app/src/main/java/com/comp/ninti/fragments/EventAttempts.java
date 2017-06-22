@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.comp.ninti.adapter.EventCustomerAdapter;
 import com.comp.ninti.database.DbHandler;
@@ -78,14 +79,16 @@ public class EventAttempts extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cursor c = (Cursor) parent.getAdapter().getItem(position);
                 c.moveToPosition(position);
-                Cursor cuDi = dbHandler.getReadableDatabase().rawQuery("select " + DisciplineContract.DISCIPLINE.COLUMN_RULE_ID
+                Cursor cursorDisc = dbHandler.getReadableDatabase().rawQuery("select " + DisciplineContract.DISCIPLINE.COLUMN_RULE_ID
                         + " from " + DisciplineContract.DISCIPLINE.TABLE_NAME
                         + " where " + DisciplineContract.DISCIPLINE._ID
                         + " = " + c.getLong(c.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_DI_ID)), null);
-                cuDi.moveToFirst();
-                Rule rule = dbHandler.getSpecificRuleById(cuDi.getLong(cuDi.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_RULE_ID)));
-                cuDi.close();
-                onFragmentInterAction(c.getLong(c.getColumnIndex(EventCustomerContract.EVENTCUSTOMER._ID)), rule);
+                cursorDisc.moveToFirst();
+                Rule rule = dbHandler.getSpecificRuleById(cursorDisc.getLong(cursorDisc.getColumnIndex(DisciplineContract.DISCIPLINE.COLUMN_RULE_ID)));
+                cursorDisc.close();
+                TextView tvCuName = (TextView) view.findViewById(R.id.text1);
+                TextView tvAttempt = (TextView) view.findViewById(R.id.text2);
+                onFragmentInterAction(c.getLong(c.getColumnIndex(EventCustomerContract.EVENTCUSTOMER._ID)), rule, tvCuName.getText().toString(), tvAttempt.getText().toString());
             }
         });
         return view;
@@ -108,9 +111,9 @@ public class EventAttempts extends Fragment {
         dbHandler.close();
     }
 
-    public void onFragmentInterAction(long eventCustomerEntryId, Rule rule) {
+    public void onFragmentInterAction(long eventCustomerEntryId, Rule rule, String customerName, String attempt) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(eventCustomerEntryId, rule);
+            mListener.onFragmentInteraction(eventCustomerEntryId, rule, customerName, attempt);
         }
     }
 
@@ -142,7 +145,7 @@ public class EventAttempts extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(long eventCustomerEntryId, Rule rule);
+        void onFragmentInteraction(long eventCustomerEntryId, Rule rule, String customerName, String attempt);
     }
 
     @Override

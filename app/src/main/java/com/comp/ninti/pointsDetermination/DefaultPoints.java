@@ -8,8 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.comp.ninti.general.core.Customer;
 import com.comp.ninti.general.core.Event;
 import com.comp.ninti.general.core.Rule;
 import com.comp.ninti.sportsmanager.R;
@@ -19,6 +21,8 @@ public class DefaultPoints extends AppCompatActivity {
     private Rule rule;
     private Button btnSave;
     private EditText etScore;
+    private String customerName,attempt;
+    private TextView tvDiscTitle;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -34,6 +38,8 @@ public class DefaultPoints extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         event = getIntent().getExtras().getParcelable("com.comp.ninti.general.core.Event");
         rule = getIntent().getExtras().getParcelable("com.comp.ninti.general.core.Rule");
+        customerName = getIntent().getStringExtra("CUSTOMER");
+        attempt = getIntent().getStringExtra("ATTEMPT");
         Intent intent = new Intent();
         intent.putExtra("com.comp.ninti.general.core.Event", event);
         setResult(RESULT_CANCELED, intent);
@@ -41,8 +47,12 @@ public class DefaultPoints extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(customerName);
+        getSupportActionBar().setSubtitle(attempt);
         btnSave = (Button) findViewById(R.id.btnSave);
         etScore = (EditText) findViewById(R.id.etScore);
+        tvDiscTitle = (TextView) findViewById(R.id.discTitle);
+        tvDiscTitle.setText(getIntent().getStringExtra("DISCIPLINE"));
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -46,12 +48,33 @@ public class EventStarted extends AppCompatActivity implements EventAttempts.OnF
             System.out.println(lon);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Started Event " + event.getName());
+        getSupportActionBar().setTitle(event.getName());
         getSupportActionBar().setSubtitle(event.getDate());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getAllDisciplines();
         spinner = (Spinner) findViewById(R.id.spinner);
         createSpinner();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.showLeaderBoard) {
+            showLeaderBoard();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showLeaderBoard() {
+        Intent intent = new Intent(EventStarted.this, LeaderBoard.class);
+        intent.putExtra("com.comp.ninti.general.core.Event", event);
+        EventStarted.this.startActivityForResult(intent, 1);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.show_leadboard, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void createSpinner() {

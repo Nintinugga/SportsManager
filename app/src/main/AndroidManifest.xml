@@ -123,6 +123,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.comp.ninti.sportsmanager.EventStarted" />
         </activity>
+        <activity
+            android:name=".LeaderBoard"
+            android:label="@string/title_activity_leader_board"
+            android:parentActivityName=".EventStarted"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.comp.ninti.sportsmanager.EventStarted" />
+        </activity>
     </application>
 
 </manifest>

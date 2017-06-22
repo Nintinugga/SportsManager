@@ -66,4 +66,6 @@
     <string name="text1">text1</string>
     <string name="text2">text2</string>
     <string name="text3">text3</string>
+    <string name="show_leader_board">Show Leader Board</string>
+    <string name="title_activity_leader_board">LeaderBoard</string>
 </resources>

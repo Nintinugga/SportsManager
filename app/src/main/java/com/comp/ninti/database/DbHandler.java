@@ -113,6 +113,24 @@ public class DbHandler extends SQLiteOpenHelper {
     }
 
     /**
+     * The calculated score can be retrieved from column 2 as int or via column name 'score'
+     *
+     * @param eventId
+     * @return
+     */
+    public Cursor getLeaderBoard(long eventId) {
+        final String query = "select "
+                + EventCustomerContract.EVENTCUSTOMER._ID + ", "
+                + EventCustomerContract.EVENTCUSTOMER.COLUMN_CU_ID
+                + ", SUM(" + EventCustomerContract.EVENTCUSTOMER.COLUMN_POINTS + ") AS score from "
+                + EventCustomerContract.EVENTCUSTOMER.TABLE_NAME + " where "
+                + EventCustomerContract.EVENTCUSTOMER.COLUMN_EV_ID + " = " + eventId
+                + " GROUP BY " + EventCustomerContract.EVENTCUSTOMER.COLUMN_CU_ID
+                + " ORDER BY " + EventCustomerContract.EVENTCUSTOMER.COLUMN_POINTS + " DESC;";
+        return this.getReadableDatabase().rawQuery(query, null);
+    }
+
+    /**
      * Returns the Rule with the given ruleName
      *
      * @param ruleName the name of the rule you want to get

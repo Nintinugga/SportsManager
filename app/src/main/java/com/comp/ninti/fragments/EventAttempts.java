@@ -3,16 +3,15 @@ package com.comp.ninti.fragments;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.comp.ninti.database.CustomerContract;
+import com.comp.ninti.adapter.EventCustomerAdapter;
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DisciplineContract;
 import com.comp.ninti.database.EventCustomerContract;
@@ -34,6 +33,8 @@ public class EventAttempts extends Fragment {
     private DbHandler dbHandler;
     private long discId, evId;
     private ListView listView;
+    private View view;
+    EventCustomerAdapter eventCustomerAdapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -69,7 +70,7 @@ public class EventAttempts extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_event_attempts, container, false);
+        view = inflater.inflate(R.layout.fragment_event_attempts, container, false);
         listView = (ListView) view.findViewById(R.id.listView);
         displayItems(view);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -90,35 +91,20 @@ public class EventAttempts extends Fragment {
         return view;
     }
 
-    private void displayItems(View view) {
+    private void displayItems(final View view) {
         dbHandler = new DbHandler(view.getContext(), "", null, 1);
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(view.getContext(),
-                android.R.layout.simple_list_item_2,
-                dbHandler.getEventCustomerEntries(discId, evId),
-                new String[]{EventCustomerContract.EVENTCUSTOMER.COLUMN_CU_ID, EventCustomerContract.EVENTCUSTOMER.COLUMN_ATTEMPT},
-                new int[]{android.R.id.text1, android.R.id.text2});
-        adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
-            @Override
-            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+        new Handler().post(new Runnable() {
 
-                //CUSTOMER
-                if (columnIndex == cursor.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_CU_ID)) {
-                    Cursor custCurs = dbHandler.getCustomerById(cursor.getLong(cursor.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_CU_ID)));
-                    custCurs.moveToFirst();
-                    TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                    tv.setText(custCurs.getString(custCurs.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_NAME)));
-                    custCurs.close();
-                    return true;
-                }
-                if (columnIndex == cursor.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_ATTEMPT)) {
-                    TextView tv = (TextView) view.findViewById(android.R.id.text2);
-                    tv.setText(getString(R.string.AttemptColon, cursor.getInt(cursor.getColumnIndex(EventCustomerContract.EVENTCUSTOMER.COLUMN_ATTEMPT))));
-                    return true;
-                }
-                return false;
+            @Override
+            public void run() {
+                eventCustomerAdapter = new EventCustomerAdapter(
+                        view.getContext(),
+                        dbHandler.getEventCustomerEntries(discId, evId),
+                        0);
+
+                listView.setAdapter(eventCustomerAdapter);
             }
         });
-        listView.setAdapter(adapter);
         dbHandler.close();
     }
 
@@ -157,5 +143,11 @@ public class EventAttempts extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(long eventCustomerEntryId, Rule rule);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        displayItems(view);
     }
 }

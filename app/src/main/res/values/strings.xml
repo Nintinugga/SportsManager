@@ -63,4 +63,8 @@
     <string name="AddPenalty">AddPenalty</string>
     <string name="Reset">Reset</string>
     <string name="AttemptColon">Attempt: %d</string>
+    <string name="ScoreColon">Score: %d</string>
+    <string name="text1">text1</string>
+    <string name="text2">text2</string>
+    <string name="text3">text3</string>
 </resources>

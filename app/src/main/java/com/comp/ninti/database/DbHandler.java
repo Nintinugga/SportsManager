@@ -21,7 +21,7 @@ import java.util.List;
 public class DbHandler extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "sportsmanager.db";
-    private static final int DATABASE_VERSION = 15;
+    private static final int DATABASE_VERSION = 16;
 
 
     public DbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -89,6 +89,15 @@ public class DbHandler extends SQLiteOpenHelper {
         return this.getReadableDatabase().rawQuery(query, null);
     }
 
+    public void setScore(long eventCustomerEntryId, int score) {
+        final String query = "UPDATE " + EventCustomerContract.EVENTCUSTOMER.TABLE_NAME +
+                " SET "
+                + EventCustomerContract.EVENTCUSTOMER.COLUMN_POINTS + " = " + score +
+                " WHERE "
+                + EventCustomerContract.EVENTCUSTOMER._ID + " = " + eventCustomerEntryId + ";";
+        this.getWritableDatabase().execSQL(query);
+    }
+
     public Cursor getCustomersById(List<Long> ids) {
         final StringBuilder query = new StringBuilder("select * from " + CustomerContract.CUSTOMER.TABLE_NAME);
         final String discEq = CustomerContract.CUSTOMER._ID + " = ";
@@ -119,7 +128,8 @@ public class DbHandler extends SQLiteOpenHelper {
     public Cursor getEventCustomerEntries(long discId, long evId) {
         String select = "select * from " + EventCustomerContract.EVENTCUSTOMER.TABLE_NAME
                 + " where " + EventCustomerContract.EVENTCUSTOMER.COLUMN_DI_ID + " = " + discId
-                + " AND " + EventCustomerContract.EVENTCUSTOMER.COLUMN_EV_ID + " = " + evId;
+                + " AND " + EventCustomerContract.EVENTCUSTOMER.COLUMN_EV_ID + " = " + evId
+                + " AND " + EventCustomerContract.EVENTCUSTOMER.COLUMN_POINTS + " IS NULL;";
         return this.getReadableDatabase().rawQuery(select, null);
     }
 

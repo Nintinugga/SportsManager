@@ -101,7 +101,6 @@
         </activity>
         <activity
             android:name=".EventStarted"
-            android:label="@string/title_activity_event_started"
             android:parentActivityName=".EventsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -110,7 +109,6 @@
         </activity>
         <activity
             android:name="com.comp.ninti.pointsDetermination.Timer"
-            android:label="@string/title_activity_timer"
             android:parentActivityName=".EventStarted"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

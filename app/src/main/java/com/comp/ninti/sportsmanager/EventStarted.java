@@ -29,6 +29,7 @@ public class EventStarted extends AppCompatActivity implements EventAttempts.OnF
     private FragmentTransaction mFragmentTransaction;
     private FragmentManager mFragmentManager;
     private int score = 0;
+    private long currentEventCustomerId;
     Event event;
     DbHandler dbHandler;
     ArrayList<Discipline> disciplines;
@@ -67,9 +68,6 @@ public class EventStarted extends AppCompatActivity implements EventAttempts.OnF
             }
         });
         spinner.setAdapter(spinnerArrayAdapter);
-        //Intent intent = new Intent();
-        //intent.putExtra("com.comp.ninti.general.core.Event", event);
-        //setResult(RESULT_OK, intent);
     }
 
 
@@ -94,18 +92,20 @@ public class EventStarted extends AppCompatActivity implements EventAttempts.OnF
                 event = data.getExtras().getParcelable("com.comp.ninti.general.core.Event");
                 score = data.getIntExtra("SCORE", 0);
                 System.out.println("reached score: " + score);
+                dbHandler = new DbHandler(EventStarted.this, "", null, 1);
+                dbHandler.setScore(currentEventCustomerId, score);
+                dbHandler.close();
             }
             if (resultCode == RESULT_CANCELED) {
                 event = data.getExtras().getParcelable("com.comp.ninti.general.core.Event");
             }
-
-            //TODO save score to database
         }
     }
 
     @Override
     public void onFragmentInteraction(long eventCustomerEntryId, Rule rule) {
         Intent intent;
+        currentEventCustomerId = eventCustomerEntryId;
         if (rule.getRuleType() == RuleType.Default) {
             System.out.println(RuleType.Default);
             intent = new Intent(EventStarted.this, DefaultPoints.class);

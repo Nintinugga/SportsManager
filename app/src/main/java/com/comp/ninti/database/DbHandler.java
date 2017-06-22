@@ -126,7 +126,7 @@ public class DbHandler extends SQLiteOpenHelper {
                 + EventCustomerContract.EVENTCUSTOMER.TABLE_NAME + " where "
                 + EventCustomerContract.EVENTCUSTOMER.COLUMN_EV_ID + " = " + eventId
                 + " GROUP BY " + EventCustomerContract.EVENTCUSTOMER.COLUMN_CU_ID
-                + " ORDER BY " + EventCustomerContract.EVENTCUSTOMER.COLUMN_POINTS + " DESC;";
+                + " ORDER BY score DESC;";
         return this.getReadableDatabase().rawQuery(query, null);
     }
 

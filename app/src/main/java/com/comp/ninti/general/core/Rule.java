@@ -51,6 +51,7 @@ public class Rule implements Parcelable {
 
     protected Rule(Parcel in) {
         name = in.readString();
+        ruleType = Enum.valueOf(RuleType.class, in.readString());
         bestTime = in.readDouble();
         worstTime = in.readDouble();
         bestTimePoints = in.readInt();
@@ -134,6 +135,7 @@ public class Rule implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
+        dest.writeString(ruleType.name());
         dest.writeDouble(bestTime);
         dest.writeDouble(worstTime);
         dest.writeInt(bestTimePoints);

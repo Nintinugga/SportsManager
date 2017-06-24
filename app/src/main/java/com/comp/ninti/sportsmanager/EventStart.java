@@ -7,6 +7,8 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import com.comp.ninti.database.CustomerContract;
 import com.comp.ninti.database.DbHandler;
 import com.comp.ninti.database.DisciplineContract;
+import com.comp.ninti.database.EventContract;
 import com.comp.ninti.database.EventCustomerContract;
 import com.comp.ninti.general.core.Customer;
 import com.comp.ninti.general.core.Discipline;
@@ -33,6 +36,24 @@ public class EventStart extends AppCompatActivity {
     private Button btnStartEvent;
     private SimpleCursorAdapter discAdapter, custAdapter;
     private LinkedList<Discipline> disciplines;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.delete) {
+            DbHandler dbHandler = new DbHandler(EventStart.this, "", null, 1);
+            dbHandler.getWritableDatabase().execSQL(EventContract.getDelete(event.getId()));
+            dbHandler.close();
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+            getMenuInflater().inflate(R.menu.delete, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

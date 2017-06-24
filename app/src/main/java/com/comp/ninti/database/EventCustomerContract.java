@@ -28,6 +28,15 @@ public class EventCustomerContract {
 
     public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + EVENTCUSTOMER.TABLE_NAME;
 
+    public static String getDeleteByCu(long custId){
+        return "DELETE FROM " + EVENTCUSTOMER.TABLE_NAME + " WHERE " + EVENTCUSTOMER.COLUMN_CU_ID + " = " + custId + ";";
+    }
+    public static String getDeleteByEv(long evId){
+        return "DELETE FROM " + EVENTCUSTOMER.TABLE_NAME + " WHERE " + EVENTCUSTOMER.COLUMN_EV_ID + " = " + evId + ";";
+    }
+    public static String getDeleteByDi(long diId){
+        return "DELETE FROM " + EVENTCUSTOMER.TABLE_NAME + " WHERE " + EVENTCUSTOMER.COLUMN_DI_ID + " = " + diId + ";";
+    }
     public static ContentValues getInsert(EventCustomerEntry eventCustomerEntry) {
         ContentValues values = new ContentValues();
         values.put(EVENTCUSTOMER.COLUMN_EV_ID, eventCustomerEntry.getEvId());

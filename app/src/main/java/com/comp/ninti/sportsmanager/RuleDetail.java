@@ -3,23 +3,61 @@ package com.comp.ninti.sportsmanager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.comp.ninti.database.DbHandler;
+import com.comp.ninti.database.DisciplineContract;
+import com.comp.ninti.database.EventContract;
+import com.comp.ninti.database.EventCustomerContract;
 import com.comp.ninti.database.RuleContract;
 import com.comp.ninti.general.core.Rule;
 import com.comp.ninti.general.RuleType;
 
-public class RuleDetail extends AppCompatActivity {
+import java.util.LinkedList;
 
+public class RuleDetail extends AppCompatActivity {
+    int requestCode;
+    Rule rule;
+    Button addRuleBtn;
     private EditText ruleBestTime;
     private EditText ruleName;
     private EditText ruleWorstTime;
     private EditText bestTimePoints;
     private EditText worstTimePoints;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.delete) {
+            DbHandler dbHandler = new DbHandler(RuleDetail.this, "", null, 1);
+            LinkedList<Long> discIds = dbHandler.getAllDisciplineIDsRules(rule.getId());
+            for(Long discId:discIds){
+                dbHandler.getWritableDatabase().execSQL(DisciplineContract.getDeleteForDisciplineRule(rule.getId(), discId));
+                dbHandler.getWritableDatabase().execSQL(EventCustomerContract.getDeleteByDi(discId));
+                dbHandler.getWritableDatabase().execSQL(EventContract.getDeleteByDiId(discId));
+                System.out.println(EventContract.getDeleteByDiId(discId));
+            }
+            System.out.println(DisciplineContract.getDeleteByRuleId(rule.getId()));
+            System.out.println(RuleContract.getDelete(rule.getId()));
+            dbHandler.getWritableDatabase().execSQL(DisciplineContract.getDeleteByRuleId(rule.getId()));
+            dbHandler.getWritableDatabase().execSQL(RuleContract.getDelete(rule.getId()));
+            dbHandler.close();
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (requestCode == 2)
+            getMenuInflater().inflate(R.menu.delete, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +74,12 @@ public class RuleDetail extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ruleName.requestFocus();
 
-        Button addRuleBtn = (Button) findViewById(R.id.addRule);
+        addRuleBtn = (Button) findViewById(R.id.addRule);
+        requestCode = getIntent().getIntExtra("REQUESTCODE", 1);
+        if (requestCode == 2) {
+            rule = getIntent().getExtras().getParcelable("com.comp.ninti.general.core.Rule");
+            setValues();
+        }
         addRuleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +87,11 @@ public class RuleDetail extends AppCompatActivity {
             }
 
         });
+    }
+
+    private void setValues() {
+        getSupportActionBar().setTitle(getString(R.string.EditRule));
+        addRuleBtn.setText(getString(R.string.SAVE));
     }
 
     private void addRule() {

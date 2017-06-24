@@ -81,6 +81,11 @@ public class DisciplinesActivity extends AppCompatActivity {
                         c.getLong(c.getColumnIndex(DisciplineContract.DISCIPLINE._ID)));
                 Toast.makeText(DisciplinesActivity.this, "Clicked Discipline: " + clickedDiscipline.getName() + " dbID: " + id,
                         Toast.LENGTH_LONG).show();
+                int requestCode = 2;
+                Intent myIntent = new Intent(DisciplinesActivity.this, DisciplineDetail.class);
+                myIntent.putExtra("com.comp.ninti.general.core.Discipline", clickedDiscipline);
+                myIntent.putExtra("REQUESTCODE", requestCode);
+                DisciplinesActivity.this.startActivityForResult(myIntent, requestCode);
             }
         });
 

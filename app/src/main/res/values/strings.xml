@@ -5,11 +5,15 @@
     <string name="AddToDisciplines">Add to Disciplines</string>
     <string name="AddToEvents">Add to Events</string>
     <string name="NewCustomer">New Customer</string>
+    <string name="EditCustomer">Edit Customer</string>
     <string name="NewRule">New Rule</string>
+    <string name="EditRule">Edit Rule</string>
     <string name="NewDiscipline">New Discipline</string>
+    <string name="EditDiscipline">Edit Discipline</string>
     <string name="SelectDisciplines">Select Disciplines</string>
     <string name="SelectCustomers">Select Customer</string>
     <string name="NewEvent">New Event</string>
+    <string name="EditEvent">Edit Event</string>
     <string name="Customer">Customer</string>
     <string name="Event">Event</string>
     <string name="Discipline">Discipline</string>
@@ -67,5 +71,6 @@
     <string name="text2">text2</string>
     <string name="text3">text3</string>
     <string name="show_leader_board">Show Leader Board</string>
+    <string name="delete">Delete</string>
     <string name="title_activity_leader_board">LeaderBoard</string>
 </resources>

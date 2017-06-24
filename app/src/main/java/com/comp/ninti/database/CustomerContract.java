@@ -33,6 +33,10 @@ public final class CustomerContract {
                 + CUSTOMER.COLUMN_PHONE + "=\"" + customer.getPhone() + "\";";
     }
 
+    public static String getDelete(long custId) {
+        return "DELETE FROM " + CUSTOMER.TABLE_NAME + " WHERE " + CUSTOMER._ID + " = " + custId + ";";
+    }
+
     public static ContentValues getInsert(Customer customer) {
         ContentValues values = new ContentValues();
         values.put(CUSTOMER.COLUMN_NAME, customer.getName());

@@ -25,6 +25,18 @@ public class EventContract {
 
     public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + EVENT.TABLE_NAME;
 
+    public static String getDelete(long evId){
+        return "DELETE FROM " + EVENT.TABLE_NAME + " WHERE " + EVENT._ID + " = " + evId + ";";
+    }
+
+    public static String getDeleteByDiId(long diId){
+        return "DELETE FROM " + EVENT.TABLE_NAME + " WHERE " + EVENT.COLUMN_DISCIPLINES + " LIKE \"%" + String.valueOf(diId) + "%\";";
+    }
+
+    public static String getDeleteByCuId(long cuId){
+        return "DELETE FROM " + EVENT.TABLE_NAME + " WHERE " + EVENT.COLUMN_CUSTOMERS + " LIKE \"%" + String.valueOf(cuId) + "%\";";
+    }
+
     public static ContentValues getInsert(Event event) {
         ContentValues values = new ContentValues();
         values.put(EVENT.COLUMN_NAME, event.getName());

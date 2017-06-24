@@ -21,7 +21,7 @@ import java.util.List;
 public class DbHandler extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "sportsmanager.db";
-    private static final int DATABASE_VERSION = 16;
+    private static final int DATABASE_VERSION = 22;
 
 
     public DbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -40,6 +40,8 @@ public class DbHandler extends SQLiteOpenHelper {
         db.execSQL(DisciplineContract.CREATE_TABLE);
         System.out.println("creating eventcustomer table");
         db.execSQL(EventCustomerContract.CREATE_TABLE);
+        System.out.println("creating disciplinerule table");
+        db.execSQL(DisciplineContract.CREATE_TABLE_DISCIPLINE_RULE);
         createDefaultValues(db);
         System.out.println("creating default values");
     }
@@ -51,6 +53,7 @@ public class DbHandler extends SQLiteOpenHelper {
         db.execSQL(RuleContract.DROP_TABLE_RULE);
         db.execSQL(EventContract.DROP_TABLE);
         db.execSQL(EventCustomerContract.DROP_TABLE);
+        db.execSQL(DisciplineContract.DROP_TABLE_DISCIPLINE_RULE);
         onCreate(db);
     }
 
@@ -217,6 +220,18 @@ public class DbHandler extends SQLiteOpenHelper {
 
     }
 
+    public LinkedList<Long> getAllDisciplineIDsRules(long ruleId) {
+        LinkedList<Long> discIds = new LinkedList<>();
+        Cursor cursor = this.getReadableDatabase().rawQuery("Select "
+                + DisciplineContract.DISCIPLINE_RULE.COLUMN_DISC_ID
+                        + " from " + DisciplineContract.DISCIPLINE_RULE.TABLE_NAME
+                        + " where " + DisciplineContract.DISCIPLINE_RULE.COLUMN_RULE_ID + " = " + ruleId + ";", null);
+        while (cursor.moveToNext()) {
+            discIds.add(cursor.getLong(cursor.getColumnIndex(DisciplineContract.DISCIPLINE_RULE.COLUMN_DISC_ID)));
+        }
+        return discIds;
+    }
+
     public static Customer populateCustomer(Cursor c) {
         return new Customer(c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_NAME)),
                 c.getInt(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_AGE)), c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_EMAIL)),
@@ -246,12 +261,16 @@ public class DbHandler extends SQLiteOpenHelper {
         db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule3));
         Discipline discipline = new Discipline("Weitschussexperte", rule, 2);
         Discipline discipline1 = new Discipline("Sprintmeister", rule, 2);
-        Discipline discipline2 = new Discipline("WasErAuchSonstMacht", rule, 2);
+        Discipline discipline2 = new Discipline("WhatEverHeDoes", rule, 2);
         Discipline discipline3 = new Discipline("TIMEBased", rule3, 2);
-        db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline));
-        db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline1));
-        db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline2));
-        db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline3));
+        long id = db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline));
+        long id1 = db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline1));
+        long id2 = db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline2));
+        long id3 = db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline3));
+        db.insert(DisciplineContract.DISCIPLINE_RULE.TABLE_NAME, null, DisciplineContract.getInsertDisciplineRule(id, 1L));
+        db.insert(DisciplineContract.DISCIPLINE_RULE.TABLE_NAME, null, DisciplineContract.getInsertDisciplineRule(id1, 1L));
+        db.insert(DisciplineContract.DISCIPLINE_RULE.TABLE_NAME, null, DisciplineContract.getInsertDisciplineRule(id2, 1L));
+        db.insert(DisciplineContract.DISCIPLINE_RULE.TABLE_NAME, null, DisciplineContract.getInsertDisciplineRule(id3, 4L));
         LinkedList<Long> disciplines = new LinkedList<>();
         disciplines.add(1L);
         disciplines.add(2L);

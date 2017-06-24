@@ -39,6 +39,10 @@ public final class RuleContract {
                 + RULE.COLUMN_TYPE + "=" + rule.getRuleType() + "\" ;";
     }
 
+    public static String getDelete(long ruleId){
+        return "DELETE FROM " + RULE.TABLE_NAME + " WHERE " + RULE._ID + " = " + ruleId + ";";
+    }
+
     public static ContentValues getInsert(Rule rule) {
         ContentValues values = new ContentValues();
         values.put(RULE.COLUMN_NAME, rule.getName());

@@ -81,9 +81,15 @@ public class RulesActivity extends AppCompatActivity {
                         c.getDouble(c.getColumnIndex(RuleContract.RULE.COLUMN_BESTTIME)),
                         c.getInt(c.getColumnIndex(RuleContract.RULE.COLUMN_BESTTIMEPOINTS)),
                         c.getDouble(c.getColumnIndex(RuleContract.RULE.COLUMN_WORSTTIME)),
-                        c.getInt(c.getColumnIndex(RuleContract.RULE.COLUMN_WORSTTIMEPOINTS)));
+                        c.getInt(c.getColumnIndex(RuleContract.RULE.COLUMN_WORSTTIMEPOINTS)),
+                        c.getLong(c.getColumnIndex(RuleContract.RULE._ID)));
                 Toast.makeText(RulesActivity.this, "Clicked Rule: " + clickedRule.getName() + " dbID: " + id,
                         Toast.LENGTH_LONG).show();
+                int requestCode = 2;
+                Intent myIntent = new Intent(RulesActivity.this, RuleDetail.class);
+                myIntent.putExtra("com.comp.ninti.general.core.Rule", clickedRule);
+                myIntent.putExtra("REQUESTCODE", requestCode);
+                RulesActivity.this.startActivityForResult(myIntent, requestCode);
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

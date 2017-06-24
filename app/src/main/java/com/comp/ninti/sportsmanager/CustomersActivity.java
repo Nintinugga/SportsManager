@@ -60,8 +60,10 @@ public class CustomersActivity extends AppCompatActivity {
         addNewCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int requestCode = 1;
                 Intent myIntent = new Intent(CustomersActivity.this, CustomerDetail.class);
-                CustomersActivity.this.startActivity(myIntent);
+                myIntent.putExtra("REQUESTCODE", requestCode);
+                CustomersActivity.this.startActivityForResult(myIntent, requestCode);
 
             }
         });
@@ -73,11 +75,16 @@ public class CustomersActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cursor c = (Cursor) parent.getAdapter().getItem(position);
                 c.moveToPosition(position);
+                int requestCode = 2;
+                Intent myIntent = new Intent(CustomersActivity.this, CustomerDetail.class);
+                myIntent.putExtra("REQUESTCODE", requestCode);
                 Customer clickedCustomer = new Customer(c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_NAME)),
                         c.getInt(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_AGE)), c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_EMAIL)),
                         c.getString(c.getColumnIndex(CustomerContract.CUSTOMER.COLUMN_PHONE)), c.getLong(c.getColumnIndex(CustomerContract.CUSTOMER._ID)));
                 Toast.makeText(CustomersActivity.this, "Clicked Customer: " + clickedCustomer.getName() + " dbID: " + id,
                         Toast.LENGTH_LONG).show();
+                myIntent.putExtra("com.comp.ninti.general.core.Customer", clickedCustomer);
+                CustomersActivity.this.startActivityForResult(myIntent, requestCode);
             }
         });
 

@@ -21,7 +21,7 @@ import java.util.List;
 public class DbHandler extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "sportsmanager.db";
-    private static final int DATABASE_VERSION = 22;
+    private static final int DATABASE_VERSION = 24;
 
 
     public DbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -260,9 +260,9 @@ public class DbHandler extends SQLiteOpenHelper {
         db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule2));
         db.insert(RuleContract.RULE.TABLE_NAME, null, RuleContract.getInsert(rule3));
         Discipline discipline = new Discipline("Weitschussexperte", rule, 2);
-        Discipline discipline1 = new Discipline("Sprintmeister", rule, 2);
-        Discipline discipline2 = new Discipline("WhatEverHeDoes", rule, 2);
-        Discipline discipline3 = new Discipline("TIMEBased", rule3, 2);
+        Discipline discipline1 = new Discipline("Sprungspezialist", rule, 2);
+        Discipline discipline2 = new Discipline("Praezessionsschuetze", rule, 2);
+        Discipline discipline3 = new Discipline("Ballkuenstler", rule3, 2);
         long id = db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline));
         long id1 = db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline1));
         long id2 = db.insert(DisciplineContract.DISCIPLINE.TABLE_NAME, null, DisciplineContract.getInsert(discipline2));

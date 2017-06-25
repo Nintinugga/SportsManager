@@ -97,7 +97,7 @@ public class DisciplinesActivity extends AppCompatActivity {
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_2,
                 dbHandler.getAllDisciplines(),
-                new String[]{DisciplineContract.DISCIPLINE.COLUMN_NAME, DisciplineContract.DISCIPLINE.COLUMN_RULE_ID},
+                new String[]{DisciplineContract.DISCIPLINE.COLUMN_NAME, DisciplineContract.DISCIPLINE.COLUMN_ATTEMPTS},
                 new int[]{android.R.id.text1, android.R.id.text2});
         ListView listView = (ListView) findViewById(R.id.disciplinesListView);
         listView.setAdapter(adapter);

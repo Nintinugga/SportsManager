@@ -85,7 +85,7 @@
                 android:layout_toEndOf="@+id/customer_name"
                 android:layout_toRightOf="@+id/customer_name"
                 android:hint="@string/Name"
-                android:inputType="textCapSentences|textAutoCorrect"
+                android:inputType="textPersonName"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
                 tools:layout_editor_absoluteX="45dp"
                 tools:layout_editor_absoluteY="0dp" />

@@ -24,6 +24,7 @@ import com.comp.ninti.general.core.Customer;
 public class CustomersActivity extends AppCompatActivity {
     private DbHandler dbHandler;
     private BottomNavigationView navigation;
+    private int menuNr = 1;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -55,7 +56,7 @@ public class CustomersActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.getMenu().getItem(1).setChecked(true);
+        navigation.getMenu().getItem(menuNr).setChecked(true);
         ImageButton addNewCustomer = (ImageButton) findViewById(R.id.addNewCustomer);
         addNewCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +113,7 @@ public class CustomersActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        navigation.getMenu().getItem(1).setChecked(true);
+        navigation.getMenu().getItem(menuNr).setChecked(true);
         displayItems();
     }
 }

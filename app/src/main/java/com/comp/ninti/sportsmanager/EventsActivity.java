@@ -24,6 +24,7 @@ import com.comp.ninti.general.core.Event;
 public class EventsActivity extends AppCompatActivity {
     private DbHandler dbHandler;
     private BottomNavigationView navigation;
+    private int menuNr = 0;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -55,7 +56,7 @@ public class EventsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.getMenu().getItem(0).setChecked(true);
+        navigation.getMenu().getItem(menuNr).setChecked(true);
         ImageButton fab = (ImageButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +108,7 @@ public class EventsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        navigation.getMenu().getItem(0).setChecked(true);
+        navigation.getMenu().getItem(menuNr).setChecked(true);
         displayItems();
     }
 

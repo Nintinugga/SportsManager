@@ -27,6 +27,7 @@ import com.comp.ninti.general.RuleType;
 public class RulesActivity extends AppCompatActivity {
     private DbHandler dbHandler;
     private BottomNavigationView navigation;
+    private int menuNr = 2;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -59,7 +60,7 @@ public class RulesActivity extends AppCompatActivity {
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.getMenu().getItem(2).setChecked(true);
+        navigation.getMenu().getItem(menuNr).setChecked(true);
 
         ImageButton fab = (ImageButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +119,7 @@ public class RulesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        navigation.getMenu().getItem(2).setChecked(true);
+        navigation.getMenu().getItem(menuNr).setChecked(true);
         displayItems();
     }
 }

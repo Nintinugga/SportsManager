@@ -8,9 +8,9 @@ import android.view.MenuItem;
 import com.comp.ninti.sportsmanager.CustomersActivity;
 import com.comp.ninti.sportsmanager.DisciplinesActivity;
 import com.comp.ninti.sportsmanager.EventsActivity;
+import com.comp.ninti.sportsmanager.DatabaseActivity;
 import com.comp.ninti.sportsmanager.R;
 import com.comp.ninti.sportsmanager.RulesActivity;
-import com.comp.ninti.pointsDetermination.Timer;
 
 
 public class NavigationUtil {
@@ -36,6 +36,11 @@ public class NavigationUtil {
             case R.id.navigation_disciplines:
                 System.out.println("disciplines Clicked");
                 myIntent = new Intent(context, DisciplinesActivity.class);
+                context.startActivity(myIntent);
+                return true;
+            case R.id.navigation_home:
+                System.out.println("DatabaseActivity Clicked");
+                myIntent = new Intent(context, DatabaseActivity.class);
                 context.startActivity(myIntent);
                 return true;
         }

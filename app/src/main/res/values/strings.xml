@@ -22,7 +22,7 @@
     <string name="Events">Events</string>
     <string name="Disciplines">Disciplines</string>
     <string name="Rules">Rules</string>
-    <string name="title_home">Home</string>
+    <string name="title_home">Database</string>
     <string name="Name">Name</string>
     <string name="Age">Age</string>
     <string name="EMail">E-Mail</string>
@@ -73,4 +73,7 @@
     <string name="show_leader_board">Show Leader Board</string>
     <string name="delete">Delete</string>
     <string name="title_activity_leader_board">LeaderBoard</string>
+    <string name="title_activity_main">Database</string>
+    <string name="database_import">Import</string>
+    <string name="database_export" >Export</string>
 </resources>
